@@ -23,17 +23,37 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-|ID    | Descrição do Requisito  | Prioridade |
-|------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+| ID    | Descrição do Requisito                                      | Prioridade |
+|-------|-------------------------------------------------------------|------------|
+| RF-001| Permitir que os usuários realizem o login no aplicativo.    | ALTA       |
+| RF-002| Permitir que os usuários registrem negociações de compra e venda de grãos no aplicativo. | ALTA |
+| RF-003| Mostrar uma lista ordenada das negociações, da mais recente para a menos recente, na tela principal. | MÉDIA |
+| RF-004| Calcular e exibir a média dos preços de compra e venda negociados por dia. | MÉDIA |
+| RF-005| Fornecer informações consolidadas do dia anterior. | MÉDIA |
+| RF-006| Notificar os usuários em tempo real sobre novas negociações. | MÉDIA |
+| RF-007| Permitir que os usuários escolham o tipo de operação (compra ou venda) ao registrar uma negociação. | ALTA |
+| RF-008| Registrar o nome da filial e os nomes do vendedor ou comprador ao registrar uma negociação. | ALTA |
+| RF-009| Permitir que os usuários escolham o tipo de produto (por exemplo, soja) ao registrar uma negociação. | ALTA |
+| RF-010| Registrar o preço por saca, quantidade de sacas e data de vencimento ao registrar uma negociação. | ALTA |
+| RF-011| Atualizar automaticamente o saldo do dia e a média de preço do dia ao registrar uma negociação. | ALTA |
+| RF-012| Detectar e alertar os usuários sobre saldo negativo (compras maiores que vendas). | ALTA |
+| RF-013| Fornecer uma tela de login para autenticação dos usuários. | ALTA |
+| RF-014| Integrar notificações via WhatsApp para informar os usuários sobre eventos importantes no aplicativo. | MÉDIA |
 
 ### Requisitos não Funcionais
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+| ID     | Descrição do Requisito                                                  | Prioridade |
+|--------|-------------------------------------------------------------------------|------------|
+| RNF-001| O aplicativo deve ser responsivo para funcionar em dispositivos móveis. | MÉDIA      |
+| RNF-002| O aplicativo deve processar as requisições do usuário em no máximo 3 segundos. | BAIXA    |
+| RNF-003| O aplicativo deve ser desenvolvido em linguagem JavaScript, tanto no frontend quanto no backend. | ALTA |
+| RNF-004| O aplicativo deve ser hospedado na plataforma Google Cloud e utilizar um banco de dados MySQL para armazenar os dados. | ALTA |
+| RNF-005| O aplicativo deve ser desenvolvido utilizando tecnologias como AngularJS/TypeScript (front-end) e Node.js (back-end), com a possibilidade de utilizar Ionic/React para futuras versões móveis. | ALTA |
+| RNF-006| O layout do aplicativo deve seguir uma paleta de cores composta por verde, preto e branco, com um ícone de grão de soja como símbolo. | BAIXA |
+| RNF-007| O aplicativo deve ser projetado para ser de fácil utilização, fluido e com bom desempenho. | ALTA |
+| RNF-008| A aplicação deve permitir até 10 usuários simultâneos devido a restrições de uso. | MÉDIA |
+
+A priorização dos requisitos foi definida com base na importância de cada funcionalidade.
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
