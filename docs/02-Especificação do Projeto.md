@@ -23,37 +23,38 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-| ID    | Descrição do Requisito                                      | Prioridade |
-|-------|-------------------------------------------------------------|------------|
-| RF-001| Permitir que os usuários realizem o login no aplicativo.    | ALTA       |
-| RF-002| Permitir que os usuários registrem negociações de compra e venda de grãos no aplicativo. | ALTA |
-| RF-003| Mostrar uma lista ordenada das negociações, da mais recente para a menos recente, na tela principal. | MÉDIA |
-| RF-004| Calcular e exibir a média dos preços de compra e venda negociados por dia. | MÉDIA |
-| RF-005| Fornecer informações consolidadas do dia anterior. | MÉDIA |
-| RF-006| Notificar os usuários em tempo real sobre novas negociações. | MÉDIA |
-| RF-007| Permitir que os usuários escolham o tipo de operação (compra ou venda) ao registrar uma negociação. | ALTA |
-| RF-008| Registrar o nome da filial e os nomes do vendedor ou comprador ao registrar uma negociação. | ALTA |
-| RF-009| Permitir que os usuários escolham o tipo de produto (por exemplo, soja) ao registrar uma negociação. | ALTA |
-| RF-010| Registrar o preço por saca, quantidade de sacas e data de vencimento ao registrar uma negociação. | ALTA |
-| RF-011| Atualizar automaticamente o saldo do dia e a média de preço do dia ao registrar uma negociação. | ALTA |
-| RF-012| Detectar e alertar os usuários sobre saldo negativo (compras maiores que vendas). | ALTA |
-| RF-013| Fornecer uma tela de login para autenticação dos usuários. | ALTA |
-| RF-014| Integrar notificações via WhatsApp para informar os usuários sobre eventos importantes no aplicativo. | MÉDIA |
+| ID     | Descrição do Requisito                                       | Prioridade |
+|-------|--------------------------------------------------------------|------------|
+| RF-001| Cadastro de Usuários: Permitir o cadastro de até 10 usuários com informações básicas (nome, e-mail, senha). | ALTA |
+| RF-002| Tela de Login: Oferecer uma tela de login para autenticação dos usuários. | ALTA |
+| RF-003| Acesso de Múltiplas Filiais: Possibilitar a seleção da unidade da empresa (Matriz, Filial 1, Filial 2, Filial 3) em cada negociação. | MÉDIA |
+| RF-004| Formulário Simplificado: O formulário de negociação deve ser intuitivo e fácil de preencher, com os campos essenciais pré-definidos (produto, operação, valor por saca, quantidade de sacas, data de vencimento). | ALTA |
+| RF-005| Gestão de Negociações: Registro de Negociações, Listagem de Negociações, Notificação em Tempo Real, Edição e Exclusão. | ALTA |
+| RF-006| Análise de Dados: Média de Preços, Consolidado do Dia Anterior (D-1), Cálculo de Saldo, Alerta de Saldo Negativo. | MÉDIA |
+| RF-007| Autenticação Segura: Utilizar métodos de autenticação seguros, como o uso de tokens ou outros mecanismos de autenticação de dois fatores. | ALTA |
+| RF-008| Compatibilidade com Leitores de Tela: Garantir que o aplicativo seja compatível com leitores de tela para usuários com deficiência visual. | ALTA |
+| RF-009| Contraste Adequado: Utilizar cores de alto contraste para facilitar a leitura por usuários com baixa visão. | ALTA |
+| RF-010| Interface Intuitiva: Criar uma interface intuitiva e de fácil navegação, considerando a usabilidade para todos os tipos de usuários. | ALTA |
+| RF-011| Registro de Negociações: Os usuários devem ser capazes de registrar negociações de compra e venda. | ALTA |
+| RF-012| Integração com WhatsApp: Integrar o aplicativo com o WhatsApp para notificações por meio de um bot. | BAIXA |
+| RF-013| Ambiente de Banco de Dados: Utilizar um banco de dados para armazenar as informações das negociações e dos usuários. | ALTA |
 
 ### Requisitos não Funcionais
 
-| ID     | Descrição do Requisito                                                  | Prioridade |
-|--------|-------------------------------------------------------------------------|------------|
-| RNF-001| O aplicativo deve ser responsivo para funcionar em dispositivos móveis. | MÉDIA      |
-| RNF-002| O aplicativo deve processar as requisições do usuário em no máximo 3 segundos. | BAIXA    |
-| RNF-003| O aplicativo deve ser desenvolvido em linguagem JavaScript, tanto no frontend quanto no backend. | ALTA |
-| RNF-004| O aplicativo deve ser hospedado na plataforma Google Cloud e utilizar um banco de dados MySQL para armazenar os dados. | ALTA |
-| RNF-005| O aplicativo deve ser desenvolvido utilizando tecnologias como AngularJS/TypeScript (front-end) e Node.js (back-end), com a possibilidade de utilizar Ionic/React para futuras versões móveis. | ALTA |
-| RNF-006| O layout do aplicativo deve seguir uma paleta de cores composta por verde, preto e branco, com um ícone de grão de soja como símbolo. | BAIXA |
-| RNF-007| O aplicativo deve ser projetado para ser de fácil utilização, fluido e com bom desempenho. | ALTA |
-| RNF-008| A aplicação deve permitir até 10 usuários simultâneos devido a restrições de uso. | MÉDIA |
-
-A priorização dos requisitos foi definida com base na importância de cada funcionalidade.
+| ID     | Descrição do Requisito                                       | Prioridade |
+|-------|--------------------------------------------------------------|------------|
+| RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel. | MÉDIA |
+| RNF-002| Deve processar requisições do usuário em no máximo 3s. | BAIXA |
+| RNF-003| Proteção de Dados Pessoais: Implementar medidas de segurança para proteger os dados pessoais dos usuários, conforme a Lei Geral de Proteção de Dados (LGPD) no Brasil. | ALTA |
+| RNF-004| Acesso Restrito: Garantir que cada usuário só tenha acesso às informações e funcionalidades relevantes ao seu papel na empresa. | ALTA |
+| RNF-005| Tempo de Resposta: Garantir que o aplicativo tenha um tempo de resposta rápido ao carregar informações e atualizar os dados. | MÉDIA |
+| RNF-006| Escalabilidade: Projetar a aplicação de forma que ela seja capaz de lidar com o aumento de usuários e de negociações sem comprometer o desempenho. | ALTA |
+| RNF-007| Integração com Google Cloud: Integrar o aplicativo com a plataforma Google Cloud para hospedar a aplicação e o banco de dados. | MÉDIA |
+| RNF-008| Banco de Dados MySQL: Utilizar o MySQL como banco de dados para armazenar informações de negociações e usuários. | ALTA |
+| RNF-009| Interface Intuitiva: Criar uma interface de usuário intuitiva e de fácil uso, considerando a simplicidade e usabilidade para os usuários. | ALTA |
+| RNF-010| Performance: Assegurar que o aplicativo seja fluido e performático, mesmo com grande volume de negociações. | ALTA |
+| RNF-012| Acessibilidade Universal: Garantir que a aplicação seja acessível a todos os tipos de usuários, incluindo suporte a leitores de tela e alto contraste. | ALTA |
+| RNF-013| Limite de Usuários: Considerar
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
