@@ -11,11 +11,7 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
 
 ## Project Model Canvas
-
-Colocar a imagem do modelo construído apresentando a proposta de solução.
-
-> **Links Úteis**:
-> Disponíveis em material de apoio do projeto
+![Project Modelo Canvas](img/ProjectModelCanvas.PNG)
 
 ## Requisitos
 
