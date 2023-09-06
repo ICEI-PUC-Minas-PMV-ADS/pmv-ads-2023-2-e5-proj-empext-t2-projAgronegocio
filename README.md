@@ -1,23 +1,24 @@
-# TÍTULO DO PROJETO
+# AgroTrade Monitor
 
-`CURSO`
+Análise e Desenvolvimento de Sistemas
 
-`DISCIPLINA`
+Projeto: Desenvolvimento de uma Aplicação Distribuída
 
-`SEMESTRE`
+2023.2
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O projeto visa desenvolver um aplicativo móvel para atender às necessidades de uma empresa do ramo de agronegócio localizada no interior de Minas Gerais. A empresa atua na armazenagem e comércio de grãos, principalmente soja, com foco em vendas futuras destinadas à exportação. O contexto atual da empresa envolve negociações informais, frequentemente conduzidas por ligações e mensagens de WhatsApp, com o registro manual das transações em cadernos.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+Geovane Vinicius Lacerda Gomes
+Kenia Maria da Cunha
+Laís Lima
+Sabrina Gonçalves de Andrade
+Werlon elem bicalho de Oliveira
 
 ## Orientador
 
-* Nome completo do professor 1
+* Soraia Lúcia da Silva
 
 ## Instruções de utilização
 
