@@ -1,3 +1,4 @@
 # Apresentação da Solução
 
-Faça uma apresentação de um resumo de todos o processo de desenvolvimento e no final apresente a solução desenvolvida, usando um pequeno vídeo.
+
+[Apresentação Verde e Branca de Conferência Agro (2).pptx](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/files/12678544/Apresentacao.Verde.e.Branca.de.Conferencia.Agro.2.pptx)
