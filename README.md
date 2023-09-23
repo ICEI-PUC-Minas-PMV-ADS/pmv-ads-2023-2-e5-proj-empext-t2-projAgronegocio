@@ -10,11 +10,11 @@ O projeto visa desenvolver um aplicativo móvel para atender às necessidades de
 
 ## Integrantes
 
-Geovane Vinicius Lacerda Gomes
-Kenia Maria da Cunha
-Laís Lima
-Sabrina Gonçalves de Andrade
-Werlon elem bicalho de Oliveira
+* Geovane Vinicius Lacerda Gomes
+* Kenia Maria da Cunha
+* Laís Lima
+* Sabrina Gonçalves de Andrade
+* Werlon Elem Bicalho de Oliveira
 
 ## Orientador
 
