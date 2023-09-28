@@ -8,7 +8,15 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 ## Arquitetura e Tecnologias
 
-o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
+A arquitetura do projeto é dividida em duas partes principais: o front-end e o back-end. 
+
+O **front-end** é construído usando **React Native** com **React Native Paper**. React Native é uma estrutura que permite o desenvolvimento de aplicativos móveis nativos para iOS e Android usando JavaScript e React. React Native Paper é uma biblioteca de componentes de design de material para React Native que segue as melhores práticas de acessibilidade da Web.
+
+O **back-end** é construído usando **Node.js** e o Sistema de Gerenciamento de Banco de Dados (SGBD) **MySQL**. 
+
+A comunicação é feita através do **Socket.IO**, que é uma biblioteca JavaScript para aplicativos da web em tempo real. Ele permite a comunicação bidirecional em tempo real entre clientes da web e servidores.
+
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/6a27e159-5fed-46e7-9d5b-aefc40036117)
 
 ## Project Model Canvas
 ![Project Modelo Canvas](img/ProjectModelCanvas.PNG)
@@ -23,16 +31,17 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |-------|--------------------------------------------------------------|------------|
 | RF-001| Oferecer uma tela de login para autenticação dos usuários. | ALTA |  
 | RF-002| Possibilitar a seleção da unidade da empresa (Matriz, Filial 1, Filial 2, Filial 3) em cada negociação. | MÉDIA |
-| RF-003| Preencher os campos essenciais pré-definidos (produto, operação, valor por saca, quantidade de sacas, data de vencimento). | ALTA |
-| RF-004| Registrar negociações | ALTA | 
-| RF-005| Visualizar negociações| ALTA | 
-| RF-006| Excluir negociações | ALTA | 
-| RF-007| Visualizar média de preços de venda e de compra | MÉDIA |
-| RF-008| Visualizar consolidado do dia anterior (D-1) | MÉDIA |
-| RF-009| Visualizar o saldo | MÉDIA | 
-| RF-010| Informar saldo negativo | MÉDIA |
-| RF-011| Enviar notificações via Whatsapp | BAIXA |
-| RF-012| Apresentar valor total de cada negociação | ALTA |
+| RF-003| Registrar negociações | ALTA | 
+| RF-004| Visualizar negociações| ALTA | 
+| RF-005| Excluir negociações | ALTA | 
+| RF-006| Visualizar média de preços de venda e de compra | MÉDIA |
+| RF-007| Visualizar consolidado do dia anterior (D-1) | MÉDIA |
+| RF-008| Visualizar o saldo | MÉDIA | 
+| RF-009| Informar saldo negativo | MÉDIA |
+| RF-010| Enviar notificações via Whatsapp | BAIXA |
+| RF-011| Apresentar valor total de cada negociação | ALTA |
+| RF-012| Gerar relatórios detalhados com base nos dados fornecidos | ALTA |
+
 
 ### Requisitos não Funcionais
 
@@ -44,6 +53,11 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RNF-004| Garantir que a aplicação seja acessível a todos os tipos de usuários, incluindo suporte a leitores de tela e alto contraste. | BAIXA |
 | RNF-005| Considerar que o usuário poderá acessar a aplicação de uma área remota | BAIXA |
 | RNF-006| Utilizar armazenamento em nuvem | MÉDIA |
+| RNF-007| Autenticar usuários para evitar acessos não autorizados | ALTA |
+| RNF-008| O software deve ser atualizado regularmente para garantir que esteja em conformidade com as mudanças nas leis e regulamentos | ALTA |
+
+O software precisa ter acesso online, 24 horas por dia de onde você estiver3.
+
 
 ## Restrições
 
