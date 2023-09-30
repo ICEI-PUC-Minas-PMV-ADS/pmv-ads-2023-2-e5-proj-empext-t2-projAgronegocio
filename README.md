@@ -1,5 +1,7 @@
 # AgroTrade Monitor
 
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/6008aa1c-fdb7-4fc5-893e-e285db0e699e)
+
 Análise e Desenvolvimento de Sistemas
 
 Projeto: Desenvolvimento de uma Aplicação Distribuída
