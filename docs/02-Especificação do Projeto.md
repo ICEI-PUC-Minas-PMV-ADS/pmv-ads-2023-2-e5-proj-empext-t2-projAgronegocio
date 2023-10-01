@@ -79,7 +79,7 @@ Na engenharia de software, um diagrama de classes é um tipo de diagrama de estr
 
 No diagrama, as classes são representadas com caixas que contêm três compartimentos: O compartimento superior contém o nome da classe. É impresso em negrito e centralizado, e a primeira letra é maiúscula. O compartimento do meio contém os atributos da classe. Eles são alinhados à esquerda e a primeira letra é minúscula. O compartimento inferior contém as operações que a classe pode executar. Eles também são alinhados à esquerda e a primeira letra é minúscula. Uma classe com três compartimentos.No projeto de um sistema, várias classes são identificadas e agrupadas em um diagrama de classes que ajuda a determinar as relações estáticas entre elas. Na modelagem detalhada, as classes do projeto conceitual são frequentemente divididas em subclasses.
 
-<img src="img/diagrama-de-classes_Agro2.png" alt="Figura do diagrama de classes do projeto AgroTradeMonitor">
+<img src="img/diagrama-de-classes_Agro3.png" alt="Figura do diagrama de classes do projeto AgroTradeMonitor">
 
 ## Modelo ER
 
