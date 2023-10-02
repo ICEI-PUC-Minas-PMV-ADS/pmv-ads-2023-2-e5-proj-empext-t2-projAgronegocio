@@ -7,7 +7,8 @@ Visão geral da interação do usuário com as funcionalidades que fazem parte d
 
 https://www.figma.com/file/VKZ0dt7kUZ1zaWkQpXbHVF/AgroTradeMonitor?type=design&node-id=118%3A491&mode=design&t=1DlDIMJupDgOdnzX-1
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/d05b52a9-72b4-4027-a8df-c9382dad7a8d)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/a51b7b86-2511-496b-b5ec-825702c27ee3)
+
 
 Animação dos fluxos:
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/4f82d075-7f6a-4414-b087-0fe9f97b1354)
