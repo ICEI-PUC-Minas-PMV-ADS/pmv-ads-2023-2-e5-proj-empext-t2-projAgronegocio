@@ -18,8 +18,9 @@ Apresente imagens e/ou vídeos que comprovam que um determinado teste foi execut
 ## A imagem abaixo representa a tela de login onde o usuário fará sua autenticação
 RF-001 atualmente o aplicativo já nos mostra a tela de login.
 
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/ed9fe7c2-2240-4c0b-842f-7c4a041fe0bd)
 
-![Login tela](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/127369443/f9c69983-1916-4114-9bff-7960862a3a6b)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/35c10d4c-4c91-4a00-a2a8-2e1f169fd1c2)
 
 ## A imagem abaixo representa a tela onde o usuário poderá visualizar suas negociações
 
