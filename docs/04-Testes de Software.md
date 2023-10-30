@@ -55,4 +55,8 @@ RF-003	Atualmente o aplicativo mostra a tela de registrar negociações venda/co
 
 ![Tela negociação compra](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/127369443/2fb1e70d-eef1-4060-8120-baf2c2185b49)
 
+## Assista aos vídeos
 
+[![Assista ao vídeo](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/131aca8e-aac4-4bce-bb3a-528f65907915)](https://www.youtube.com/watch?v=cboLPdfvinA)
+
+[![Assista ao vídeo](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/1ad4989b-b96e-4d4d-8a06-61c441e2c6c5)]([https://www.youtube.com/watch?v=cboLPdfvinA](https://www.youtube.com/watch?v=X862E7Hlrx4)https://www.youtube.com/watch?v=X862E7Hlrx4)
