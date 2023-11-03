@@ -1,12 +1,12 @@
 const connection = require('./connection');
 
 const getAll = async () => {
-    const [negociacao] = await connection.execute('SELECT n.* , u.nome FROM negociacao AS n INNER JOIN usuarios AS u ON n.id_usuario = u.id;');
+    const [negociacao] = await connection.execute('SELECT n.* , u.nome as nomeResponsavel , p.nome as nomePessoa FROM negociacao AS n INNER JOIN usuarios AS u ON n.id_usuario = u.id INNER JOIN pessoas AS p ON n.cliente_produtor = p.id ORDER BY data_lancamento DESC;');
     return negociacao;
 };
 
 const getById = async (id) => {
-    const [negociacao] = await connection.execute('SELECT * FROM negociacao WHERE id_usuario = ?', [id]);
+    const [negociacao] = await connection.execute('SELECT n.* , u.nome as nomeResponsavel , p.nome as nomePessoa FROM negociacao AS n INNER JOIN usuarios AS u ON n.id_usuario = u.id INNER JOIN pessoas AS p ON n.cliente_produtor = p.id WHERE n.id_usuario = ? ORDER BY data_lancamento DESC;', [id]);
     return negociacao;
 };
 
