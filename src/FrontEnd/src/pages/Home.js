@@ -8,7 +8,7 @@ import Negociacao from './Negociacao';
 import Perfil from './Perfil';
 
 const Home = () => {
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: 'negociacao', title: 'Painel Principal', icon: 'home-analytics' },
     { key: 'perfil', title: 'Perfil', icon: 'account' },
@@ -24,23 +24,18 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.content}>
-        <BottomNavigation
-          navigationState={{ index, routes }}
-          onIndexChange={setIndex}
-          renderScene={renderScene}
-          barStyle={{ backgroundColor: '#6FCF97' }}
-        />
-      </View>
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        barStyle={{ backgroundColor: '#6FCF97' }}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  content: {
     flex: 1,
   },
 });

@@ -6,7 +6,7 @@ import Register from '../pages/Register';
 
 const Stack = createNativeStackNavigator();
 
-const Main = () => {
+const Auht = () => {
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
@@ -27,4 +27,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Auht;

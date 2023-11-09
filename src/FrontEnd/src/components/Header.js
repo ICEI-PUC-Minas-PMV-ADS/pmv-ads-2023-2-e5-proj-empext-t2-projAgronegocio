@@ -5,15 +5,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const Header = ({ goBack }) => {
   const handleGoBack = () => {
     if (goBack) {
-      // Faça alguma ação quando o ícone for pressionado
       goBack();
     }
   };
 
-  return (
+  return (    
     <View style={styles.header}>
       <Image
-        source={require('../assets/LogoAgroTradeMonitor2.jpg')}
+        source={require('../assets/LogoAgroTradeMonitor4.jpg')}
         style={styles.image}
       />
       {goBack && (
@@ -26,25 +25,20 @@ const Header = ({ goBack }) => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    width: '100%', 
-    height: 111, 
-    backgroundColor: 'rgba(57, 191, 129, 0.74)',
-    zIndex: 1,
-  },
+
   image: { 
-    width: 147,
-    height: 101,
+    width: 417,
+    height: 109,
     alignSelf: 'center',
-    marginTop: 11,
   },
-  iconContainer: {
-    position: 'absolute',
-    top: 70, // Ajuste este valor para posicionar o ícone mais abaixo
-    left: 20,
-  },
+         
+  
   icon: {
     color: 'black',
+   marginLeft:40,
+
+
+   
   },
 });
 

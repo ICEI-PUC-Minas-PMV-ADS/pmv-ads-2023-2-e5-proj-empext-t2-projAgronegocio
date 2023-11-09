@@ -6,8 +6,10 @@ import {
   TextInput,
   Button,
   Appbar,
+  ActivityIndicator,
 } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Picker } from '@react-native-picker/picker';
 
 import Container from '../components/Container';
 import Body from '../components/Body';
@@ -24,6 +26,9 @@ import {
   deleteNegociacao,
 } from '../services/negociacao.services';
 
+import { getPessoas } from '../services/pessoas.services';
+import { getUnidades } from '../services/unidades.services';
+
 const NovaNegociacao = ({ route }) => {
   const navigation = useNavigation();
   //validar se existe valores
@@ -35,33 +40,34 @@ const NovaNegociacao = ({ route }) => {
 
   const [tipoOperacao, setTipoOperacao] = useState('Venda');
 
-  const [clienteProdutor, setClienteProdutor] = useState('');
   const [dataVencimento, setDataVencimento] = useState(
     moment(new Date()).format('DD/MM/YYYY')
   );
   const [qtdSacas, setQtdSacas] = useState('');
   const [valorPorSaca, setValorPorSaca] = useState('');
   const [valorTotal, setValorTotal] = useState('');
-  const [unidade, setUnidade] = useState('');
   const [idUsuario, setIdUsuario] = useState('');
-
-  const handleNome = (nome) => {
-    if (tipoOperacao === 'Venda') {
-      setComprador(nome);
-    } else {
-      setProdutor(nome);
-    }
-  };
+  const [pessoas, setPessoas] = useState([]);
+  const [pessoaSelecionada, setPessoaSelecionada] = useState([]);
+  const [unidades, setUnidades] = useState([]);
+  const [unidadeSelecionada, setUnidadeSelecionada] = useState([]);
 
   useEffect(() => {
+    getPessoas().then((dados) => {
+      setPessoas(dados);
+    });
+    getUnidades().then((dados) => {
+      setUnidades(dados);
+    });
+
     if (item) {
       setTipoOperacao(item.tipo_operacao);
-      setClienteProdutor(item.cliente_produtor);
+      setPessoaSelecionada(item.cliente_produtor);
       setDataVencimento(item.data_vencimento);
       setValorPorSaca(item.valor_por_saca);
       setQtdSacas(item.quantidade_saca);
       setValorTotal(item.valor_total);
-      setUnidade(item.unidade);
+      setUnidadeSelecionada(item.unidade);
       setIdUsuario(item.id_usuario);
     }
   }, [item]);
@@ -69,40 +75,61 @@ const NovaNegociacao = ({ route }) => {
   const handleSalvar = () => {
     if (item) {
       updateNegociacao({
-        cliente_produtor: clienteProdutor,
+        cliente_produtor: pessoaSelecionada,
         tipo_operacao: Number(tipoOperacao),
         valor_por_saca: Number(valorPorSaca),
         quantidade_saca: Number(qtdSacas),
         data_vencimento: dataVencimento,
         valor_total: valorPorSaca * qtdSacas,
-        unidade: Number(unidade),
+        unidade: unidadeSelecionada,
         id_usuario: Number(idUsuario),
         id: item.id,
       }).then((res) => {
-        Alert.alert('Atenção', 'Negociação alterada com Sucesso!', [
-          {
-            text: 'Ok',
-            onPress: () => navigation.goBack(),
-          },
-        ]);
+        console.log(res);
+        res != null
+          ? Alert.alert('Atenção!', 'Negociação alterada com sucesso!', [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Home' }],
+                  }),
+              },
+            ])
+          : Alert.alert('Atenção!', 'Erro ao alterar negociação!', [
+              {
+                text: 'Ok',
+              },
+            ]);
       });
     } else {
       insertNegociacao({
-        cliente_produtor: clienteProdutor,
+        cliente_produtor: pessoaSelecionada,
         tipo_operacao: Number(tipoOperacao),
         valor_por_saca: Number(valorPorSaca),
         quantidade_saca: Number(qtdSacas),
         data_vencimento: dataVencimento,
         valor_total: valorPorSaca * qtdSacas,
-        unidade: Number(unidade),
+        unidade: unidadeSelecionada,
         id_usuario: id,
       }).then((res) => {
-        Alert.alert('Atenção', 'Negociação criada com Sucesso!', [
-          {
-            text: 'Ok',
-            onPress: () => navigation.goBack(),
-          },
-        ]);
+        res != null
+          ? Alert.alert('Atenção!', 'Negociação criada com sucesso!', [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Home' }],
+                  }),
+              },
+            ])
+          : Alert.alert('Atenção!', 'Erro ao cadastrar negociação!', [
+              {
+                text: 'Ok',
+              },
+            ]);
       });
     }
   };
@@ -110,8 +137,8 @@ const NovaNegociacao = ({ route }) => {
   const confirmar = () => {
     if (item) {
       Alert.alert(
-        'Atenção',
-        'Tem certeza que deseja ALTERAR os dados desta Negociação ?',
+        'Atenção!',
+        'Tem certeza que deseja ALTERAR os dados desta negociação?',
         [
           {
             text: 'Cancelar',
@@ -126,7 +153,7 @@ const NovaNegociacao = ({ route }) => {
   };
 
   const handleExcluir = () => {
-    Alert.alert('Atenção', 'Tem certeza que deseja EXCLUIR esta Negociacão?', [
+    Alert.alert('Atenção!', 'Tem certeza que deseja EXCLUIR esta negociacão?', [
       {
         text: 'Cancelar',
         style: 'cancel',
@@ -139,6 +166,58 @@ const NovaNegociacao = ({ route }) => {
           }),
       },
     ]);
+  };
+
+  const renderPessoas = (tipoOp) => {
+    produtor = pessoas
+      .filter(function (item) {
+        return item.tipo == 'Produtor';
+      })
+      .map(function ({ id, nome }) {
+        return { id, nome };
+      });
+
+    cliente = pessoas
+      .filter(function (item) {
+        return item.tipo == 'Cliente';
+      })
+      .map(function ({ id, nome }) {
+        return { id, nome };
+      });
+
+    if (tipoOp == 0) {
+      dadosPessoas = cliente;
+    } else {
+      dadosPessoas = produtor;
+    }
+
+    return pessoas ? (
+      <Picker
+        selectedValue={pessoaSelecionada}
+        style={styles.picker}
+        onValueChange={(itemValue) => setPessoaSelecionada(itemValue)}>
+        {dadosPessoas.map((array) => {
+          return <Picker.Item label={array.nome} value={array.id} />;
+        })}
+      </Picker>
+    ) : (
+      <ActivityIndicator size="large" color="#6FCF97" />
+    );
+  };
+
+  const renderUnidades = () => {
+    return unidades ? (
+      <Picker
+        selectedValue={unidadeSelecionada}
+        style={styles.picker}
+        onValueChange={(itemValue) => setUnidadeSelecionada(itemValue)}>
+        {unidades.map((array) => {
+          return <Picker.Item label={array.razaoSocial} value={array.id} />;
+        })}
+      </Picker>
+    ) : (
+      <ActivityIndicator size="large" color="#6FCF97" />
+    );
   };
 
   return (
@@ -166,7 +245,6 @@ const NovaNegociacao = ({ route }) => {
             <Text>Compra</Text>
           </View>
         </View>
-
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -181,22 +259,13 @@ const NovaNegociacao = ({ route }) => {
             }}
           />
         )}
-        <Input
-          label="Tipo de Operação:"
-          value={tipoOperacao === 0 ? 'Venda' : 'Compra'}
-          onChangeText={(text) => setTipoOperacao(text)}
-          left={<TextInput.Icon icon="book-variant-multiple" />}
-        />
-        <Input
-          label={tipoOperacao === 0 ? 'Cliente:' : 'Produtor:'}
-          value={clienteProdutor}
-          onChangeText={(text) => setClienteProdutor(text)}
-          left={<TextInput.Icon icon="leaf-circle" />}
-        />
-
+        <View style={styles.pickerContainer}>
+          <Text>{tipoOperacao === 0 ? 'Cliente:' : 'Produtor:'}</Text>
+          {renderPessoas(tipoOperacao)}
+        </View>
         <TouchableOpacity onPress={() => setShow(true)}>
           <Input
-            label="Data de vencimento:"
+            label="Data de pagamento:"
             value={dataVencimento}
             left={<TextInput.Icon icon="calendar" />}
             editable={false}
@@ -218,12 +287,10 @@ const NovaNegociacao = ({ route }) => {
           onChangeText={(text) => setValorPorSaca(text)}
           left={<TextInput.Icon icon="currency-brl" />}
         />
-        <Input
-          label="Unidade:"
-          value={unidade == 0 ? 'Matriz' : 'Filial'}
-          left={<TextInput.Icon icon="home-group" />}
-          editable={false}
-        />
+        <View style={styles.pickerContainer}>
+          <Text>Unidade:</Text>
+          {renderUnidades()}
+        </View>
         <Input
           label="Valor total:"
           value={String(qtdSacas * valorPorSaca)}
@@ -231,7 +298,6 @@ const NovaNegociacao = ({ route }) => {
           left={<TextInput.Icon icon="currency-brl" />}
           editable={false}
         />
-
         <Button
           mode="contained"
           color="#157E58"
@@ -239,7 +305,6 @@ const NovaNegociacao = ({ route }) => {
           onPress={confirmar}>
           Salvar
         </Button>
-
         {item && (
           <Button
             mode="contained"
@@ -268,6 +333,14 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 8,
+  },
+  pickerContainer: {
+    marginBottom: 16,
+  },
+  picker: {
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 4,
   },
 });
 

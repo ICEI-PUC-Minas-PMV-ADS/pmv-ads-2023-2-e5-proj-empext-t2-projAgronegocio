@@ -20,13 +20,6 @@ const Main = () => {
         }}
       />
       <Stack.Screen
-        name="Negociacao"
-        component={Negociacao}
-        options={{
-          header: () => null,
-        }}
-      />
-      <Stack.Screen
         name="NovaNegociacao"
         component={NovaNegociacao}
         options={{
