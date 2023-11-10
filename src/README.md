@@ -9,15 +9,17 @@ npm install
 
 npm audit fix (se constar algum erro)
 
-npm install express express-validator mysql body-parser jsonwebtoken bcryptjs cors --save
+npm install express
 
-npm install -g localtunnel
+npm install express express-validator mysql body-parser jsonwebtoken bcryptjs cors --save
 
 npm install dotenv
 
 npm install -g nodemon
 
 npm install mysql2
+
+npm install -g localtunnel
 
 ### cd src/BackEnd/Negociacoes
 
@@ -25,15 +27,17 @@ npm install
 
 npm audit fix (se constar algum erro)
 
-npm install express express-validator mysql body-parser jsonwebtoken bcryptjs cors --save
+npm install express
 
-npm install -g localtunnel
+npm install express express-validator mysql body-parser jsonwebtoken bcryptjs cors --save
 
 npm install dotenv
 
 npm install -g nodemon
 
 npm install mysql2
+
+npm install -g localtunnel
 
 ### cd src/FrontEnd
 npm install --force
@@ -52,7 +56,21 @@ npx expo start
 
 ## OBS: Criar arquivo .env com as informações do banco e porta para Usuarios e Negociacoes antes de executar
 
-Entrar nos seguintes diretorios
+.env (Usuarios e Negociacoes nos respectivos diretorios, solicitar acesso para a equipe)
+
+PORT=
+
+MYSQL_HOST=
+
+MYSQL_USER=
+
+MYSQL_PASSWORD=
+
+MYSQL_DB=
+
+SEGREDO_TOKEN =
+
+## Entrar nos seguintes diretorios
 
 ### cd src/BackEnd/Usuarios
 
