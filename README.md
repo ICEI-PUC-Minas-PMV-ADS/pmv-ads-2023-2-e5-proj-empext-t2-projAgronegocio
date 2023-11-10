@@ -26,6 +26,8 @@ O projeto visa desenvolver um aplicativo móvel para atender às necessidades de
 
 Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
 
+<li><a href="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/blob/main/src/README.md"> Descrito no README.md</a></li>
+
 # Documentação
 
 <ol>
