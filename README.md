@@ -4,9 +4,9 @@
 
 Análise e Desenvolvimento de Sistemas
 
-Projeto: Desenvolvimento de uma Aplicação Distribuída
+Projeto: Desenvolvimento de um sistema sociotécnico inovador
 
-2023.2
+2023.2 - Eixo 5
 
 O projeto visa desenvolver um aplicativo móvel para atender às necessidades de uma empresa do ramo de agronegócio localizada no interior de Minas Gerais. A empresa atua na armazenagem e comércio de grãos, principalmente soja, com foco em vendas futuras destinadas à exportação. O contexto atual da empresa envolve negociações informais, frequentemente conduzidas por ligações e mensagens de WhatsApp, com o registro manual das transações em cadernos.
 
