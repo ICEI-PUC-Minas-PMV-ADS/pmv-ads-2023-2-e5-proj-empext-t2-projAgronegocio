@@ -1,9 +1,26 @@
 import API from './webapi.services';
-import { URL_NEGOCIACAO } from './urls';
+import { URL } from './urls';
 
 export const getNegociacoes = async () => {
   try {
-    return await API.get(`${URL_NEGOCIACAO}/negociacao`).then(
+    return await API.get(`${URL}/negociacao`).then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        console.log(error);
+        return null;
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getNegociacoesRecentes = async () => {
+  try {
+    return await API.get(`${URL}/negociacaorecente`).then(
       (response) => {
         return response.data;
       },
@@ -20,7 +37,7 @@ export const getNegociacoes = async () => {
 
 export const getNegociacoesUsuarioId = async (param) => {
   try {
-    return await API.get(`${URL_NEGOCIACAO}/negociacao/${param}`).then(
+    return await API.get(`${URL}/negociacao/${param}`).then(
       (response) => {
         return response.data;
       },
@@ -38,7 +55,7 @@ export const getNegociacoesUsuarioId = async (param) => {
 export const updateNegociacao = async (param) => {
   console.log(param);
   try {
-    return await API.put(`${URL_NEGOCIACAO}/negociacao/${param.id}`, param).then(
+    return await API.put(`${URL}/negociacao/${param.id}`, param).then(
       (response) => {
         return response.data;
       },
@@ -55,7 +72,7 @@ export const updateNegociacao = async (param) => {
 
 export const insertNegociacao = async (param) => {
   try {
-    return await API.post(`${URL_NEGOCIACAO}/negociacao`, param).then(
+    return await API.post(`${URL}/negociacao`, param).then(
       (response) => {
         return response.data;
       },
@@ -72,7 +89,7 @@ export const insertNegociacao = async (param) => {
 
 export const deleteNegociacao = async (id) => {
   try {
-    return await API.delete(`${URL_NEGOCIACAO}/negociacao/${id}`).then(
+    return await API.delete(`${URL}/negociacao/${id}`).then(
       (response) => {
         return response.data;
       },

@@ -1,9 +1,9 @@
 import API from './webapi.services';
-import { URL_NEGOCIACAO } from './urls';
+import { URL } from './urls';
 
 export const getPessoas = async () => {
   try {
-    return await API.get(`${URL_NEGOCIACAO}/pessoas`).then(
+    return await API.get(`${URL}/pessoas`).then(
       (response) => {
         return response.data;
       },
@@ -20,7 +20,7 @@ export const getPessoas = async () => {
 
 export const getPessoasUsuarioId = async (param) => {
   try {
-    return await API.get(`${URL_NEGOCIACAO}/pessoas/${param}`).then(
+    return await API.get(`${URL}/pessoas/${param}`).then(
       (response) => {
         return response.data;
       },
@@ -34,4 +34,3 @@ export const getPessoasUsuarioId = async (param) => {
     return null;
   }
 };
-

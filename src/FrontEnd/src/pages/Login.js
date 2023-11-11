@@ -14,24 +14,39 @@ import { login } from '../services/auth.services';
 const Login = () => {
   const navigation = useNavigation();
   const { setSigned, setName, setId } = useUser();
-
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email, setEmail] = useState('geo@gmail.com');
+  const [senha, setSenha] = useState('123456');
 
   const handleLogin = () => {
     login({
       email: email,
       password: senha,
     }).then((res) => {
-      console.log(res);
-
+      console.log('res:', res);
       if (res && res.user) {
-        setName(res.user.name);
+        console.log(res.user.nome);
+        setName(res.user.nome);
         setId(res.user.id);
         AsyncStorage.setItem('@TOKEN_KEY', res.token).then();
         setSigned(true);
       } else {
-        Alert.alert('Atenção', 'Usuário ou senha inválidos!');
+        if (res && res.usuarioNaoExiste) {
+          Alert.alert('Atenção', 'Usuário não existe, deseja se cadastrar?', [
+            {
+              text: 'Cancelar',
+              style: 'cancel',
+            },
+            {
+              text: 'Sim',
+              onPress: () =>
+                navigation.navigate('Register', {
+                  paramKey: email,
+                }),
+            },
+          ]);
+        } else {
+          Alert.alert('Atenção', 'Usuário ou senha inválidos!');
+        }
       }
     });
   };
@@ -79,7 +94,11 @@ const Login = () => {
           <Button
             style={styles.buttonRegister}
             color="blue"
-            onPress={() => navigation.navigate('Register')}>
+            onPress={() =>
+              navigation.navigate('Register', {
+                paramKey: email,
+              })
+            }>
             Crie agora
           </Button>
         </View>
@@ -94,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#157E58',
   },
   image: {
-    width: '100%'
+    width: '100%',
   },
   infText: {
     margin: 8,

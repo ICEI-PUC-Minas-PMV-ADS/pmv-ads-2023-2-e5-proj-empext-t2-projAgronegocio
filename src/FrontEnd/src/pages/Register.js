@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import validator from 'validator';
 import { StyleSheet, View, Alert, Image } from 'react-native';
-import { TextInput, Button, ActivityIndicator} from 'react-native-paper';
+import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
 import Container from '../components/Container';
 import Body from '../components/Body';
 import Input from '../components/Input';
 
 import { useNavigation } from '@react-navigation/native';
-import {register} from '../services/auth.services';
+import { register } from '../services/auth.services';
 
-const Register = () => {
-
+const Register = ({ route }) => {
   const navigation = useNavigation();
-  
+
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(route.params.paramKey);
   const [senha, setSenha] = useState('');
   const [isRegister, setRegister] = useState(false);
 
@@ -38,17 +37,26 @@ const Register = () => {
       password: senha,
     }).then((res) => {
       console.log('res:', res);
-      console.log('dados:', name, email, senha);
-      if(res){
-        setRegister(false);
-        Alert.alert('Atenção', 'Usuário cadastrado com sucesso!',[
-          { text: "OK", onPress: () => navigation.goBack() },
+      setRegister(false);
+      if (res && res.insertId) {
+        Alert.alert('Atenção', 'Usuário Cadastrado com sucesso!', [
+          { text: 'OK', onPress: () => navigation.goBack() },
         ]);
-      }else{
-        setRegister(false);
-        Alert.alert('Atenção', 'Usuário não cadastrado! Tente novamente mais tarde!');
+      } else {
+        if (res && res.usuarioJaCadastrado) {
+          Alert.alert('Atenção', 'Usuário já existe, deseja fazer o Login?', [
+            {
+              text: 'Cancelar',
+              style: 'cancel',
+            },
+            {
+              text: 'Sim',
+              onPress: () => navigation.navigate('Login'),
+            },
+          ]);
+        }
       }
-    });    
+    });
   };
 
   return (
@@ -58,20 +66,20 @@ const Register = () => {
         style={styles.image}
       />
       <Body>
-          <Input
+        <Input
           label="Nome"
           value={name}
-          onChangeText={(text) => setName(text)} 
+          onChangeText={(text) => setName(text)}
           left={<TextInput.Icon name="account" />}
-          mode="outlined"         
+          mode="outlined"
         />
         <Input
           label="Email"
-          value={email}          
+          value={email}
           onChangeText={(text) => setEmail(text)}
           left={<TextInput.Icon name="email" />}
           keyboardType="email-address"
-          mode="outlined"          
+          mode="outlined"
         />
         <Input
           label="Senha"
@@ -87,19 +95,16 @@ const Register = () => {
           </View>
         )}
         {!isRegister && (
-          <Button
-            style={styles.buttonSend}
-            onPress={checkFields} 
-            color="white">
+          <Button style={styles.buttonSend} onPress={checkFields} color="white">
             Registrar
           </Button>
         )}
-          <Button
-            style={styles.buttonCancel}
-            onPress={() => navigation.goBack()}
-            color="black">
-            Cancelar
-          </Button>
+        <Button
+          style={styles.buttonCancel}
+          onPress={() => navigation.goBack()}
+          color="black">
+          Cancelar
+        </Button>
       </Body>
     </Container>
   );
@@ -108,20 +113,20 @@ const Register = () => {
 const styles = StyleSheet.create({
   buttonSend: {
     margin: 8,
-    backgroundColor: '#157E58'
+    backgroundColor: '#157E58',
   },
   image: {
-    width: '100%'
+    width: '100%',
   },
-  buttonCancel: { 
+  buttonCancel: {
     margin: 8,
-    backgroundColor: '#F2B66D'
+    backgroundColor: '#F2B66D',
   },
   activity: {
     marginVertical: 8,
     borderRadius: 60,
     backgroundColor: '#FFF',
-  }
+  },
 });
 
 export default Register;

@@ -8,7 +8,7 @@ import Auth from './Auth';
 const Route = () => {
   const { signed } = useUser();
 
-  return <>{signed ? <Main /> : <Auth />}</>;
+  return <>{signed ? <Main /> : <Auth/>}</>;
 };
 
 export default Route;

@@ -1,9 +1,9 @@
 import API from './webapi.services';
-import {URL_USUARIO} from './urls';
+import {URL} from './urls';
 
 export const register = async (param) => {
   try{
-    return await API.post(`${URL_USUARIO}/register`, param).then( 
+    return await API.post(`${URL}/usuarios/register`, param).then( 
       response => {
         return response.data;
       },
@@ -20,7 +20,7 @@ export const register = async (param) => {
 
 export const login = async (param) => {
   try{
-    return await API.post(`${URL_USUARIO}/login`, param).then( 
+    return await API.post(`${URL}/usuarios/login`, param).then( 
       response => {
         return response.data;
       },

@@ -1,9 +1,9 @@
 import API from './webapi.services';
-import { URL_NEGOCIACAO } from './urls';
+import { URL } from './urls';
 
 export const getUnidades = async () => {
   try {
-    return await API.get(`${URL_NEGOCIACAO}/unidades`).then(
+    return await API.get(`${URL}/unidades`).then(
       (response) => {
         return response.data;
       },
@@ -20,7 +20,7 @@ export const getUnidades = async () => {
 
 export const getUnidadesId = async (param) => {
   try {
-    return await API.get(`${URL_NEGOCIACAO}/unidades/${param}`).then(
+    return await API.get(`${URL}/unidades/${param}`).then(
       (response) => {
         return response.data;
       },
