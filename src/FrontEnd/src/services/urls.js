@@ -1,1 +1,1 @@
-export const URL = 'https://backagrotrade.azurewebsites.net/';
+export const URL = 'https://backagrotrade.azurewebsites.net';

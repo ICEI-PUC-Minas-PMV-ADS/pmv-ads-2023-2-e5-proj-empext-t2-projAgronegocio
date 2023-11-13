@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ScrollView,
   Image,
@@ -33,6 +33,7 @@ import {
 import Assets from '../assets/ImagemSoja2.jpg';
 import { Modalize } from 'react-native-modalize';
 
+
 import { getPessoas } from '../services/pessoas.services';
 import { getUnidades } from '../services/unidades.services';
 
@@ -44,19 +45,36 @@ const Negociacao = () => {
   const [negociacoesRecentes, setNegociacoesRecentes] = useState([]);
   const modalizeRef = useRef(null);
 
-  const [filtrado, setFiltrado] = useState([]);
-  const [filterDataInicial, setFilterDataInicial] = useState('Data Inicial');
-  const [filterDataFinal, setFilterDataFinal] = useState('Data Final');
+  const [filtrado, setFiltrado] = useState(negociacoes);
+
+  const [filterDataInicial, setFilterDataInicial] = useState(
+    moment(new Date()).format('DD/MM/YYYY')
+  );
+  const [filterDataFinal, setFilterDataFinal] = useState(
+    moment(new Date()).format('DD/MM/YYYY')
+  );
+  
+  const [filterDataInicialPagamento, setFilterDataInicialPagamento] = useState(
+    moment(new Date()).format('DD/MM/YYYY')
+  );
+  const [filterDataFinalPagamento, setFilterDataFinalPagamento] = useState(
+    moment(new Date()).format('DD/MM/YYYY')
+  );
   const [filterUnidade, setFilterUnidade] = useState('');
   const [filterOperacao, setFilterOperacao] = useState('');
-  const [filterPessoa, setFilterPessoa] = useState('');
+  const [filterCliente, setFilteCliente] = useState('');
+  const [filterProdutor, setFilterProdutor] = useState('');
   const [date, setDate] = useState(new Date());
   const [showDataInicial, setShowDataInicial] = useState(false);
   const [showDataFinal, setShowDataFinal] = useState(false);
+  const [showDataInicialPagamento, setShowDataInicialPagamento] = useState(false);
+  const [showDataFinalPagamento, setShowDataFinalPagamento] = useState(false);
+
 
   const [pessoas, setPessoas] = useState([]);
   const [pessoaSelecionada, setPessoaSelecionada] = useState([]);
   const [unidades, setUnidades] = useState([]);
+  const [unidadeSelecionada, setUnidadeSelecionada] = useState(0);
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -64,10 +82,6 @@ const Negociacao = () => {
   const onClose = () => {
     modalizeRef.current?.close();
   };
-  const handleFilterUnit = () => alert('Clicou em Unidades');
-  const handleFilterOperation = () => alert('Clicou em Tipo operação');
-  const handleFilterClient = () => alert('Clicou em Cliente');
-  const handleFilterFarmers = () => alert('Clicou  produtor');
 
   useEffect(() => {
     getPessoas().then((dados) => {
@@ -89,40 +103,7 @@ const Negociacao = () => {
 
   const filtrarNegociacoes = () => {
     const filtered = negociacoes.filter((x) => {
-      console.log('entrei no filtro');
-      console.log(filterDataInicial);
-      console.log(filterDataFinal);
-      console.log(filterUnidade);
-      console.log(filterOperacao);
-      console.log(filterPessoa);
-      return (
-        console.log(moment(x.data_lancamento).format('DD-MM-YYYY')) ||
-        moment(x.data_lancamento).format('DD-MM-YYYY') >= filterDataInicial &&
-        moment(x.data_lancamento).format('DD-MM-YYYY') <= filterDataFinal &&
-        x.unidade === filterUnidade &&
-        x.tipo_operacao === filterOperacao &&
-        x.nomePessoa === filterPessoa
-      );
-    });
-    setFiltrado(filtered);
-    console.log(filtered);
-  };
-
-  useEffect(() => { // esse é responsável em pegar as alterações
-    console.log(filtrado);
-  }, [filtrado]);
-
-
-   const filtNegociacoes = () => {
-    const filtered = negociacoes.filter((x) => {
-      console.log('entrei no filtro');
-      return (
-        moment(x.data_lancamento).format('YYYY-MM-DD') >= filterDataInicial &&
-        x.data_lancamento <= filterDataFinal &&
-        x.unidade === filterUnidade &&
-        x.tipo_operacao === filterOperacao &&
-        x.nomePessoa === filterPessoa
-      );
+      return x.data_lancamento === 'Geovane' && x.valor_por_saca <= 20;
     });
     setFiltrado(filtered);
   };
@@ -152,12 +133,12 @@ const Negociacao = () => {
 
     return pessoas ? (
       <Picker
-        selectedValue={filterPessoa}
+        selectedValue={pessoaSelecionada}
         style={styles.picker}
-        onValueChange={(itemValue) => setFilterPessoa(itemValue)}>
+        onValueChange={(itemValue) => setPessoaSelecionada(itemValue)}>
         <Picker.Item color="#00000090" label="Selecione" value="" />
         {dadosPessoas.map((array) => {
-          return <Picker.Item label={array.nome} value={array.nome} />;
+          return <Picker.Item label={array.nome} value={array.id} />;
         })}
       </Picker>
     ) : (
@@ -168,9 +149,9 @@ const Negociacao = () => {
   const renderUnidades = () => {
     return unidades ? (
       <Picker
-        selectedValue={filterUnidade}
+        selectedValue={unidadeSelecionada}
         style={styles.picker}
-        onValueChange={(itemValue) => setFilterUnidade(itemValue)}>
+        onValueChange={(itemValue) => setUnidadeSelecionada(itemValue)}>
         <Picker.Item color="#00000090" label="Selecione" value="" />
         {unidades.map((array) => {
           return <Picker.Item label={array.razaoSocial} value={array.id} />;
@@ -265,9 +246,9 @@ const Negociacao = () => {
           </View>
 
           <View style={styles.negociacaoRecente}>
-            <Text style={{ fontWeight: 'bold' }}>Negociações Recentes</Text>
+            <Text style={{ fontWeight: 'bold', fontSize:18 }}>Negociações Recentes</Text>
             <TouchableOpacity style={styles.buttonfilter} onPress={onOpen}>
-              <Text>Filtrar</Text>
+              <Text style={{fontSize:16 }}>Filtrar</Text>
               <IconButton icon="filter-menu" color="#000" size={15} />
             </TouchableOpacity>
           </View>
@@ -332,11 +313,16 @@ const Negociacao = () => {
             <Text style={styles.locationTex}> Matriz Valor </Text>
             <Text style={styles.locationTex}> Filial Oeste Valor </Text>
             <Text style={styles.locationTex}> Filial Norte Valor </Text>
-            <Text style={styles.locationTex}> Filial Sul alor </Text>
+            <Text style={styles.locationTex}> Filial Sul Valor </Text>
           </View>
         </View>
       </ScrollView>
-      <Modalize ref={modalizeRef} adjustToContentHeight={true}>
+      <Modalize 
+        ref={modalizeRef} 
+        HeaderComponent={
+          <Text style={{fontSize:18, fontWeight:'bold', alignSelf:'center', marginVertical:10}}>Filtrar por</Text>} 
+        adjustToContentHeight={true}
+        >
         {showDataInicial && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -347,7 +333,7 @@ const Negociacao = () => {
             onTouchCancel={() => setShowDataInicial(false)}
             onChange={(event, date) => {
               setShowDataInicial(false);
-              setFilterDataInicial(moment(date).format('DD-MM-YYYY'));
+              setFilterDataInicial(moment(date).format('DD/MM/YYYY'));
             }}
           />
         )}
@@ -361,31 +347,22 @@ const Negociacao = () => {
             onTouchCancel={() => setShowDataFinal(false)}
             onChange={(event, date) => {
               setShowDataFinal(false);
-              setFilterDataFinal(moment(date).format('DD-MM-YYYY'));
+              setFilterDataFinal(moment(date).format('DD/MM/YYYY'));
             }}
           />
         )}
+        
         <View
           style={{
-            height: 500,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text>Data de lançamento</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <View style={styles.pickerDate}>
+            <Text>Data do lançamento:</Text>  
+            <View style={styles.date}>      
             <TouchableOpacity onPress={() => setShowDataInicial(true)}>
               <Input
+                label="Data inicial:"
                 value={filterDataInicial}
                 left={<TextInput.Icon icon="calendar" />}
                 editable={false}
@@ -393,16 +370,64 @@ const Negociacao = () => {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setShowDataFinal(true)}>
               <Input
+                label="Data final:"
                 value={filterDataFinal}
                 left={<TextInput.Icon icon="calendar" />}
                 editable={false}
               />
+            </TouchableOpacity>  
+            </View>          
+          </View>
+          {showDataInicialPagamento && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={'date'}
+            is24Hour={true}
+            display="default"
+            onTouchCancel={() => setShowDataInicialPagamento(false)}
+            onChange={(event, date) => {
+              setShowDataInicialPagamento(false);
+              setFilterDataInicialPagamento(moment(date).format('DD/MM/YYYY'));
+            }}
+          />
+        )}
+        {showDataFinalPagamento && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={'date'}
+            is24Hour={true}
+            display="default"Pagamento
+            onTouchCancel={() => setShowDataFinalPagamento(false)}
+            onChange={(event, date) => {
+              setShowDataFinalPagamento(false);
+              setFilterDataFinalPagamento(moment(date).format('DD/MM/YYYY'));
+            }}
+          />
+        )}
+          <View style={styles.pickerDate}>
+            <Text>Data do pagamento:</Text>  
+            <View style={styles.date}>      
+            <TouchableOpacity onPress={() => setShowDataInicialPagamento(true)}>
+              <Input
+                label="Data inicial:"
+                value={filterDataInicialPagamento}
+                left={<TextInput.Icon icon="calendar" />}
+                editable={false}
+              />
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => setShowDataFinalPagamento(true)}>
+              <Input
+                label="Data final:"
+                value={filterDataFinalPagamento}
+                left={<TextInput.Icon icon="calendar" />}
+                editable={false}
+              />
+            </TouchableOpacity>  
+            </View>          
           </View>
-          <View style={styles.pickerContainer}>
-            <Text>Unidade:</Text>
-            {renderUnidades()}
-          </View>
+
           <View
             style={{
               flexDirection: 'row',
@@ -432,22 +457,39 @@ const Negociacao = () => {
             <Text>{filterOperacao === 0 ? 'Cliente:' : 'Produtor:'}</Text>
             {renderPessoas(filterOperacao)}
           </View>
+          
+          <View style={styles.pickerContainer}>
+            <Text>Unidade:</Text>
+            {renderUnidades()}
+          </View>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Button onPress={onClose} color="black">
+            <Button 
+              style={styles.buttonFiltrar}
+              onPress={onClose} 
+              mode="contained"
+              color="#F2B66D">
               Voltar
             </Button>
-            <Button color="black">Limpar</Button>
-            <Button
-              style={styles.but2tonFiltrar}
-              onPress={filtrarNegociacoes}
-              color="black">
-              Pesquisar
+             <Button
+              style={styles.buttonFiltrar}
+              onPress= {()=>{console.log("Limpar  filtro")} }
+              mode="contained"
+              color="white">
+              Limpar
             </Button>
+            <Button
+              style={styles.buttonFiltrar}
+              onPress={filtrarNegociacoes}
+              mode="contained"
+              color="#157E58">
+              Pesquisar
+            </Button>     
+            
           </View>
         </View>
       </Modalize>
@@ -560,27 +602,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#269F67',
     borderRadius: 20,
     width: '30%',
-    height: '60%',
+    height: '50%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  actionButton: {
-    width: '50%',
-    backgroundColor: '#269F67',
-    borderRadius: 6,
-    marginTop: 8,
-    padding: 8,
-    alignSelf: 'center',
-    alignItems: 'center',
-    borderColor: '#157E58 0.2',
-  },
-  text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
   negociacaoRecente: {
-    margin: 0,
+    padding:10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -590,7 +618,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   pickerContainer: {
-    marginBottom: 16,
+    marginVertical: 8
   },
   picker: {
     height: 50,
@@ -599,9 +627,17 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonFiltrar: {
-    margin: 8,
-    backgroundColor: '#157E58',
+    margin: 8
   },
+  pickerDate: {
+    alignItems: 'center', 
+  },
+  date:{
+    flexDirection: 'row',
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    marginVertical: 8
+  }
 });
 
 export default Negociacao;
