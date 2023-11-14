@@ -27,12 +27,14 @@ jobs:
         working-directory: ./src/Backend/src
 
       - name: Run Unit Tests for Controllers
+        chmod +x ./node_modules/.bin/jest
         run: npx jest ./controllers
-        working-directory: ./src/Backend/src/controllers
+        working-directory: ./src/Backend/src
 
       - name: Run Unit Tests for Middlewares
+        chmod +x ./node_modules/.bin/jest
         run: npx jest ./middlewares
-        working-directory: ./src/Backend/src/middlewares
+        working-directory: ./src/Backend/src
 
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
