@@ -1,33 +1,36 @@
 name: CI-CD
 
-on: 
-  push: 
+on:
+  push:
     branches: ["main"]
 
 jobs:
   CI:
     runs-on: ubuntu-latest
-
+    
     steps:
       - uses: actions/checkout@v3.1.0
 
-      # Adicionando testes unitários com Jest
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.18.0
+          node-version: 18
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./src/Backend/src
 
       - name: Install Jest Dependencies
         run: npm install --save-dev jest @types/jest ts-jest
+        working-directory: ./src/Backend/src
 
       - name: Run Unit Tests for Controllers
-        run: npx jest ./src/Backend/src/controllers
+        run: npx jest ./controllers
+        working-directory: ./src/Backend/src/controllers
 
       - name: Run Unit Tests for Middlewares
-        run: npx jest ./src/Backend/src/middlewares
+        run: npx jest ./middlewares
+        working-directory: ./src/Backend/src/middlewares
 
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
@@ -48,8 +51,7 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     needs: [CI]
-
-    steps: 
+    steps:
       - uses: actions/checkout@v3.1.0
 
       - name: Definindo o context
