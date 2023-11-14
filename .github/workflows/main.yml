@@ -23,8 +23,11 @@ jobs:
       - name: Install Jest Dependencies
         run: npm install --save-dev jest @types/jest ts-jest
 
-      - name: Run Unit Tests
-        run: npx jest ./src/Backend/src/controllers ./src/Backend/src/middlewares
+      - name: Run Unit Tests for Controllers
+        run: npx jest ./src/Backend/src/controllers
+
+      - name: Run Unit Tests for Middlewares
+        run: npx jest ./src/Backend/src/middlewares
 
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
