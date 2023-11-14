@@ -21,16 +21,15 @@ jobs:
         working-directory: ./src/Backend/src
 
       - name: Instalação de Dependências e Permissões de Teste no CI
-        run: cd ./src/Backend && npm install --save-dev jest @types/jest ts-jest && chmod +x ./node_modules/.bin/jest
-        working-directory: ./src/Backend
+        run: cd ./src/Backend && npm install --save-dev jest @types/jest ts-jest && npx jest --init
       
       - name: Run Unit Tests for Controllers
-        run: npx jest ./controllers
-        working-directory: ./src/Backend/src
+        run: npx jest ./src/controllers
+        working-directory: ./src/Backend
       
       - name: Run Unit Tests for Middlewares
-        run: npx jest ./middlewares
-        working-directory: ./src/Backend/src
+        run: npx jest ./src/middlewares
+        working-directory: ./src/Backend
         
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
