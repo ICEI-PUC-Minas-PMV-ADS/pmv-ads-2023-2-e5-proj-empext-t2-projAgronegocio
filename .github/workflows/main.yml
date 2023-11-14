@@ -25,7 +25,7 @@ jobs:
         working-directory: ./src/Backend/src
       
       - name: Configurar Testes
-        run: chmod +x ./node_modules/.bin/jest
+        run: chmod +x ./node_modules/jest/bin/jest.js
         working-directory: ./src/Backend/src
       
       - name: Run Unit Tests for Controllers
