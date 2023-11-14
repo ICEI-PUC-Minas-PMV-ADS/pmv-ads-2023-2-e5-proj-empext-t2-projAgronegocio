@@ -6,15 +6,11 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
-  Modal,
   Alert,
 } from 'react-native';
 import {
-  List,
   Text,
-  FAB,
   IconButton,
-  Icon,
   RadioButton,
   TextInput,
   Button,
@@ -42,7 +38,6 @@ const Negociacao = () => {
   const isFocused = useIsFocused();
   const [expanded, setExpanded] = useState(false);
   const [negociacoes, setNegociacoes] = useState([]);
-  const [negfiltros, setNegfiltros] = useState(negociacoes);
   const [negociacoesRecentes, setNegociacoesRecentes] = useState([]);
   const [negociacoesExibidas, setNegociacoesExibidas] = useState([]);
   const [textNegociacoes, setTextNegociacoes] = useState(
@@ -50,7 +45,6 @@ const Negociacao = () => {
   );
   const modalizeRef = useRef(null);
 
-  const [filtrado, setFiltrado] = useState('');
   const [filterDataInicial, setFilterDataInicial] = useState('DD/MM/YYYY');
   const [filterDataFinal, setFilterDataFinal] = useState('DD/MM/YYYY');
   const [filterDataInicialPagamento, setFilterDataInicialPagamento] =
@@ -94,51 +88,30 @@ const Negociacao = () => {
     });
   }, [isFocused]);
 
-  //const negociacoesFiltradas = useMemo(() => {}
-
   const filtrarNegociacoes = () => {
-    console.log(filterDataInicial);
-    let dataInicial = filterDataInicial;
-    let dataFinal = filterDataFinal;
-    let dataInicialPagamento = filterDataInicialPagamento;
-    let dataFinalPagamento = filterDataFinalPagamento;
-    if (filterDataInicial === 'DD/MM/YYYY') {
-      dataInicial = passarParaData('01/01/2020');
-    } else {
-      dataInicial = passarParaData(filterDataInicial);
-    }
-    if (filterDataFinal === 'DD/MM/YYYY') {
-      dataFinal = passarParaData('01/01/2200');
-    } else {
-      dataFinal = passarParaData(filterDataFinal);
-    }
-    if (filterDataInicialPagamento === 'DD/MM/YYYY') {
-      dataInicialPagamento = passarParaData('01/01/2020');
-    } else {
-      dataInicialPagamento = passarParaData(filterDataInicialPagamento);
-    }
-    if (filterDataFinalPagamento === 'DD/MM/YYYY') {
-      dataFinalPagamento = passarParaData('01/01/2200');
-    } else {
-      dataFinalPagamento = passarParaData(filterDataFinalPagamento);
-    }
     const filtered = negociacoes.filter((x) => {
-      console.log('entrei no filtro!');
-      console.log(dataInicial);
       return (
-        passarParaData(moment(x.data_lancamento).format('DD/MM/YYYY')) >=
-          dataInicial &&
-        passarParaData(moment(x.data_lancamento).format('DD/MM/YYYY')) <=
-          dataFinal &&
-        passarParaData(x.data_vencimento) >= dataInicialPagamento &&
-        passarParaData(x.data_vencimento) <= dataFinalPagamento &&
-        x.unidade === filterUnidade &&
-        x.tipo_operacao === filterOperacao &&
-        x.nomePessoa === filterPessoa
+        (filterDataInicial === 'DD/MM/YYYY'
+          ? true
+          : moment(x.data_lancamento).format('DD/MM/YYYY') >=
+            filterDataInicial) &&
+        (filterDataFinal === 'DD/MM/YYYY'
+          ? true
+          : moment(x.data_lancamento).format('DD/MM/YYYY') <=
+            filterDataFinal) &&
+        (filterDataInicialPagamento === 'DD/MM/YYYY'
+          ? true
+          : passarParaData(x.data_vencimento) >=
+            passarParaData(filterDataInicialPagamento)) &&
+        (filterDataFinalPagamento === 'DD/MM/YYYY'
+          ? true
+          : passarParaData(x.data_vencimento) <=
+            passarParaData(filterDataFinalPagamento)) &&
+        (filterUnidade === '' ? true : x.unidade === filterUnidade) &&
+        (filterOperacao === 3 ? true : x.tipo_operacao === filterOperacao) &&
+        (filterPessoa === '' ? true : x.nomePessoa === filterPessoa)
       );
     });
-    setFiltrado(filtered);
-    console.log(filtered);
     if (filtered.length > 0) {
       setNegociacoesExibidas(filtered);
       setTextNegociacoes('Encontrado ' + filtered.length + ' registro(s)');
@@ -168,7 +141,6 @@ const Negociacao = () => {
     const m = str[1];
     const y = str[2];
     const strConv = y + '-' + m + '-' + d;
-    console.log(new Date(strConv));
     return new Date(strConv);
   };
 
