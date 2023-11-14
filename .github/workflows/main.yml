@@ -1,0 +1,39 @@
+name: CI-CD
+
+on: 
+  push: 
+    branches: ["main"]
+    
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3.1.0
+      
+      - name: Autenticação no Docker Hub
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{secrets.DOCKERHUB_USER}}
+          password: ${{secrets.DOCKERHUB_PWD}}
+      
+      - name: Construção da imagem Docker
+        uses: docker/build-push-action@v3.2.0
+        with: 
+          context: ./src/Backend/src
+          file: ./src/Backend/src/Dockerfile
+          push: true
+          tags: |
+            laisamaral/live-kube-news:${{github.run_number}}
+            laisamaral/live-kube-news:latest
+  CD:
+    runs-on: ubuntu-latest
+    needs: [CI]
+    steps: 
+      - uses: actions/checkout@v3.1.0
+      
+      - name: Definindo o context
+        uses: Azure/k8s-set-context@v3.0
+        with:
+          method: kubeconfig
+          kubeconfig: ${{secrets.K8S_CONFIG}}
