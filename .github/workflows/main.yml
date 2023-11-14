@@ -21,7 +21,8 @@ jobs:
         working-directory: ./src/Backend/src
 
       - name: Instalação de Dependências e Permissões de Teste no CI
-        run: cd ./src/Backend && npm install --save-dev jest @types/jest ts-jest && npx jest --init
+        run: npm install --save-dev jest
+        working-directory: ./src/Backend/src
       
       - name: Run Unit Tests for Controllers
         run: npx jest ./src/controllers
