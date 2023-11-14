@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Modal,
+  Alert,
 } from 'react-native';
 import {
   List,
@@ -33,7 +34,6 @@ import {
 import Assets from '../assets/ImagemSoja2.jpg';
 import { Modalize } from 'react-native-modalize';
 
-
 import { getPessoas } from '../services/pessoas.services';
 import { getUnidades } from '../services/unidades.services';
 
@@ -42,39 +42,33 @@ const Negociacao = () => {
   const isFocused = useIsFocused();
   const [expanded, setExpanded] = useState(false);
   const [negociacoes, setNegociacoes] = useState([]);
+  const [negfiltros, setNegfiltros] = useState(negociacoes);
   const [negociacoesRecentes, setNegociacoesRecentes] = useState([]);
+  const [negociacoesExibidas, setNegociacoesExibidas] = useState([]);
+  const [textNegociacoes, setTextNegociacoes] = useState(
+    'Negociações Recentes'
+  );
   const modalizeRef = useRef(null);
 
-  const [filtrado, setFiltrado] = useState(negociacoes);
-
-  const [filterDataInicial, setFilterDataInicial] = useState(
-    moment(new Date()).format('DD/MM/YYYY')
-  );
-  const [filterDataFinal, setFilterDataFinal] = useState(
-    moment(new Date()).format('DD/MM/YYYY')
-  );
-  
-  const [filterDataInicialPagamento, setFilterDataInicialPagamento] = useState(
-    moment(new Date()).format('DD/MM/YYYY')
-  );
-  const [filterDataFinalPagamento, setFilterDataFinalPagamento] = useState(
-    moment(new Date()).format('DD/MM/YYYY')
-  );
+  const [filtrado, setFiltrado] = useState('');
+  const [filterDataInicial, setFilterDataInicial] = useState('DD/MM/YYYY');
+  const [filterDataFinal, setFilterDataFinal] = useState('DD/MM/YYYY');
+  const [filterDataInicialPagamento, setFilterDataInicialPagamento] =
+    useState('DD/MM/YYYY');
+  const [filterDataFinalPagamento, setFilterDataFinalPagamento] =
+    useState('DD/MM/YYYY');
   const [filterUnidade, setFilterUnidade] = useState('');
-  const [filterOperacao, setFilterOperacao] = useState('');
-  const [filterCliente, setFilteCliente] = useState('');
-  const [filterProdutor, setFilterProdutor] = useState('');
+  const [filterOperacao, setFilterOperacao] = useState(3);
+  const [filterPessoa, setFilterPessoa] = useState('');
   const [date, setDate] = useState(new Date());
   const [showDataInicial, setShowDataInicial] = useState(false);
   const [showDataFinal, setShowDataFinal] = useState(false);
-  const [showDataInicialPagamento, setShowDataInicialPagamento] = useState(false);
+  const [showDataInicialPagamento, setShowDataInicialPagamento] =
+    useState(false);
   const [showDataFinalPagamento, setShowDataFinalPagamento] = useState(false);
 
-
   const [pessoas, setPessoas] = useState([]);
-  const [pessoaSelecionada, setPessoaSelecionada] = useState([]);
   const [unidades, setUnidades] = useState([]);
-  const [unidadeSelecionada, setUnidadeSelecionada] = useState(0);
 
   const onOpen = () => {
     modalizeRef.current?.open();
@@ -95,17 +89,99 @@ const Negociacao = () => {
     });
     getNegociacoesRecentes().then((dadosR) => {
       console.log(dadosR);
-      setNegociacoesRecentes(dadosR || []); // Adicionei uma verificação para garantir que negociacoes não seja nulo
+      setNegociacoesRecentes(dadosR || []);
+      setNegociacoesExibidas(dadosR || []); // Adicionei uma verificação para garantir que negociacoes não seja nulo
     });
   }, [isFocused]);
 
   //const negociacoesFiltradas = useMemo(() => {}
 
   const filtrarNegociacoes = () => {
+    console.log(filterDataInicial);
+    let dataInicial = filterDataInicial;
+    let dataFinal = filterDataFinal;
+    let dataInicialPagamento = filterDataInicialPagamento;
+    let dataFinalPagamento = filterDataFinalPagamento;
+    if (filterDataInicial === 'DD/MM/YYYY') {
+      dataInicial = passarParaData('01/01/2020');
+    } else {
+      dataInicial = passarParaData(filterDataInicial);
+    }
+    if (filterDataFinal === 'DD/MM/YYYY') {
+      dataFinal = passarParaData('01/01/2200');
+    } else {
+      dataFinal = passarParaData(filterDataFinal);
+    }
+    if (filterDataInicialPagamento === 'DD/MM/YYYY') {
+      dataInicialPagamento = passarParaData('01/01/2020');
+    } else {
+      dataInicialPagamento = passarParaData(filterDataInicialPagamento);
+    }
+    if (filterDataFinalPagamento === 'DD/MM/YYYY') {
+      dataFinalPagamento = passarParaData('01/01/2200');
+    } else {
+      dataFinalPagamento = passarParaData(filterDataFinalPagamento);
+    }
     const filtered = negociacoes.filter((x) => {
-      return x.data_lancamento === 'Geovane' && x.valor_por_saca <= 20;
+      console.log('entrei no filtro!');
+      console.log(dataInicial);
+      return (
+        passarParaData(moment(x.data_lancamento).format('DD/MM/YYYY')) >=
+          dataInicial &&
+        passarParaData(moment(x.data_lancamento).format('DD/MM/YYYY')) <=
+          dataFinal &&
+        passarParaData(x.data_vencimento) >= dataInicialPagamento &&
+        passarParaData(x.data_vencimento) <= dataFinalPagamento &&
+        x.unidade === filterUnidade &&
+        x.tipo_operacao === filterOperacao &&
+        x.nomePessoa === filterPessoa
+      );
     });
     setFiltrado(filtered);
+    console.log(filtered);
+    if (filtered.length > 0) {
+      setNegociacoesExibidas(filtered);
+      setTextNegociacoes('Encontrado ' + filtered.length + ' registro(s)');
+      setExpanded(false);
+      Alert.alert(
+        'Atenção!',
+        'Encontrado ' + filtered.length + ' registro(s)!',
+        [
+          {
+            text: 'Ok',
+            onPress: onClose,
+          },
+        ]
+      );
+    } else {
+      Alert.alert('Atenção!', 'Nenhum dado encontrado!', [
+        {
+          text: 'Ok',
+        },
+      ]);
+    }
+  };
+
+  const passarParaData = (d1) => {
+    const str = d1.split('/');
+    const d = str[0];
+    const m = str[1];
+    const y = str[2];
+    const strConv = y + '-' + m + '-' + d;
+    console.log(new Date(strConv));
+    return new Date(strConv);
+  };
+
+  const limparFiltro = () => {
+    setFilterDataInicial('DD/MM/YYYY');
+    setFilterDataFinal('DD/MM/YYYY');
+    setFilterDataInicialPagamento('DD/MM/YYYY');
+    setFilterDataFinalPagamento('DD/MM/YYYY');
+    setFilterUnidade('');
+    setFilterOperacao(3);
+    setFilterPessoa('');
+    setNegociacoesExibidas(negociacoesRecentes);
+    setTextNegociacoes('Negociações Recentes');
   };
 
   const renderPessoas = (tipoOp) => {
@@ -125,20 +201,26 @@ const Negociacao = () => {
         return { id, nome };
       });
 
+    todasPessoas = pessoas.map(function ({ id, nome }) {
+      return { id, nome };
+    });
+
     if (tipoOp == 0) {
       dadosPessoas = cliente;
-    } else {
+    } else if (tipoOp == 1) {
       dadosPessoas = produtor;
+    } else {
+      dadosPessoas = todasPessoas;
     }
 
     return pessoas ? (
       <Picker
-        selectedValue={pessoaSelecionada}
+        selectedValue={filterPessoa}
         style={styles.picker}
-        onValueChange={(itemValue) => setPessoaSelecionada(itemValue)}>
+        onValueChange={(itemValue) => setFilterPessoa(itemValue)}>
         <Picker.Item color="#00000090" label="Selecione" value="" />
         {dadosPessoas.map((array) => {
-          return <Picker.Item label={array.nome} value={array.id} />;
+          return <Picker.Item label={array.nome} value={array.nome} />;
         })}
       </Picker>
     ) : (
@@ -149,9 +231,9 @@ const Negociacao = () => {
   const renderUnidades = () => {
     return unidades ? (
       <Picker
-        selectedValue={unidadeSelecionada}
+        selectedValue={filterUnidade}
         style={styles.picker}
-        onValueChange={(itemValue) => setUnidadeSelecionada(itemValue)}>
+        onValueChange={(itemValue) => setFilterUnidade(itemValue)}>
         <Picker.Item color="#00000090" label="Selecione" value="" />
         {unidades.map((array) => {
           return <Picker.Item label={array.razaoSocial} value={array.id} />;
@@ -164,8 +246,8 @@ const Negociacao = () => {
 
   const renderNegociacoes = () => {
     const displayedNegociacoes = expanded
-      ? negociacoesRecentes || []
-      : (negociacoesRecentes || []).slice(0, 2);
+      ? negociacoesExibidas || []
+      : (negociacoesExibidas || []).slice(0, 2);
 
     return (
       <View>
@@ -208,7 +290,7 @@ const Negociacao = () => {
             <View style={styles.divider} />
           </TouchableOpacity>
         ))}
-        {!expanded && (
+        {!expanded && negociacoesExibidas.length > 2 && (
           <View style={styles.expandIconContainer}>
             <IconButton
               icon="arrow-expand-all"
@@ -246,15 +328,17 @@ const Negociacao = () => {
           </View>
 
           <View style={styles.negociacaoRecente}>
-            <Text style={{ fontWeight: 'bold', fontSize:18 }}>Negociações Recentes</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
+              {textNegociacoes}
+            </Text>
             <TouchableOpacity style={styles.buttonfilter} onPress={onOpen}>
-              <Text style={{fontSize:16 }}>Filtrar</Text>
+              <Text style={{ fontSize: 16 }}>Filtrar</Text>
               <IconButton icon="filter-menu" color="#000" size={15} />
             </TouchableOpacity>
           </View>
         </View>
         <Body>{renderNegociacoes()}</Body>
-        {expanded && (
+        {expanded && negociacoesExibidas.length > 2 && (
           <View style={styles.expandIconContainer}>
             <IconButton
               icon="arrow-collapse-all"
@@ -317,12 +401,20 @@ const Negociacao = () => {
           </View>
         </View>
       </ScrollView>
-      <Modalize 
-        ref={modalizeRef} 
+      <Modalize
+        ref={modalizeRef}
         HeaderComponent={
-          <Text style={{fontSize:18, fontWeight:'bold', alignSelf:'center', marginVertical:10}}>Filtrar por</Text>} 
-        adjustToContentHeight={true}
-        >
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              alignSelf: 'center',
+              marginVertical: 10,
+            }}>
+            Filtrar por
+          </Text>
+        }
+        adjustToContentHeight={true}>
         {showDataInicial && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -351,81 +443,85 @@ const Negociacao = () => {
             }}
           />
         )}
-        
+
         <View
           style={{
             justifyContent: 'center',
             alignItems: 'center',
           }}>
           <View style={styles.pickerDate}>
-            <Text>Data do lançamento:</Text>  
-            <View style={styles.date}>      
-            <TouchableOpacity onPress={() => setShowDataInicial(true)}>
-              <Input
-                label="Data inicial:"
-                value={filterDataInicial}
-                left={<TextInput.Icon icon="calendar" />}
-                editable={false}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setShowDataFinal(true)}>
-              <Input
-                label="Data final:"
-                value={filterDataFinal}
-                left={<TextInput.Icon icon="calendar" />}
-                editable={false}
-              />
-            </TouchableOpacity>  
-            </View>          
+            <Text>Data do lançamento:</Text>
+            <View style={styles.date}>
+              <TouchableOpacity onPress={() => setShowDataInicial(true)}>
+                <Input
+                  label="Data inicial:"
+                  value={filterDataInicial}
+                  left={<TextInput.Icon icon="calendar" />}
+                  editable={false}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setShowDataFinal(true)}>
+                <Input
+                  label="Data final:"
+                  value={filterDataFinal}
+                  left={<TextInput.Icon icon="calendar" />}
+                  editable={false}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
           {showDataInicialPagamento && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            onTouchCancel={() => setShowDataInicialPagamento(false)}
-            onChange={(event, date) => {
-              setShowDataInicialPagamento(false);
-              setFilterDataInicialPagamento(moment(date).format('DD/MM/YYYY'));
-            }}
-          />
-        )}
-        {showDataFinalPagamento && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={'date'}
-            is24Hour={true}
-            display="default"Pagamento
-            onTouchCancel={() => setShowDataFinalPagamento(false)}
-            onChange={(event, date) => {
-              setShowDataFinalPagamento(false);
-              setFilterDataFinalPagamento(moment(date).format('DD/MM/YYYY'));
-            }}
-          />
-        )}
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={'date'}
+              is24Hour={true}
+              display="default"
+              onTouchCancel={() => setShowDataInicialPagamento(false)}
+              onChange={(event, date) => {
+                setShowDataInicialPagamento(false);
+                setFilterDataInicialPagamento(
+                  moment(date).format('DD/MM/YYYY')
+                );
+              }}
+            />
+          )}
+          {showDataFinalPagamento && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={'date'}
+              is24Hour={true}
+              display="default"
+              Pagamento
+              onTouchCancel={() => setShowDataFinalPagamento(false)}
+              onChange={(event, date) => {
+                setShowDataFinalPagamento(false);
+                setFilterDataFinalPagamento(moment(date).format('DD/MM/YYYY'));
+              }}
+            />
+          )}
           <View style={styles.pickerDate}>
-            <Text>Data do pagamento:</Text>  
-            <View style={styles.date}>      
-            <TouchableOpacity onPress={() => setShowDataInicialPagamento(true)}>
-              <Input
-                label="Data inicial:"
-                value={filterDataInicialPagamento}
-                left={<TextInput.Icon icon="calendar" />}
-                editable={false}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setShowDataFinalPagamento(true)}>
-              <Input
-                label="Data final:"
-                value={filterDataFinalPagamento}
-                left={<TextInput.Icon icon="calendar" />}
-                editable={false}
-              />
-            </TouchableOpacity>  
-            </View>          
+            <Text>Data do pagamento:</Text>
+            <View style={styles.date}>
+              <TouchableOpacity
+                onPress={() => setShowDataInicialPagamento(true)}>
+                <Input
+                  label="Data inicial:"
+                  value={filterDataInicialPagamento}
+                  left={<TextInput.Icon icon="calendar" />}
+                  editable={false}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setShowDataFinalPagamento(true)}>
+                <Input
+                  label="Data final:"
+                  value={filterDataFinalPagamento}
+                  left={<TextInput.Icon icon="calendar" />}
+                  editable={false}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View
@@ -454,10 +550,16 @@ const Negociacao = () => {
             </View>
           </View>
           <View style={styles.pickerContainer}>
-            <Text>{filterOperacao === 0 ? 'Cliente:' : 'Produtor:'}</Text>
+            <Text>
+              {filterOperacao === 0
+                ? 'Cliente:'
+                : filterOperacao === 1
+                ? 'Produtor'
+                : 'Cliente/Produtor:'}
+            </Text>
             {renderPessoas(filterOperacao)}
           </View>
-          
+
           <View style={styles.pickerContainer}>
             <Text>Unidade:</Text>
             {renderUnidades()}
@@ -468,16 +570,16 @@ const Negociacao = () => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Button 
+            <Button
               style={styles.buttonFiltrar}
-              onPress={onClose} 
+              onPress={onClose}
               mode="contained"
               color="#F2B66D">
               Voltar
             </Button>
-             <Button
+            <Button
               style={styles.buttonFiltrar}
-              onPress= {()=>{console.log("Limpar  filtro")} }
+              onPress={limparFiltro}
               mode="contained"
               color="white">
               Limpar
@@ -488,8 +590,7 @@ const Negociacao = () => {
               mode="contained"
               color="#157E58">
               Pesquisar
-            </Button>     
-            
+            </Button>
           </View>
         </View>
       </Modalize>
@@ -503,7 +604,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     backgroundColor: 'white',
-    padding: 20,
+    padding: 3,
     marginBottom: 0,
   },
   saldoDiaContainer: {
@@ -527,7 +628,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
+    padding: 8,
     backgroundColor: 'white',
     shadowColor: '#000',
     shadowOffset: {
@@ -602,13 +703,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#269F67',
     borderRadius: 20,
     width: '30%',
-    height: '50%',
+    height: '65%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
   negociacaoRecente: {
-    padding:10,
+    padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -618,7 +719,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   pickerContainer: {
-    marginVertical: 8
+    marginVertical: 8,
   },
   picker: {
     height: 50,
@@ -627,17 +728,17 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonFiltrar: {
-    margin: 8
+    margin: 8,
   },
   pickerDate: {
-    alignItems: 'center', 
+    alignItems: 'center',
   },
-  date:{
+  date: {
     flexDirection: 'row',
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    marginVertical: 8
-  }
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 8,
+  },
 });
 
 export default Negociacao;

@@ -30,7 +30,7 @@ const validateBody = (req, res, next) => {
         return;
     }
     if (body.id_usuario === undefined || body.id_usuario === '' || body.id_usuario === null) {
-        res.status(400).json({ message: 'Campo "unidade" é obrigatório' });
+        res.status(400).json({ message: 'Campo "id_usuario" é obrigatório' });
         return;
     }
 

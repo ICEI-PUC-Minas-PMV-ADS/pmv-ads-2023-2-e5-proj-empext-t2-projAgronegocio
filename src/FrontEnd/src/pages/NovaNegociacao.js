@@ -48,9 +48,9 @@ const NovaNegociacao = ({ route }) => {
   const [valorTotal, setValorTotal] = useState('');
   const [idUsuario, setIdUsuario] = useState('');
   const [pessoas, setPessoas] = useState([]);
-  const [pessoaSelecionada, setPessoaSelecionada] = useState([]);
+  const [pessoaSelecionada, setPessoaSelecionada] = useState();
   const [unidades, setUnidades] = useState([]);
-  const [unidadeSelecionada, setUnidadeSelecionada] = useState([]);
+  const [unidadeSelecionada, setUnidadeSelecionada] = useState();
 
   useEffect(() => {
     getPessoas().then((dados) => {
@@ -196,6 +196,7 @@ const NovaNegociacao = ({ route }) => {
         selectedValue={pessoaSelecionada}
         style={styles.picker}
         onValueChange={(itemValue) => setPessoaSelecionada(itemValue)}>
+        <Picker.Item color="#00000090" label="Selecione" value="" />
         {dadosPessoas.map((array) => {
           return <Picker.Item label={array.nome} value={array.id} />;
         })}
@@ -222,7 +223,14 @@ const NovaNegociacao = ({ route }) => {
 
   return (
     <Container>
-      <Header title={'Negociação'} goBack={() => navigation.goBack()}></Header>
+      <Header
+        title={'Negociação'}
+        goBack={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }],
+          })
+        }></Header>
       <Body>
         <View style={styles.containerRadioButton}>
           <View style={styles.containerRadioItem}>

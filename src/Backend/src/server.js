@@ -5,7 +5,7 @@ const app = require('./app');
 
 require('dotenv').config();
 
-app.use('/api-docs-negociacoes', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocs));
+app.use('/api-doc-agrotrademonitor', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerDocs));
 
 const PORT = process.env.PORT || 3333;
 

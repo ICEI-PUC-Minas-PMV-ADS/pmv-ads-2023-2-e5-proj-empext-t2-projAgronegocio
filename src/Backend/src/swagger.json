@@ -1,176 +1,336 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "API de Negociações",
-        "description": "Essa API tem como objetivo a criação, atualização e exclusão de negociações",
-        "termsOfService": "",
-        "contact": {
-            "email": "laislima.amarals@gmail.com"
-        },
-        "version": "1.0.0"
+      "title": "API de Negociações e Usuários",
+      "description": "Essa API tem como objetivo a criação, atualização e exclusão de negociações, bem como a criação e gerenciamento de usuários.",
+      "termsOfService": "",
+      "contact": {
+        "email": "laislima.amarals@gmail.com"
+      },
+      "version": "1.0.0"
     },
     "servers": [
-        {
-            "url": "http://localhost:3333",
-            "description": "API de produção"
-        }
+      {
+        "url": "http://localhost:3333",
+        "description": "API de produção"
+      }
     ],
     "paths": {
-        "/negociacao": {
-            "get": {
-                "summary": "Listar todas as negociações",
-                "responses": {
-                    "200": {
-                        "description": "Sucesso ao listar negociações"
-                    }
-                }
-            },
-            "post": {
-                "summary": "Criar uma nova negociação",
-                "requestBody": {
-                    "description": "Dados da negociação a ser criada",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "cliente_produtor": {
-                                        "type": "string",
-                                        "maxLength": 80
-                                    },
-                                    "tipo_operacao": {
-                                        "type": "integer"
-                                    },
-                                    "valor_por_saca": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "quantidade_saca": {
-                                        "type": "integer"
-                                    },
-                                    "data_vencimento": {
-                                        "type": "string",
-                                        "format": "date"
-                                    },
-                                    "valor_total": {
-                                        "type": "number",
-                                        "format": "float"
-                                    },
-                                    "unidade": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "required": [
-                                    "cliente_produtor",
-                                    "tipo_operacao",
-                                    "valor_por_saca",
-                                    "quantidade_saca",
-                                    "data_vencimento",
-                                    "valor_total",
-                                    "unidade"
-                                ]
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Negociação criada com sucesso"
+      "/negociacao": {
+        "get": {
+          "summary": "Listar todas as negociações",
+          "responses": {
+            "200": {
+              "description": "Sucesso ao listar negociações"
+            }
+          }
+        },
+        "post": {
+          "summary": "Criar uma nova negociação",
+          "requestBody": {
+            "description": "Dados da negociação a ser criada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cliente_produtor": {
+                      "type": "string",
+                      "maxLength": 80
                     },
-                    "400": {
-                        "description": "Erro ao criar negociação"
+                    "tipo_operacao": {
+                      "type": "integer"
+                    },
+                    "valor_por_saca": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "quantidade_saca": {
+                      "type": "integer"
+                    },
+                    "data_vencimento": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "valor_total": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "unidade": {
+                      "type": "integer"
                     }
+                  },
+                  "required": [
+                    "cliente_produtor",
+                    "tipo_operacao",
+                    "valor_por_saca",
+                    "quantidade_saca",
+                    "data_vencimento",
+                    "valor_total",
+                    "unidade"
+                  ]
                 }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Negociação criada com sucesso"
+            },
+            "400": {
+              "description": "Erro ao criar negociação"
+            }
+          }
+        }
+      },
+      "/negociacao/{id}": {
+        "get": {
+          "summary": "Obter uma negociação por ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID da negociação a ser obtida",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso ao obter negociação por ID"
+            },
+            "404": {
+              "description": "Negociação não encontrada"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Excluir uma negociação por ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID da negociação a ser excluída",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Negociação excluída com sucesso"
+            },
+            "404": {
+              "description": "Negociação não encontrada"
+            }
+          }
+        },
+        "put": {
+          "summary": "Atualizar uma negociação por ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID da negociação a ser atualizada",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+        ],
+          "requestBody": {
+            "description": "Dados da negociação a ser atualizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property1": {
+                      "type": "string"
+                    },
+                    "property2": {
+                      "type": "string"
+                    },
+                    "property3": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
             }
         },
-        "/negociacao/{id}": {
-            "get": {
-                "summary": "Obter uma negociação por ID",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da negociação a ser obtida",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sucesso ao obter negociação por ID"
-                    },
-                    "404": {
-                        "description": "Negociação não encontrada"
-                    }
-                }
+          "responses": {
+            "200": {
+              "description": "Negociação atualizada com sucesso"
             },
-            "delete": {
-                "summary": "Excluir uma negociação por ID",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da negociação a ser excluída",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Negociação excluída com sucesso"
-                    },
-                    "404": {
-                        "description": "Negociação não encontrada"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Atualizar uma negociação por ID",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da negociação a ser atualizada",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Dados da negociação a ser atualizada",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "property1": {
-                                        "type": "string"
-                                    },
-                                    "property2": {
-                                        "type": "string"
-                                    },
-                                    "property3": {
-                                        "type": "number"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Negociação atualizada com sucesso"
-                    },
-                    "400": {
-                        "description": "Erro ao atualizar negociação"
-                    }
-                }
+            "400": {
+              "description": "Erro ao atualizar negociação"
             }
+          }
         }
+      },
+      "/register": {
+        "post": {
+          "summary": "Cadastrar um novo usuário",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Senha com no mínimo 5 caracteres"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "email",
+                    "password"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuário registrado com sucesso"
+            },
+            "400": {
+              "description": "Erro ao registrar o usuário"
+            },
+            "409": {
+              "description": "Usuário já em uso"
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+          "summary": "Realizar login de usuário",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "Email do usuário para login"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Senha com no mínimo 5 caracteres"
+                    }
+                  },
+                  "required": [
+                    "email",
+                    "password"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Usuário logado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string"
+                      },
+                      "token": {
+                        "type": "string"
+                      },
+                      "user": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro ao realizar o login"
+            },
+            "401": {
+              "description": "Dados inválidos"
+            }
+          }
+        }
+      },
+      "/get-user": {
+        "post": {
+          "summary": "Obter dados do usuário logado",
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Token JWT de autorização",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuário encontrado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "boolean"
+                      },
+                      "data": {
+                        "type": "object"
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Token não fornecido"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "security": [
+        {
+          "BearerAuth": []
+        }
+      ]
     }
-}
+  }  
