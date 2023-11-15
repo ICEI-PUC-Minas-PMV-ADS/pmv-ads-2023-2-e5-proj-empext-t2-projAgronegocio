@@ -25,12 +25,14 @@ jobs:
         working-directory: ./src/Backend
 
       - name: Run Jest Tests Controllers
-        run: npx jest ./controllers
-        working-directory: ./src/Backend
+        uses: stefanoeb/jest-action@1.0.4
+        with:
+          jestArgs: ./src/Backend/controllers
           
       - name: Run Jest Tests Middlewares
-        run: npx jest ./middlewares
-        working-directory: ./src/Backend
+        uses: stefanoeb/jest-action@1.0.4
+        with:
+          jestArgs: ./src/Backend/middlewares
 
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
