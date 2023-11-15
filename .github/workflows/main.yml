@@ -24,9 +24,15 @@ jobs:
         run: npm install --save-dev jest
         working-directory: ./src/Backend
 
-      - name: Run Unit Tests
-        run: /path/to/npx jest
-        working-directory: ./src/Backend
+      - name: Run Jest Tests Controllers
+        uses: stefanoeb/jest-action@1.0.4
+        with:
+          jestArgs: ./controllers
+          
+      - name: Run Jest Tests Middlewares
+        uses: stefanoeb/jest-action@1.0.4
+        with:
+          jestArgs: ./middlewares
 
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
