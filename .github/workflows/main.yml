@@ -24,6 +24,10 @@ jobs:
         run: npm install --save-dev jest
         working-directory: ./src/Backend
 
+      - name: Change permissions (Optional)
+        run: chmod -R 777 node_modules
+        working-directory: ./src/Backend
+
       - name: Run Jest Tests Controllers
         uses: stefanoeb/jest-action@1.0.4
         with:
