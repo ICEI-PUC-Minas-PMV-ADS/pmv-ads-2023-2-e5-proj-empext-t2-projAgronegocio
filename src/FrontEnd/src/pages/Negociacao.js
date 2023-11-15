@@ -28,10 +28,10 @@ import {
   getNegociacoesRecentes,
 } from '../services/negociacao.services';
 import Assets from '../assets/ImagemSoja2.jpg';
-import { Modalize } from 'react-native-modalize';
 
 import { getPessoas } from '../services/pessoas.services';
 import { getUnidades } from '../services/unidades.services';
+
 
 const Negociacao = () => {
   const navigation = useNavigation();
@@ -43,7 +43,6 @@ const Negociacao = () => {
   const [textNegociacoes, setTextNegociacoes] = useState(
     'Negociações Recentes'
   );
-  const modalizeRef = useRef(null);
 
   const [filterDataInicial, setFilterDataInicial] = useState('DD/MM/YYYY');
   const [filterDataFinal, setFilterDataFinal] = useState('DD/MM/YYYY');
@@ -63,12 +62,13 @@ const Negociacao = () => {
 
   const [pessoas, setPessoas] = useState([]);
   const [unidades, setUnidades] = useState([]);
+  const [filterOpen, setFilterOpen] = useState(false);
 
-  const onOpen = () => {
-    modalizeRef.current?.open();
+  const openFilter = () => {
+    setFilterOpen(true);
   };
-  const onClose = () => {
-    modalizeRef.current?.close();
+  const closeFilter = () => {
+    setFilterOpen(false);
   };
 
   useEffect(() => {
@@ -94,19 +94,19 @@ const Negociacao = () => {
         (filterDataInicial === 'DD/MM/YYYY'
           ? true
           : moment(x.data_lancamento).format('DD/MM/YYYY') >=
-            filterDataInicial) &&
+          filterDataInicial) &&
         (filterDataFinal === 'DD/MM/YYYY'
           ? true
           : moment(x.data_lancamento).format('DD/MM/YYYY') <=
-            filterDataFinal) &&
+          filterDataFinal) &&
         (filterDataInicialPagamento === 'DD/MM/YYYY'
           ? true
           : passarParaData(x.data_vencimento) >=
-            passarParaData(filterDataInicialPagamento)) &&
+          passarParaData(filterDataInicialPagamento)) &&
         (filterDataFinalPagamento === 'DD/MM/YYYY'
           ? true
           : passarParaData(x.data_vencimento) <=
-            passarParaData(filterDataFinalPagamento)) &&
+          passarParaData(filterDataFinalPagamento)) &&
         (filterUnidade === '' ? true : x.unidade === filterUnidade) &&
         (filterOperacao === 3 ? true : x.tipo_operacao === filterOperacao) &&
         (filterPessoa === '' ? true : x.nomePessoa === filterPessoa)
@@ -122,7 +122,7 @@ const Negociacao = () => {
         [
           {
             text: 'Ok',
-            onPress: onClose,
+            onPress: closeFilter,
           },
         ]
       );
@@ -278,10 +278,240 @@ const Negociacao = () => {
 
   const Separator = () => <View style={styles.separator} />;
 
+  const somatorioCompra = () => {
+    let sumVenda = 0;
+    let sumCompra = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 0) {
+        sumVenda += negociacoes[i].valor_total;
+        //console.log({sumVenda});
+      }
+      else {
+        sumCompra += negociacoes[i].valor_total;
+        //console.log({sumCompra});
+
+      }
+    }
+    saldo = sumVenda - sumCompra;
+    return (
+      <View>
+        <Text style={styles.vendaSaca}>R${sumCompra.toFixed(2)}</Text>
+      </View>
+    );
+  };
+
+  const somatorioVenda = () => {
+    let sumVenda = 0;
+    let sumCompra = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 0) {
+        sumVenda += negociacoes[i].valor_total;
+        //console.log({sumVenda});
+      }
+      else {
+        sumCompra += negociacoes[i].valor_total;
+        //console.log({sumCompra});
+
+      }
+    }
+    saldo = sumVenda - sumCompra;
+    return (
+      <View>
+        <Text style={styles.vendaSaca}>R${sumVenda.toFixed(2)}</Text>
+      </View>
+    );
+  };
+
+
+  const mediaCompra = () => {
+    let mediaVenda = 0;
+    let mediaCompra = 0;
+    let numVenda = 0;
+    let numCompra = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 0) {
+        mediaVenda += negociacoes[i].valor_total;
+        numVenda += 1;
+        //console.log({mediaVenda});
+        //console.log({numVenda});
+      }
+      else {
+        mediaCompra += negociacoes[i].valor_total;
+        numCompra += 1;
+        //console.log({mediaCompra});
+        //console.log({numCompra});
+      }
+    }
+    return (
+      <View>
+        <Text style={styles.vendaSaca}>R${(mediaCompra / numCompra).toFixed(2)}</Text>
+      </View>
+    );
+  };
+
+  const mediaVenda = () => {
+    let mediaVenda = 0;
+    let mediaCompra = 0;
+    let numVenda = 0;
+    let numCompra = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 0) {
+        mediaVenda += negociacoes[i].valor_total;
+        numVenda += 1;
+        //console.log({mediaVenda});
+        //console.log({numVenda});
+      }
+      else {
+        mediaCompra += negociacoes[i].valor_total;
+        numCompra += 1;
+        //console.log({mediaCompra});
+        //console.log({numCompra});
+      }
+    }
+    return (
+      <View>
+        <Text style={styles.vendaSaca}>R${(mediaVenda / numVenda).toFixed(2)}</Text>
+      </View>
+    );
+  };
+
+  /*const diaAtual = () => {
+    let numbers = DATA;
+    let numVenda = 0;
+    let numCompra = 0;
+  
+    let primeiroItem = numbers[0]['data_lancamento'];
+  
+    for (let i=1; i<numbers.length;i++)
+    {
+      if(numbers[i]['data_lancamento']<primeiroItem)
+      {
+        numVenda+=1;
+        console.log({numVenda});
+        console.log("Venda: " + numbers[i]['data_lancamento'] + " " + primeiroItem);
+      }
+      else{
+          numCompra+=1;
+          console.log({numCompra});
+         console.log("Compra: " + numbers[i]['data_lancamento'] + " " + primeiroItem);
+      }
+    }
+        return (
+        <View>
+              <Text></Text>
+              <Text>NumVenda Dmenos1 = {numVenda}</Text>
+              <Text>NumCompra Dmenos1 = {numCompra}</Text>     
+        </View>
+      );
+  };*/
+
+  const unidadeNegociacCompra = () => {
+
+    let sumCompraMatriz = 0;
+    let sumCompraFilialOeste = 0;
+    let sumCompraFilialNorte = 0;
+    let sumCompraFilialSul = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 1) {
+        switch (negociacoes[i].unidade) {
+          case 1:
+            sumCompraMatriz += negociacoes[i].valor_total;
+            break;
+          case 2:
+            sumCompraFilialOeste += negociacoes[i].valor_total;
+            break;
+          case 3:
+            sumCompraFilialNorte += negociacoes[i].valor_total;
+            break;
+          case 4:
+            sumCompraFilialSul += negociacoes[i].valor_total;
+            break;
+          default:
+            console.log(`Sorry, we are out of.`);
+        }
+      }
+    }
+    return (
+      <View>
+        <Text>{`Matriz: R$${sumCompraMatriz.toFixed(2)}`}</Text>
+        <Text>{`FilialOeste: R$${sumCompraFilialOeste.toFixed(2)}`}</Text>
+        <Text>{`FilialNorte: R$${sumCompraFilialNorte.toFixed(2)}`}</Text>
+        <Text>{`FilialSul: R$${sumCompraFilialSul.toFixed(2)}`}</Text>
+      </View>
+    );
+  };
+
+  const unidadeNegociacVenda = () => {
+
+    let sumVendaMatriz = 0;
+    let sumVendaFilialOeste = 0;
+    let sumVendaFilialNorte = 0;
+    let sumVendaFilialSul = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 0) {
+        switch (negociacoes[i].unidade) {
+          case 1:
+            sumVendaMatriz += negociacoes[i].valor_total;
+            break;
+          case 2:
+            sumVendaFilialOeste += negociacoes[i].valor_total;
+            break;
+          case 3:
+            sumVendaFilialNorte += negociacoes[i].valor_total;
+            break;
+          case 4:
+            sumVendaFilialSul += negociacoes[i].valor_total;
+            break;
+          default:
+            console.log(`Sorry, we are out of.`);
+        }
+      }
+    }
+
+    return (
+      <View>
+        <Text>{`Matriz: R$${sumVendaMatriz.toFixed(2)}`}</Text>
+        <Text>{`FilialOeste: R$${sumVendaFilialOeste.toFixed(2)}`}</Text>
+        <Text>{`FilialNorte: R$${sumVendaFilialNorte.toFixed(2)}`}</Text>
+        <Text>{`FilialSul: R$${sumVendaFilialSul.toFixed(2)}`}</Text>
+      </View>
+    );
+  };
+
+  const saldoAtual = () => {
+    let sumVenda = 0;
+    let sumCompra = 0;
+    let saldo = 0;
+
+    for (let i = 0; i < negociacoes.length; i++) {
+      if (negociacoes[i].tipo_operacao === 0) {
+        sumVenda += negociacoes[i].valor_total;
+        //console.log({sumVenda});
+      }
+      else {
+        sumCompra += negociacoes[i].valor_total;
+        //console.log({sumCompra});
+
+      }
+    }
+    saldo = sumVenda - sumCompra;
+    return (
+      <View>
+        <Text>R${saldo.toFixed(2)}</Text>
+      </View>
+    );
+  };
+
   return (
     <Container>
       <Header title={'Agro Trade Monitor'} />
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={filterOpen ? { opacity: 0.2 } : { marginTop: 0 }}>
         <View style={styles.infoContainer}>
           <View style={styles.saldoDiaContainer}>
             <Text style={styles.saldoDia}>
@@ -289,6 +519,7 @@ const Negociacao = () => {
                 style={{ fontWeight: 'bold', fontSize: 24, color: '#269F67' }}>
                 Saldo X Dia
               </Text>
+              <Text style={styles.compraSaca}> {saldoAtual()} </Text>
             </Text>
           </View>
           <View style={styles.saldoDiaAnteriorContainer}>
@@ -303,7 +534,7 @@ const Negociacao = () => {
             <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
               {textNegociacoes}
             </Text>
-            <TouchableOpacity style={styles.buttonfilter} onPress={onOpen}>
+            <TouchableOpacity style={styles.buttonfilter} onPress={openFilter}>
               <Text style={{ fontSize: 16 }}>Filtrar</Text>
               <IconButton icon="filter-menu" color="#000" size={15} />
             </TouchableOpacity>
@@ -327,10 +558,10 @@ const Negociacao = () => {
         <View style={styles.horizontalSummarySession}>
           <View style={styles.squareSummaryContainer}>
             <View style={styles.darkGreenbox}>
-              <Text style={styles.compraSaca}> Compra XXXX saca </Text>
+              <Text style={styles.compraSaca}> Compra {somatorioCompra()} </Text>
             </View>
             <View style={styles.lightGreenbox}>
-              <Text style={styles.vendaSaca}> Venda XXXX saca </Text>
+              <Text style={styles.vendaSaca}> Venda {somatorioVenda()}</Text>
             </View>
           </View>
         </View>
@@ -341,10 +572,10 @@ const Negociacao = () => {
         <View style={styles.horizontalSummarySession}>
           <View style={styles.squareSummaryContainer}>
             <View style={styles.darkGreenbox}>
-              <Text style={styles.compraSaca}> Compra XXXX saca </Text>
+              <Text style={styles.compraSaca}> Compra {mediaCompra()} </Text>
             </View>
             <View style={styles.lightGreenbox}>
-              <Text style={styles.vendaSaca}> Venda XXXX saca </Text>
+              <Text style={styles.vendaSaca}> Venda {mediaVenda()}</Text>
             </View>
           </View>
         </View>
@@ -354,10 +585,7 @@ const Negociacao = () => {
         </View>
         <View style={styles.verticalSummarySession}>
           <View style={styles.darkGreenbox}>
-            <Text style={styles.locationTex}> Matriz Valor </Text>
-            <Text style={styles.locationTex}> Filial Oeste Valor </Text>
-            <Text style={styles.locationTex}> Filial Norte Valor </Text>
-            <Text style={styles.locationTex}> Filial Sul Valor </Text>
+            <Text style={styles.vendaSaca}> {unidadeNegociacCompra()}</Text>
           </View>
         </View>
         <Separator />
@@ -366,16 +594,12 @@ const Negociacao = () => {
         </View>
         <View style={styles.verticalSummarySession}>
           <View style={styles.lightGreenbox}>
-            <Text style={styles.locationTex}> Matriz Valor </Text>
-            <Text style={styles.locationTex}> Filial Oeste Valor </Text>
-            <Text style={styles.locationTex}> Filial Norte Valor </Text>
-            <Text style={styles.locationTex}> Filial Sul Valor </Text>
+            <Text style={styles.vendaSaca}> {unidadeNegociacVenda()}</Text>
           </View>
         </View>
       </ScrollView>
-      <Modalize
-        ref={modalizeRef}
-        HeaderComponent={
+      {filterOpen && (
+        <View style={styles.filtroView}>
           <Text
             style={{
               fontSize: 18,
@@ -385,194 +609,201 @@ const Negociacao = () => {
             }}>
             Filtrar por
           </Text>
-        }
-        adjustToContentHeight={true}>
-        {showDataInicial && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            onTouchCancel={() => setShowDataInicial(false)}
-            onChange={(event, date) => {
-              setShowDataInicial(false);
-              setFilterDataInicial(moment(date).format('DD/MM/YYYY'));
-            }}
-          />
-        )}
-        {showDataFinal && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            onTouchCancel={() => setShowDataFinal(false)}
-            onChange={(event, date) => {
-              setShowDataFinal(false);
-              setFilterDataFinal(moment(date).format('DD/MM/YYYY'));
-            }}
-          />
-        )}
-
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <View style={styles.pickerDate}>
-            <Text>Data do lançamento:</Text>
-            <View style={styles.date}>
-              <TouchableOpacity onPress={() => setShowDataInicial(true)}>
-                <Input
-                  label="Data inicial:"
-                  value={filterDataInicial}
-                  left={<TextInput.Icon icon="calendar" />}
-                  editable={false}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setShowDataFinal(true)}>
-                <Input
-                  label="Data final:"
-                  value={filterDataFinal}
-                  left={<TextInput.Icon icon="calendar" />}
-                  editable={false}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {showDataInicialPagamento && (
+          {showDataInicial && (
             <DateTimePicker
               testID="dateTimePicker"
               value={date}
               mode={'date'}
               is24Hour={true}
               display="default"
-              onTouchCancel={() => setShowDataInicialPagamento(false)}
+              onTouchCancel={() => setShowDataInicial(false)}
               onChange={(event, date) => {
-                setShowDataInicialPagamento(false);
-                setFilterDataInicialPagamento(
-                  moment(date).format('DD/MM/YYYY')
-                );
+                setShowDataInicial(false);
+                setFilterDataInicial(moment(date).format('DD/MM/YYYY'));
               }}
             />
           )}
-          {showDataFinalPagamento && (
+          {showDataFinal && (
             <DateTimePicker
               testID="dateTimePicker"
               value={date}
               mode={'date'}
               is24Hour={true}
               display="default"
-              Pagamento
-              onTouchCancel={() => setShowDataFinalPagamento(false)}
+              onTouchCancel={() => setShowDataFinal(false)}
               onChange={(event, date) => {
-                setShowDataFinalPagamento(false);
-                setFilterDataFinalPagamento(moment(date).format('DD/MM/YYYY'));
+                setShowDataFinal(false);
+                setFilterDataFinal(moment(date).format('DD/MM/YYYY'));
               }}
             />
           )}
-          <View style={styles.pickerDate}>
-            <Text>Data do pagamento:</Text>
-            <View style={styles.date}>
-              <TouchableOpacity
-                onPress={() => setShowDataInicialPagamento(true)}>
-                <Input
-                  label="Data inicial:"
-                  value={filterDataInicialPagamento}
-                  left={<TextInput.Icon icon="calendar" />}
-                  editable={false}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setShowDataFinalPagamento(true)}>
-                <Input
-                  label="Data final:"
-                  value={filterDataFinalPagamento}
-                  left={<TextInput.Icon icon="calendar" />}
-                  editable={false}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-
           <View
             style={{
-              flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <View style={styles.containerRadioItem}>
-              <RadioButton
-                value="first"
-                status={filterOperacao === 0 ? 'checked' : 'unchecked'}
-                color={'#157E58'}
-                onPress={() => setFilterOperacao(0)}
-              />
-              <Text>Venda</Text>
+            <View style={styles.pickerDate}>
+              <Text>Data do lançamento:</Text>
+              <View style={styles.date}>
+                <TouchableOpacity onPress={() => setShowDataInicial(true)}>
+                  <Input
+                    label="Data inicial:"
+                    value={filterDataInicial}
+                    left={<TextInput.Icon icon="calendar" />}
+                    editable={false}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setShowDataFinal(true)}>
+                  <Input
+                    label="Data final:"
+                    value={filterDataFinal}
+                    left={<TextInput.Icon icon="calendar" />}
+                    editable={false}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.containerRadioItem}>
-              <RadioButton
-                value="first"
-                status={filterOperacao === 1 ? 'checked' : 'unchecked'}
-                color={'red'}
-                onPress={() => setFilterOperacao(1)}
+            {showDataInicialPagamento && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+                onTouchCancel={() => setShowDataInicialPagamento(false)}
+                onChange={(event, date) => {
+                  setShowDataInicialPagamento(false);
+                  setFilterDataInicialPagamento(
+                    moment(date).format('DD/MM/YYYY')
+                  );
+                }}
               />
-              <Text>Compra</Text>
+            )}
+            {showDataFinalPagamento && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+                Pagamento
+                onTouchCancel={() => setShowDataFinalPagamento(false)}
+                onChange={(event, date) => {
+                  setShowDataFinalPagamento(false);
+                  setFilterDataFinalPagamento(
+                    moment(date).format('DD/MM/YYYY')
+                  );
+                }}
+              />
+            )}
+            <View style={styles.pickerDate}>
+              <Text>Data do pagamento:</Text>
+              <View style={styles.date}>
+                <TouchableOpacity
+                  onPress={() => setShowDataInicialPagamento(true)}>
+                  <Input
+                    label="Data inicial:"
+                    value={filterDataInicialPagamento}
+                    left={<TextInput.Icon icon="calendar" />}
+                    editable={false}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setShowDataFinalPagamento(true)}>
+                  <Input
+                    label="Data final:"
+                    value={filterDataFinalPagamento}
+                    left={<TextInput.Icon icon="calendar" />}
+                    editable={false}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          <View style={styles.pickerContainer}>
-            <Text>
-              {filterOperacao === 0
-                ? 'Cliente:'
-                : filterOperacao === 1
-                ? 'Produtor'
-                : 'Cliente/Produtor:'}
-            </Text>
-            {renderPessoas(filterOperacao)}
-          </View>
 
-          <View style={styles.pickerContainer}>
-            <Text>Unidade:</Text>
-            {renderUnidades()}
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Button
-              style={styles.buttonFiltrar}
-              onPress={onClose}
-              mode="contained"
-              color="#F2B66D">
-              Voltar
-            </Button>
-            <Button
-              style={styles.buttonFiltrar}
-              onPress={limparFiltro}
-              mode="contained"
-              color="white">
-              Limpar
-            </Button>
-            <Button
-              style={styles.buttonFiltrar}
-              onPress={filtrarNegociacoes}
-              mode="contained"
-              color="#157E58">
-              Pesquisar
-            </Button>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View style={styles.containerRadioItem}>
+                <RadioButton
+                  value="first"
+                  status={filterOperacao === 0 ? 'checked' : 'unchecked'}
+                  color={'#157E58'}
+                  onPress={() => setFilterOperacao(0)}
+                />
+                <Text>Venda</Text>
+              </View>
+              <View style={styles.containerRadioItem}>
+                <RadioButton
+                  value="first"
+                  status={filterOperacao === 1 ? 'checked' : 'unchecked'}
+                  color={'red'}
+                  onPress={() => setFilterOperacao(1)}
+                />
+                <Text>Compra</Text>
+              </View>
+            </View>
+            <View style={styles.pickerContainer}>
+              <Text>
+                {filterOperacao === 0
+                  ? 'Cliente:'
+                  : filterOperacao === 1
+                    ? 'Produtor'
+                    : 'Cliente/Produtor:'}
+              </Text>
+              {renderPessoas(filterOperacao)}
+            </View>
+
+            <View style={styles.pickerContainer}>
+              <Text>Unidade:</Text>
+              {renderUnidades()}
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Button
+                style={styles.buttonFiltrar}
+                onPress={closeFilter}
+                mode="contained"
+                color="#F2B66D">
+                Voltar
+              </Button>
+              <Button
+                style={styles.buttonFiltrar}
+                onPress={limparFiltro}
+                mode="contained"
+                color="white">
+                Limpar
+              </Button>
+              <Button
+                style={styles.buttonFiltrar}
+                onPress={filtrarNegociacoes}
+                mode="contained"
+                color="#157E58">
+                Pesquisar
+              </Button>
+            </View>
           </View>
         </View>
-      </Modalize>
+      )}
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    marginTop: 0,
+  filtroView: {
+    paddingTop: 15,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: '73%',
+    alignItems: 'center',
   },
   infoContainer: {
     backgroundColor: 'white',
@@ -700,7 +931,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonFiltrar: {
-    margin: 8,
+    marginHorizontal: 12,
   },
   pickerDate: {
     alignItems: 'center',

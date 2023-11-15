@@ -123,7 +123,7 @@ const DetalhesNegociacao = ({ route }) => {
           left={<TextInput.Icon icon="currency-brl" />}
           editable={false}
         />
-      </Body>
+      </Body>   
     </Container>
   );
 };

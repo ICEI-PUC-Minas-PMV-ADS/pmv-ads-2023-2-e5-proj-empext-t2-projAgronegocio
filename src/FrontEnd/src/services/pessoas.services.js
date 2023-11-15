@@ -34,3 +34,4 @@ export const getPessoasUsuarioId = async (param) => {
     return null;
   }
 };
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import Header from '../components/Header';
 import Container from '../components/Container';
 import Body from '../components/Body';
@@ -8,36 +8,36 @@ import { useNavigation } from '@react-navigation/native';
 import { useUser } from '../contexts/UserContext';
 import AsyncStorage from '@react-native-community/async-storage';
 
-
 const Perfil = () => {
   const navigation = useNavigation();
   console.log(AsyncStorage.getAllKeys());
-  const {setSigned} = useUser();
+  const { setSigned } = useUser();
 
   const handleTextClick = () => {
     // Ao navegar para MinhasNegociacoes
     navigation.navigate('MinhasNegociacoes');
   };
-   const logout = () => {
+  const logout = () => {
     AsyncStorage.getAllKeys()
       .then((keys) => AsyncStorage.multiRemove(keys))
       .then(() => setSigned(false));
-      console.log(AsyncStorage.getAllKeys());
+    console.log(AsyncStorage.getAllKeys());
   };
-
 
   return (
     <Container>
       <Header title={'Perfil'}></Header>
       <Body>
         <View style={styles.container}>
-          <Button style={styles.buttonSend} onPress={handleTextClick} color="white">
+          <Button
+            style={styles.buttonSend}
+            onPress={handleTextClick}
+            color="white">
             Minhas Negociacões
           </Button>
           <Button style={styles.buttonSend} onPress={logout} color="white">
             Sair
           </Button>
-          {/* Adicione o conteúdo da tela aqui */}
         </View>
       </Body>
     </Container>

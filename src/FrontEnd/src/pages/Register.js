@@ -62,7 +62,7 @@ const Register = ({ route }) => {
   return (
     <Container>
       <Image
-        source={require('../assets/LogoAgroTradeMonitor2.jpg')}
+        source={require('../assets/LogoAgroTradeMonitor2.png')}
         style={styles.image}
       />
       <Body>

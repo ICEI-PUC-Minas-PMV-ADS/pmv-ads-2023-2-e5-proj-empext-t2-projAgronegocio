@@ -54,7 +54,7 @@ const Login = () => {
   return (
     <Container>
       <Image
-        source={require('../assets/LogoAgroTradeMonitor2.jpg')}
+        source={require('../assets/LogoAgroTradeMonitor2.png')}
         style={styles.image}
       />
 
@@ -80,14 +80,6 @@ const Login = () => {
         </Button>
         <View style={styles.infText}>
           <Text> Ou continue com </Text>
-        </View>
-        <View style={styles.buttonAux}>
-          <Button style={styles.buttonGoogle} color="black">
-            Google
-          </Button>
-          <Button style={styles.buttonFacebook} color="black">
-            Facebook
-          </Button>
         </View>
         <View style={styles.registerText}>
           <Text> Não possui conta? </Text>
@@ -124,12 +116,6 @@ const styles = StyleSheet.create({
     margin: 8,
     justifyContent: 'space-evenly',
     flexDirection: 'row',
-  },
-  buttonGoogle: {
-    backgroundColor: '#d3d3d3',
-  },
-  buttonFacebook: {
-    backgroundColor: '#d3d3d3',
   },
   registerText: {
     margin: 8,

@@ -73,7 +73,7 @@ const MinhasNegociacoes = () => {
       <Header title={'Minhas Negociações'} goBack={() => navigation.goBack()} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.infoContainer}>
-          <Text style={styles.saldoDia}>Minhas Negociações</Text>
+          <Text style={styles.saldoDia}>Minhas negociações</Text>
         </View>
         <Body>{renderNegociacoes()}</Body>
       </ScrollView>
