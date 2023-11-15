@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Dependencies
+      - name: Instalação de Dependências
         run: npm install
         working-directory: ./src/Backend
 
@@ -24,20 +24,14 @@ jobs:
         run: npm install --save-dev jest
         working-directory: ./src/Backend
 
-      - name: Change permissions (Optional)
+      - name: Adicionando Permissões
         run: chmod -R 777 node_modules
         working-directory: ./src/Backend
 
-      - name: Run Jest Tests Controllers
-        uses: stefanoeb/jest-action@1.0.4
-        with:
-          jestArgs: ./src/Backend/controllers
-          
-      - name: Run Jest Tests Middlewares
-        uses: stefanoeb/jest-action@1.0.4
-        with:
-          jestArgs: ./src/Backend/middlewares
-
+      - name: Testes Unitários
+        run: npx jest
+        working-directory: ./src/Backend
+        
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
         with:
