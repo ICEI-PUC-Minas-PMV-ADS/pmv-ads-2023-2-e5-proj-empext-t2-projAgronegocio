@@ -112,11 +112,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonAux: {
-    margin: 8,
-    justifyContent: 'space-evenly',
-    flexDirection: 'row',
-  },
   registerText: {
     margin: 8,
     flexDirection: 'row',
