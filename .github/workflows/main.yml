@@ -23,11 +23,11 @@ jobs:
       - name: Instalação de Dependências do Jest
         run: npm install --save-dev jest
         working-directory: ./src/Backend
-		
-      - name: Testes Unitarios
+
+      - name: Run Unit Tests
         run: npx jest
         working-directory: ./src/Backend
-        
+
       - name: Autenticação no Docker Hub
         uses: docker/login-action@v2.1.0
         with:
@@ -43,3 +43,15 @@ jobs:
           tags: |
             laisamaral/live-kube-news:${{github.run_number}}
             laisamaral/live-kube-news:latest
+
+  CD:
+    runs-on: ubuntu-latest
+    needs: [CI]
+    steps:
+      - uses: actions/checkout@v3.1.0
+
+      - name: Definindo o context
+        uses: Azure/k8s-set-context@v3.0
+        with:
+          method: kubeconfig
+          kubeconfig: ${{secrets.K8S_CONFIG}}
