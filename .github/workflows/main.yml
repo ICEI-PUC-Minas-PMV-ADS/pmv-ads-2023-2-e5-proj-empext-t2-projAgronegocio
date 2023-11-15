@@ -25,7 +25,7 @@ jobs:
         working-directory: ./src/Backend
 
       - name: Run Unit Tests
-        run: npx jest
+        run: /path/to/npx jest
         working-directory: ./src/Backend
 
       - name: Autenticação no Docker Hub
