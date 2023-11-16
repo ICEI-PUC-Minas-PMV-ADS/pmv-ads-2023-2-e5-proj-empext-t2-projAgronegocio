@@ -10,7 +10,7 @@ const Header = ({ goBack }) => {
   };
 
   return (    
-    <View style={styles.header}>
+    <View style={styles.header} testID="header-component">
       <Image
         source={require('../assets/LogoAgroTradeMonitor4.jpg')}
         style={styles.image}
