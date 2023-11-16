@@ -38,7 +38,7 @@ jobs:
           node-version: 18
 
       - name: Instalação de Dependências - Frontend
-        run: npm install --force
+        run: npm install
         working-directory: ./src/Frontend
 
       - name: Yarn Install - Frontend
@@ -63,10 +63,6 @@ jobs:
 
       - name: Yarn Global Add - react-native-cli
         run: yarn global add react-native-cli
-        working-directory: ./src/Frontend
-
-      - name: Yarn Install - Frontend (novamente)
-        run: yarn
         working-directory: ./src/Frontend
 
       - name: Expo Install - expo-font
@@ -152,11 +148,7 @@ jobs:
       - name: Yarn Global Add - react-native-cli
         run: yarn global add react-native-cli
         working-directory: ./src/Frontend
-
-      - name: Yarn Install - Frontend (novamente)
-        run: yarn
-        working-directory: ./src/Frontend
-
+        
       - name: Expo Install - expo-font
         run: expo install expo-font
         working-directory: ./src/Frontend
