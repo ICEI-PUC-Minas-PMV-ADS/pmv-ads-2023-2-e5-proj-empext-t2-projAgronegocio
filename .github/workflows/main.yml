@@ -11,42 +11,87 @@ jobs:
     steps:
       - uses: actions/checkout@v3.1.0
 
-      - name: Set up Node.js
+      - name: Set up Node.js - Backend
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install Dependencies
+      - name: Instalação de Dependências - Backend
         run: npm install
-        working-directory: ./src/Backend/src
+        working-directory: ./src/Backend
 
-      - name: Instalação de Dependências e Permissões de Teste no CI
-        run: npm install --save-dev jest && chmod +x ./node_modules/.bin/jest
-        working-directory: ./src/Backend/src
-      
-      - name: Run Unit Tests for Controllers
-        run: npx jest ./src/controllers
+      - name: Instalação de Dependências do Jest - Backend
+        run: npm install --save-dev jest
         working-directory: ./src/Backend
-      
-      - name: Run Unit Tests for Middlewares
-        run: npx jest ./src/middlewares
+
+      - name: Adicionando Permissões - Backend
+        run: chmod -R 777 node_modules
         working-directory: ./src/Backend
-        
-      - name: Autenticação no Docker Hub
-        uses: docker/login-action@v2.1.0
+
+      - name: Testes Unitários - Backend
+        run: npx jest
+        working-directory: ./src/Backend
+
+      - name: Set up Node.js - Frontend
+        uses: actions/setup-node@v4
         with:
-          username: ${{secrets.DOCKERHUB_USER}}
-          password: ${{secrets.DOCKERHUB_PWD}}
+          node-version: 18
 
-      - name: Construção da imagem Docker
-        uses: docker/build-push-action@v3.2.0
-        with: 
-          context: ./src/Backend
-          file: ./src/Backend/src/Dockerfile
-          push: true
-          tags: |
-            laisamaral/live-kube-news:${{github.run_number}}
-            laisamaral/live-kube-news:latest
+      - name: Instalação de Dependências - Frontend
+        run: npm install --force
+        working-directory: ./src/Frontend
+
+      - name: Yarn Install - Frontend
+        run: yarn install
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência - react-native-vector-icons
+        run: yarn add react-native-vector-icons
+        working-directory: ./src/Frontend
+
+      - name: Instalação Global - Expo CLI
+        run: npm install --global expo-cli
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência - expo-font
+        run: yarn add expo-font
+        working-directory: ./src/Frontend
+
+      - name: Expo Upgrade - Frontend
+        run: expo upgrade
+        working-directory: ./src/Frontend
+
+      - name: Yarn Global Add - react-native-cli
+        run: yarn global add react-native-cli
+        working-directory: ./src/Frontend
+
+      - name: Yarn Install - Frontend (novamente)
+        run: yarn
+        working-directory: ./src/Frontend
+
+      - name: Expo Install - expo-font
+        run: expo install expo-font
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência - react-native-gesture-handler
+        run: yarn add react-native-gesture-handler
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência de Desenvolvimento - react-test-renderer
+        run: yarn add --dev react-test-renderer
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência de Desenvolvimento - Jest
+        run: yarn add --dev jest
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência de Desenvolvimento - @testing-library/react-native
+        run: yarn add --dev @testing-library/react-native
+        working-directory: ./src/Frontend
+
+      - name: Testes - Frontend
+        run: yarn test
+        working-directory: ./src/Frontend
 
   CD:
     runs-on: ubuntu-latest
@@ -54,8 +99,84 @@ jobs:
     steps:
       - uses: actions/checkout@v3.1.0
 
-      - name: Definindo o context
-        uses: Azure/k8s-set-context@v3.0
+      - name: Set up Node.js - Backend
+        uses: actions/setup-node@v4
         with:
-          method: kubeconfig
-          kubeconfig: ${{secrets.K8S_CONFIG}}
+          node-version: 18
+
+      - name: Instalação de Dependências - Backend
+        run: npm install
+        working-directory: ./src/Backend
+
+      - name: Instalação de Dependências do Jest - Backend
+        run: npm install --save-dev jest
+        working-directory: ./src/Backend
+
+      - name: Adicionando Permissões - Backend
+        run: chmod -R 777 node_modules
+        working-directory: ./src/Backend
+
+      - name: Testes Unitários - Backend
+        run: npx jest
+        working-directory: ./src/Backend
+
+      - name: Set up Node.js - Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalação de Dependências - Frontend
+        run: npm install --force
+        working-directory: ./src/Frontend
+
+      - name: Yarn Install - Frontend
+        run: yarn install
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência - react-native-vector-icons
+        run: yarn add react-native-vector-icons
+        working-directory: ./src/Frontend
+
+      - name: Instalação Global - Expo CLI
+        run: npm install --global expo-cli
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência - expo-font
+        run: yarn add expo-font
+        working-directory: ./src/Frontend
+
+      - name: Expo Upgrade - Frontend
+        run: expo upgrade
+        working-directory: ./src/Frontend
+
+      - name: Yarn Global Add - react-native-cli
+        run: yarn global add react-native-cli
+        working-directory: ./src/Frontend
+
+      - name: Yarn Install - Frontend (novamente)
+        run: yarn
+        working-directory: ./src/Frontend
+
+      - name: Expo Install - expo-font
+        run: expo install expo-font
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência - react-native-gesture-handler
+        run: yarn add react-native-gesture-handler
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência de Desenvolvimento - react-test-renderer
+        run: yarn add --dev react-test-renderer
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência de Desenvolvimento - Jest
+        run: yarn add --dev jest
+        working-directory: ./src/Frontend
+
+      - name: Adicionando Dependência de Desenvolvimento - @testing-library/react-native
+        run: yarn add --dev @testing-library/react-native
+        working-directory: ./src/Frontend
+
+      - name: Testes - Frontend
+        run: yarn test
+        working-directory: ./src/Frontend
