@@ -33,7 +33,7 @@ jobs:
         working-directory: ./src/Backend
 
       - name: Instalação de Dependências - Frontend
-        run: npm install
+        run: npm install --force
         working-directory: ./src/Frontend/src
 
       - name: Yarn Install - Frontend
