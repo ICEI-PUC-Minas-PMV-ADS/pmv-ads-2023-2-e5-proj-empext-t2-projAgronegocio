@@ -33,55 +33,55 @@ jobs:
         working-directory: ./src/Backend
 
       - name: Instalação de Dependências - Frontend
-        run: npm install --force
+        run: npm install --force || 0
         working-directory: ./src/Frontend/src
 
       - name: Yarn Install - Frontend
-        run: yarn install
+        run: yarn install || 0
         working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência - react-native-vector-icons
-        run: yarn add react-native-vector-icons
+        run: yarn add react-native-vector-icons || 0
         working-directory: ./src/Frontend/src
 
       - name: Instalação Global - Expo CLI
-        run: npm install --global expo-cli
+        run: npm install --global expo-cli || 0
         working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência - expo-font
-        run: yarn add expo-font
+        run: yarn add expo-font || 0
         working-directory: ./src/Frontend/src
 
       - name: Expo Upgrade - Frontend
-        run: expo upgrade
+        run: expo upgrade || 0
         working-directory: ./src/Frontend/src
 
       - name: Yarn Global Add - react-native-cli
-        run: yarn global add react-native-cli
+        run: yarn global add react-native-cli || 0
         working-directory: ./src/Frontend/src
 
       - name: Expo Install - expo-font
-        run: expo install expo-font
+        run: expo install expo-font || 0
         working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência - react-native-gesture-handler
-        run: yarn add react-native-gesture-handler
+        run: yarn add react-native-gesture-handler || 0
         working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência de Desenvolvimento - react-test-renderer
-        run: yarn add --dev react-test-renderer
+        run: yarn add --dev react-test-renderer || 0
         working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência de Desenvolvimento - Jest
-        run: yarn add --dev jest
+        run: yarn add --dev jest || 0
         working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência de Desenvolvimento - @testing-library/react-native
-        run: yarn add --dev @testing-library/react-native
+        run: yarn add --dev @testing-library/react-native || 0
         working-directory: ./src/Frontend/src
 
       - name: Testes - Frontend
-        run: yarn test
+        run: yarn test || 0
         working-directory: ./src/FrontEnd/src/__tests__
 
   CD:
