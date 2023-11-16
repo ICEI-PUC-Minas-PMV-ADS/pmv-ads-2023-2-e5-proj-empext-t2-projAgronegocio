@@ -32,62 +32,57 @@ jobs:
         run: npx jest
         working-directory: ./src/Backend
 
-      - name: Set up Node.js - Frontend
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
       - name: Instalação de Dependências - Frontend
         run: npm install
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Yarn Install - Frontend
         run: yarn install
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência - react-native-vector-icons
         run: yarn add react-native-vector-icons
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Instalação Global - Expo CLI
         run: npm install --global expo-cli
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência - expo-font
         run: yarn add expo-font
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Expo Upgrade - Frontend
         run: expo upgrade
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Yarn Global Add - react-native-cli
         run: yarn global add react-native-cli
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Expo Install - expo-font
         run: expo install expo-font
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência - react-native-gesture-handler
         run: yarn add react-native-gesture-handler
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência de Desenvolvimento - react-test-renderer
         run: yarn add --dev react-test-renderer
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência de Desenvolvimento - Jest
         run: yarn add --dev jest
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Adicionando Dependência de Desenvolvimento - @testing-library/react-native
         run: yarn add --dev @testing-library/react-native
-        working-directory: ./src/Frontend
+        working-directory: ./src/Frontend/src
 
       - name: Testes - Frontend
         run: yarn test
-        working-directory: ./src/Frontend
+        working-directory: ./src/FrontEnd/src/__tests__
 
   CD:
     runs-on: ubuntu-latest
@@ -122,7 +117,7 @@ jobs:
           node-version: 18
 
       - name: Instalação de Dependências - Frontend
-        run: npm install --force
+        run: npm install
         working-directory: ./src/Frontend
 
       - name: Yarn Install - Frontend
@@ -171,4 +166,4 @@ jobs:
 
       - name: Testes - Frontend
         run: yarn test
-        working-directory: ./src/Frontend
+        working-directory: ./src/FrontEnd/src/__tests__
