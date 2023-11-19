@@ -34,11 +34,11 @@ jobs:
 
       - name: Instalação de Dependências - Frontend
         run: npm install --force
-        working-directory: ./src/Frontend/src
+        working-directory: ./src/Frontend
 
       - name: Instalação Global - Expo CLI
         run: npm install --global expo-cli
-        working-directory: ./src/Frontend/src
+        working-directory: ./src/Frontend
 
   CD:
     runs-on: ubuntu-latest
