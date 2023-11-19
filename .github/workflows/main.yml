@@ -32,17 +32,13 @@ jobs:
         run: npx jest
         working-directory: ./src/Backend
 
-      - name: Adicionando Permissões - Frontend
-        run: chmod -R 777 node_modules
-        working-directory: ./src/Frontend/src
-        
       - name: Instalação de Dependências - Frontend
         run: npm install --force
-        working-directory: ./src/Frontend/src
+        working-directory: ./Frontend
 
       - name: Instalação Global - Expo CLI
         run: npm install --global expo-cli
-        working-directory: ./src/Frontend/src
+        working-directory: ./Frontend
 
   CD:
     runs-on: ubuntu-latest
@@ -71,14 +67,10 @@ jobs:
         run: npx jest
         working-directory: ./src/Backend
 
-      - name: Adicionando Permissões - Frontend
-        run: chmod -R 777 node_modules
-        working-directory: ./src/Frontend/src
-
       - name: Instalação de Dependências - Frontend
         run: npm install
-        working-directory: ./src/Frontend/src
+        working-directory: ./Frontend
 
       - name: Instalação Global - Expo CLI
         run: npm install --global expo-cli
-        working-directory: ./src/Frontend/src
+        working-directory: ./Frontend
