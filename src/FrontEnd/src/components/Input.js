@@ -8,7 +8,6 @@ const Input = (props) => {
       style = {styles.input}
       keyboardType="default"
       {...props}
-      testID="input-component"
     />)
   ;
 };

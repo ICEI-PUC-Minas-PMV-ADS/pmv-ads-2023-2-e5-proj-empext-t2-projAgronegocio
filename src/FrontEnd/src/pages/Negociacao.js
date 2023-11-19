@@ -32,6 +32,7 @@ import Assets from '../assets/ImagemSoja2.jpg';
 import { getPessoas } from '../services/pessoas.services';
 import { getUnidades } from '../services/unidades.services';
 
+DMENOS = 3;
 
 const Negociacao = () => {
   const navigation = useNavigation();
@@ -278,257 +279,341 @@ const Negociacao = () => {
 
   const Separator = () => <View style={styles.separator} />;
 
-  const somatorioCompra = () => {
-    let sumVenda = 0;
-    let sumCompra = 0;
-
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 0) {
-        sumVenda += negociacoes[i].valor_total;
-        //console.log({sumVenda});
-      }
-      else {
-        sumCompra += negociacoes[i].valor_total;
-        //console.log({sumCompra});
-
-      }
-    }
-    saldo = sumVenda - sumCompra;
-    return (
-      <View>
-        <Text style={styles.vendaSaca}>R${sumCompra.toFixed(2)}</Text>
-      </View>
-    );
-  };
-
-  const somatorioVenda = () => {
-    let sumVenda = 0;
-    let sumCompra = 0;
-
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 0) {
-        sumVenda += negociacoes[i].valor_total;
-        //console.log({sumVenda});
-      }
-      else {
-        sumCompra += negociacoes[i].valor_total;
-        //console.log({sumCompra});
-
-      }
-    }
-    saldo = sumVenda - sumCompra;
-    return (
-      <View>
-        <Text style={styles.vendaSaca}>R${sumVenda.toFixed(2)}</Text>
-      </View>
-    );
-  };
-
-
-  const mediaCompra = () => {
-    let mediaVenda = 0;
-    let mediaCompra = 0;
-    let numVenda = 0;
-    let numCompra = 0;
-
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 0) {
-        mediaVenda += negociacoes[i].valor_total;
-        numVenda += 1;
-        //console.log({mediaVenda});
-        //console.log({numVenda});
-      }
-      else {
-        mediaCompra += negociacoes[i].valor_total;
-        numCompra += 1;
-        //console.log({mediaCompra});
-        //console.log({numCompra});
-      }
-    }
-    return (
-      <View>
-        <Text style={styles.vendaSaca}>R${(mediaCompra / numCompra).toFixed(2)}</Text>
-      </View>
-    );
-  };
-
-  const mediaVenda = () => {
-    let mediaVenda = 0;
-    let mediaCompra = 0;
-    let numVenda = 0;
-    let numCompra = 0;
-
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 0) {
-        mediaVenda += negociacoes[i].valor_total;
-        numVenda += 1;
-        //console.log({mediaVenda});
-        //console.log({numVenda});
-      }
-      else {
-        mediaCompra += negociacoes[i].valor_total;
-        numCompra += 1;
-        //console.log({mediaCompra});
-        //console.log({numCompra});
-      }
-    }
-    return (
-      <View>
-        <Text style={styles.vendaSaca}>R${(mediaVenda / numVenda).toFixed(2)}</Text>
-      </View>
-    );
-  };
-
-  /*const diaAtual = () => {
-    let numbers = DATA;
-    let numVenda = 0;
-    let numCompra = 0;
   
-    let primeiroItem = numbers[0]['data_lancamento'];
+//consolidado compra D-1
+  const somatorioCompraDmenosUm = () => {
+  let sumVenda = 0;
+  let sumCompra = 0;
+
+  const str = (moment().format('DD/MM/YYYY')).split('/');
+  const d = str[0]-DMENOS;
+  const m = str[1];
+  const y = str[2];
+  const strConv = d + '/' + m + '/' + y;
   
-    for (let i=1; i<numbers.length;i++)
+  let date1 = new Date(strConv).getTime();
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+      let date2 = new Date(moment(negociacoes[i].data_lancamento).format('DD/MM/YYYY')).getTime();
+
+    if(date2 < date1)
     {
-      if(numbers[i]['data_lancamento']<primeiroItem)
+      if(negociacoes[i].tipo_operacao===0)
       {
-        numVenda+=1;
-        console.log({numVenda});
-        console.log("Venda: " + numbers[i]['data_lancamento'] + " " + primeiroItem);
+      sumVenda+=negociacoes[i].quantidade_saca;
+
       }
       else{
-          numCompra+=1;
-          console.log({numCompra});
-         console.log("Compra: " + numbers[i]['data_lancamento'] + " " + primeiroItem);
+          sumCompra+=negociacoes[i].quantidade_saca;
+
       }
     }
-        return (
-        <View>
-              <Text></Text>
-              <Text>NumVenda Dmenos1 = {numVenda}</Text>
-              <Text>NumCompra Dmenos1 = {numCompra}</Text>     
-        </View>
-      );
-  };*/
-
-  const unidadeNegociacCompra = () => {
-
-    let sumCompraMatriz = 0;
-    let sumCompraFilialOeste = 0;
-    let sumCompraFilialNorte = 0;
-    let sumCompraFilialSul = 0;
-
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 1) {
-        switch (negociacoes[i].unidade) {
-          case 1:
-            sumCompraMatriz += negociacoes[i].valor_total;
-            break;
-          case 2:
-            sumCompraFilialOeste += negociacoes[i].valor_total;
-            break;
-          case 3:
-            sumCompraFilialNorte += negociacoes[i].valor_total;
-            break;
-          case 4:
-            sumCompraFilialSul += negociacoes[i].valor_total;
-            break;
-          default:
-            console.log(`Sorry, we are out of.`);
-        }
-      }
-    }
-    return (
+  }
+  saldo = sumVenda - sumCompra;
+        //console.log('SomVenda: ' + sumVenda +' Somcompra' + sumCompra);
+      return (
       <View>
-        <Text>{`Matriz: R$${sumCompraMatriz.toFixed(2)}`}</Text>
-        <Text>{`FilialOeste: R$${sumCompraFilialOeste.toFixed(2)}`}</Text>
-        <Text>{`FilialNorte: R$${sumCompraFilialNorte.toFixed(2)}`}</Text>
-        <Text>{`FilialSul: R$${sumCompraFilialSul.toFixed(2)}`}</Text>
+            <Text style={styles.vendaSaca}>{sumCompra} sacas</Text>         
       </View>
     );
-  };
+};
 
-  const unidadeNegociacVenda = () => {
+  //consolidado venda D-1
+  const somatorioVendaDmenosUm = () => {
+  let sumVenda = 0;
+  let sumCompra = 0;
 
-    let sumVendaMatriz = 0;
-    let sumVendaFilialOeste = 0;
-    let sumVendaFilialNorte = 0;
-    let sumVendaFilialSul = 0;
+  const str = (moment().format('DD/MM/YYYY')).split('/');
+  const d = str[0]-DMENOS;
+  const m = str[1];
+  const y = str[2];
+  const strConv = d + '/' + m + '/' + y;
 
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 0) {
-        switch (negociacoes[i].unidade) {
-          case 1:
-            sumVendaMatriz += negociacoes[i].valor_total;
-            break;
-          case 2:
-            sumVendaFilialOeste += negociacoes[i].valor_total;
-            break;
-          case 3:
-            sumVendaFilialNorte += negociacoes[i].valor_total;
-            break;
-          case 4:
-            sumVendaFilialSul += negociacoes[i].valor_total;
-            break;
-          default:
-            console.log(`Sorry, we are out of.`);
-        }
+  let date1 = new Date(strConv).getTime();
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+     let date2 = new Date(moment(negociacoes[i].data_lancamento).format('DD/MM/YYYY')).getTime();
+
+    if(date2 < date1)
+    {
+      if(negociacoes[i].tipo_operacao===0)
+      {
+      sumVenda+=negociacoes[i].quantidade_saca;
+      }
+      else{
+          sumCompra+=negociacoes[i].quantidade_saca;
+
       }
     }
-
-    return (
+  }
+  saldo = sumVenda - sumCompra;
+      return (
       <View>
-        <Text>{`Matriz: R$${sumVendaMatriz.toFixed(2)}`}</Text>
-        <Text>{`FilialOeste: R$${sumVendaFilialOeste.toFixed(2)}`}</Text>
-        <Text>{`FilialNorte: R$${sumVendaFilialNorte.toFixed(2)}`}</Text>
-        <Text>{`FilialSul: R$${sumVendaFilialSul.toFixed(2)}`}</Text>
+            <Text style={styles.vendaSaca}>{sumVenda} sacas</Text>               
       </View>
     );
-  };
+};
+
+
+const mediaCompra = () => {
+  let mediaCompra = 0;
+  let numCompra = 0;
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+    if(negociacoes[i].tipo_operacao===1)
+    {
+        mediaCompra+=negociacoes[i].valor_por_saca;
+        numCompra+=1;
+    }
+  }
+      return (
+      <View>
+            <Text style={styles.vendaSaca}>R${(mediaCompra/numCompra).toFixed(2)}</Text>             
+      </View>
+    );
+};
+
+const mediaVenda = () => {
+  let mediaVenda = 0;
+  let numVenda = 0;
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+    if(negociacoes[i].tipo_operacao===0)
+    {
+      mediaVenda+=negociacoes[i].valor_por_saca;
+      numVenda+=1;
+
+    }
+
+  }
+      return (
+      <View>
+            <Text style={styles.vendaSaca}>R${(mediaVenda/numVenda).toFixed(2)}</Text>       
+      </View>
+    );
+};
+
+const unidadeNegociacCompra = () => {
+
+  let sumCompraMatriz = 0;
+  let sumCompraFilialOeste = 0;
+  let sumCompraFilialNorte = 0;
+  let sumCompraFilialSul = 0;
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+    if(negociacoes[i].tipo_operacao===1)
+    {
+      switch (negociacoes[i].unidade) {
+        case 1:
+          sumCompraMatriz+=negociacoes[i].quantidade_saca;
+          break;
+        case 2:
+          sumCompraFilialOeste+=negociacoes[i].quantidade_saca;
+          break;
+        case 3:
+          sumCompraFilialNorte+=negociacoes[i].quantidade_saca;
+          break;
+        case 4:
+          sumCompraFilialSul+=negociacoes[i].quantidade_saca;
+          break;
+        default:
+          console.log(`Sorry, we are out of.`);
+      }
+    }
+  }
+      return (
+      <View style={styles.container}>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#ADD8E6' }]} />
+        <Text style={styles.whiteText}>Matriz: {sumCompraMatriz} sacas</Text>
+      </View>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#F2B66D' }]} />
+        <Text style={styles.whiteText}>FilialOeste: {sumCompraFilialOeste} sacas</Text>
+      </View>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#39BF81' }]} />
+        <Text style={styles.whiteText}>FilialNorte: {sumCompraFilialNorte} sacas</Text>
+      </View>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#FF4040' }]} />
+        <Text style={styles.whiteText}>FilialSul: {sumCompraFilialSul} sacas</Text>
+      </View>
+    </View>
+    );
+};
+
+const unidadeNegociacVenda = () => {
+
+  let sumVendaMatriz = 0;
+  let sumVendaFilialOeste = 0;
+  let sumVendaFilialNorte = 0;
+  let sumVendaFilialSul = 0;
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+    if(negociacoes[i].tipo_operacao===0)
+    {
+      switch (negociacoes[i].unidade) {
+        case 1:
+          sumVendaMatriz+=negociacoes[i].quantidade_saca;
+          break;
+        case 2:
+          sumVendaFilialOeste+=negociacoes[i].quantidade_saca;
+          break;
+        case 3:
+          sumVendaFilialNorte+=negociacoes[i].quantidade_saca;
+          break;
+        case 4:
+          sumVendaFilialSul+=negociacoes[i].quantidade_saca;
+          break;
+        default:
+          console.log(`Sorry, we are out of.`);
+      }
+    }
+  }
+
+     return (
+  <View style={styles.container}>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#ADD8E6' }]} />
+        <Text style={styles.whiteText}>Matriz: {sumVendaMatriz} sacas</Text>
+      </View>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#F2B66D' }]} />
+        <Text style={styles.whiteText}>FilialOeste: {sumVendaFilialOeste} sacas</Text>
+      </View>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#39BF81' }]} />
+        <Text style={styles.whiteText}>FilialNorte: {sumVendaFilialNorte} sacas</Text>
+      </View>
+      <View style={styles.row}>
+        <View style={[styles.bullet, { backgroundColor: '#FF4040' }]} />
+        <Text style={styles.whiteText}>FilialSul: {sumVendaFilialSul} sacas</Text>
+      </View>
+    </View>
+    );
+};
 
   const saldoAtual = () => {
-    let sumVenda = 0;
-    let sumCompra = 0;
-    let saldo = 0;
+  let sumVenda = 0;
+  let sumCompra = 0;
+  let saldo = 0;
 
-    for (let i = 0; i < negociacoes.length; i++) {
-      if (negociacoes[i].tipo_operacao === 0) {
-        sumVenda += negociacoes[i].valor_total;
-        //console.log({sumVenda});
-      }
-      else {
-        sumCompra += negociacoes[i].valor_total;
+  for (let i=0; i<negociacoes.length;i++)
+  {
+    if(negociacoes[i].tipo_operacao===0)
+    {
+    sumVenda+=negociacoes[i].quantidade_saca;
+    //console.log({sumVenda});
+    }
+    else{
+        sumCompra+=negociacoes[i].quantidade_saca;
         //console.log({sumCompra});
+
+    }
+  }
+  saldo = sumVenda - sumCompra;
+      return (
+      <View>
+            <Text>{saldo} sacas</Text>                  
+      </View>
+    );
+};
+
+const saldoAtualDmenosUm = () => {
+  let sumVenda = 0;
+  let sumCompra = 0;
+  let saldo = 0;
+
+  const str = (moment().format('DD/MM/YYYY')).split('/');
+    console.log('STR ' + str);
+  const strmod = Date.parse("17/11/2023");
+  console.log('STRMOD ' + strmod);
+  const d = str[0]-DMENOS;
+  const m = str[1];
+  const y = str[2];
+  const strConv = d + '/' + m + '/' + y;
+    //console.log('STRCONV ' + strConv);
+
+  let date1 = new Date(strConv).getTime();
+  //console.log('str value d1 ' + date1);
+  let date3 = new Date(moment(strConv)).getTime();
+    //console.log('str value d3 ' + date3);
+
+  for (let i=0; i<negociacoes.length;i++)
+  {
+
+    let date2 = new Date(moment(negociacoes[i].data_lancamento).format('DD/MM/YYYY')).getTime();
+    //console.log('str value d2 ' + date2);
+    //console.log('aaa ' + date1 +'  ' + date2);
+
+    //console.log(date2 < date1);
+
+    if(date2 < date1)
+    {
+      if(negociacoes[i].tipo_operacao===0)
+      {
+      sumVenda+=negociacoes[i].quantidade_saca;
+      //console.log({sumVenda});
+      }
+      else{
+          sumCompra+=negociacoes[i].quantidade_saca;
+          //console.log("PASSOU AQUI");
 
       }
     }
-    saldo = sumVenda - sumCompra;
-    return (
+  }
+  saldo = sumVenda - sumCompra;
+      return (
       <View>
-        <Text>R${saldo.toFixed(2)}</Text>
+            <Text>{saldo} sacas</Text>                  
       </View>
     );
-  };
+};
+
+
+
 
   return (
-    <Container>
-      <Header title={'Agro Trade Monitor'} />
-      <ScrollView style={filterOpen ? { opacity: 0.2 } : { marginTop: 0 }}>
-        <View style={styles.infoContainer}>
-          <View style={styles.saldoDiaContainer}>
-            <Text style={styles.saldoDia}>
-              <Text
-                style={{ fontWeight: 'bold', fontSize: 24, color: '#269F67' }}>
-                Saldo X Dia
-              </Text>
-              <Text style={styles.compraSaca}> {saldoAtual()} </Text>
-            </Text>
-          </View>
-          <View style={styles.saldoDiaAnteriorContainer}>
-            <Text style={styles.saldoDiaAnterior}>
-              <Text style={{ fontWeight: 'bold' }}>
-                Saldo dia Anterior X Sacas
-              </Text>
-            </Text>
-          </View>
+   <Container>
+  <Header title={'Agro Trade Monitor'} />
+  <ScrollView style={filterOpen ? { opacity: 0.2 } : { marginTop: 0 }}>
+    <View style={styles.infoContainer}>
+     <View style={styles.saldoDiaContainer}>
+ 
+  <View style={styles.saldoDiaValueContainer}>
+      <Text style={styles.saldoDiaTitle}>
+    Saldo do Dia
+    </Text>
+     <Text style={styles.saldoDiaValue}>
+      {saldoAtual()}
+      </Text>
+  </View>
+</View>
+
+  
+
+
+
+  <View style={styles.saldoDiaAnteriorContainer}>
+  <Text style={styles.saldoDiaAnteriorTitle}>
+    Saldo do dia Anterior
+  </Text>
+  <Text style={styles.saldoDiaAnteriorValue}>
+    {saldoAtualDmenosUm()}
+  </Text>
+</View>
+
+
+
+
+
 
           <View style={styles.negociacaoRecente}>
             <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
@@ -552,22 +637,22 @@ const Negociacao = () => {
           </View>
         )}
         <Separator />
-        <View style={styles.subtitleSession}>
-          <Text style={styles.subtitleTex}> Consolidado do Dia Anterior </Text>
-        </View>
+                <View style={{...summarySection}}>
+         <Text style={summaryTitle}>Consolidado do Dia Anterior</Text>
+      </View>
         <View style={styles.horizontalSummarySession}>
           <View style={styles.squareSummaryContainer}>
             <View style={styles.darkGreenbox}>
-              <Text style={styles.compraSaca}> Compra {somatorioCompra()} </Text>
+              <Text style={styles.compraSaca}> Compra {somatorioCompraDmenosUm()} </Text>
             </View>
             <View style={styles.lightGreenbox}>
-              <Text style={styles.vendaSaca}> Venda {somatorioVenda()}</Text>
+              <Text style={styles.compraSaca}> Venda {somatorioVendaDmenosUm()} </Text>
             </View>
           </View>
         </View>
         <Separator />
-        <View style={styles.subtitleSession}>
-          <Text style={styles.subtitleTex}> Preços Mês Anterior </Text>
+        <View style={{...summarySection}}>
+  <Text style={summaryTitle}>Preços Mês Anterior</Text>
         </View>
         <View style={styles.horizontalSummarySession}>
           <View style={styles.squareSummaryContainer}>
@@ -580,8 +665,8 @@ const Negociacao = () => {
           </View>
         </View>
         <Separator />
-        <View style={styles.subtitleSession}>
-          <Text style={styles.subtitleTex}> Compras por Unidade </Text>
+        <View style={{...summarySection}}>
+  <Text style={summaryTitle}>Compras por Unidade</Text>
         </View>
         <View style={styles.verticalSummarySession}>
           <View style={styles.darkGreenbox}>
@@ -589,8 +674,8 @@ const Negociacao = () => {
           </View>
         </View>
         <Separator />
-        <View style={styles.subtitleSession}>
-          <Text style={styles.subtitleTex}> Vendas por Unidade </Text>
+        <View style={{...summarySection}}>
+  <Text style={summaryTitle}>Vendas por Unidade</Text>
         </View>
         <View style={styles.verticalSummarySession}>
           <View style={styles.lightGreenbox}>
@@ -688,7 +773,7 @@ const Negociacao = () => {
                 display="default"
                 Pagamento
                 onTouchCancel={() => setShowDataFinalPagamento(false)}
-                onChange={(event, date) => {
+                onChange={(event, date) => { 
                   setShowDataFinalPagamento(false);
                   setFilterDataFinalPagamento(
                     moment(date).format('DD/MM/YYYY')
@@ -795,7 +880,70 @@ const Negociacao = () => {
   );
 };
 
+const summarySection = {
+  backgroundColor: 'white',
+  padding: 10,
+  marginBottom: 10,
+};
+
+const summaryTitle = {
+  fontWeight: 'bold',
+  fontSize: 18,
+};
+
+
+
 const styles = StyleSheet.create({
+
+saldoDiaAnteriorContainer: {
+  alignItems: 'center',
+},
+saldoDiaAnteriorTitle: {
+  fontWeight: 'bold',
+  fontSize: 18,
+  marginBottom: 5, // adiciona um espaço entre o título e o valor
+},
+
+saldoDiaValueContainer: {
+  alignItems: 'center',
+},
+saldoDiaTitle: {
+  marginTop:15,
+  fontWeight: 'bold',
+  fontSize: 24,
+  color: '#269F67',
+},
+saldoDiaValue: {
+  fontSize: 20,
+  marginTop: 8, // Espaço entre o título e o valor
+  textAlign: 'center', // Centralizando horizontalmente
+
+},
+
+
+  
+  container: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    paddingHorizontal: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  bullet: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginRight: 5,
+  },
+  whiteText: {
+    color: '#FFFFFF',
+    fontSize:18
+  },
+
+
   filtroView: {
     paddingTop: 15,
     borderWidth: 2,
@@ -814,19 +962,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  saldoDia: {
-    textAlign: 'center',
-  },
-  saldoDiaAnteriorContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  saldoDiaAnterior: {
-    fontSize: 11,
-    color: '#000000',
-    marginBottom: 10,
-    fontWeight: 'bold',
-  },
+ 
+
   itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -892,11 +1029,11 @@ const styles = StyleSheet.create({
   },
   compraSaca: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
   },
   vendaSaca: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
   },
   expandIconContainer: {
     flexDirection: 'row',
@@ -906,10 +1043,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#269F67',
     borderRadius: 20,
     width: '30%',
-    height: '65%',
+    height: '55%',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    marginBottom:20,
   },
   negociacaoRecente: {
     padding: 10,
@@ -931,7 +1069,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonFiltrar: {
-    marginHorizontal: 12,
+    marginHorizontal: 10,
   },
   pickerDate: {
     alignItems: 'center',
