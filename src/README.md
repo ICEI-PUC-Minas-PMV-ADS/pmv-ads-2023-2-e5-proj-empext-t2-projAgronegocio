@@ -54,55 +54,11 @@ npx expo start
 
 ## Executando:
 
-## OBS: Criar arquivo .env com as informações do banco e porta para Usuarios e Negociacoes antes de executar
+### cd src/BackEnd
 
-.env (Usuarios e Negociacoes nos respectivos diretorios, solicitar acesso para a equipe)
+Abrir CMD e digitar: npm run dev
+Executará na porta 3333
 
-PORT=
-
-MYSQL_HOST=
-
-MYSQL_USER=
-
-MYSQL_PASSWORD=
-
-MYSQL_DB=
-
-SEGREDO_TOKEN =
-
-## Entrar nos seguintes diretorios
-
-### cd src/BackEnd/Usuarios
-
-Abrir CMD:
-
-npm run dev
-
-### cd src/BackEnd/Usuarios
-
-Abrir outro CMD:
-
-lt --port 5000
-
-Clicar com o botão e quando aparecer follow clique em copiar
-
-Cole a URL na url que consta lá no Front
-
-### cd src/BackEnd/Negociacoes
-
-Abrir CMD:
-
-npm run dev
-
-### cd src/BackEnd/Negociacoes
-
-Abrir outro CMD:
-
-lt --port 3333
-
-Clicar com o botão e quando aparecer follow clique em copiar
-
-Insira a URL na pasta services/url que consta no Front
 -------------------------------------
 ### cd src/FrontEnd
 
