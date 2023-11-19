@@ -71,7 +71,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-<img src="img/DiagramaCasoDeUso.jpeg" alt="Figura do diagrama de caso de uso">
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/0c81c528-2b56-440e-96c9-32cf2dcc8b56)
 
 ## Diagrama de Classes
 
