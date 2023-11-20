@@ -1,5 +1,8 @@
 # AgroTrade Monitor
 
+## Acesso pelo Snack do Expo
+https://snack.expo.dev/@laislimas/821324?platform=android
+
 ## Parametrização de ambiente
 
 Entrar no CMD ou PowerShell e instalar os pacotes em cada diretorio separadamente:
