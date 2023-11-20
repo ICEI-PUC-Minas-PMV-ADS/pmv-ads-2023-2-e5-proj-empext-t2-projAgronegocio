@@ -10,6 +10,13 @@ https://docs.google.com/spreadsheets/d/1-rbQ1Y6GMhC7kreUkrwDyxYRukM77med/edit?us
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/102aba6d-57b8-4854-978d-c170fc46b769)
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/b0526f4f-d590-46b1-8c6f-facfbb499b40)
 
+# Testes Unitários
+
+![TestesUnitarios2](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/745755c8-da0b-4135-b869-a414975d180c)
+![TestesUnitarios](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/4a6c57f9-f240-4ef9-9de4-5b5b9b79b354)
+
+# Pipeline de Testes
+![PipelineGitHubActions](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/e42aba41-5396-4240-919c-1b8f08e09abd)
 
  
 # Evidências de Testes de Software
@@ -18,9 +25,15 @@ Apresente imagens e/ou vídeos que comprovam que um determinado teste foi execut
 ## A imagem abaixo representa a tela de login onde o usuário fará sua autenticação
 RF-001 atualmente o aplicativo já nos mostra a tela de login.
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/ed9fe7c2-2240-4c0b-842f-7c4a041fe0bd)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/84749be0-0e55-4beb-bfea-13ae0a76cd6c)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/039b3887-7570-4c31-8e30-22d644ac6f6b)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/dbfc943a-2da2-460c-843e-84da59832536)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/7af0d310-ca23-41d2-b2ac-c35d5fa77cb3)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/d432ae14-5748-47ef-b3c3-82a475daaa14)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/a831fcbf-93d1-4d6a-882d-11a312167ecc)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/087396ae-5140-4094-8244-e0f72ee8b6b1)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/4c6e3ff6-f224-461c-a6e5-f60699593276)
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/35c10d4c-4c91-4a00-a2a8-2e1f169fd1c2)
 
 ## A imagem abaixo representa a tela onde o usuário poderá visualizar suas negociações
 
@@ -61,6 +74,7 @@ RF-003	Atualmente o aplicativo mostra a tela de registrar negociações venda/co
 
 Link: https://youtu.be/cboLPdfvinA
 
-[![Assista ao vídeo](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/1ad4989b-b96e-4d4d-8a06-61c441e2c6c5)]([https://www.youtube.com/watch?v=cboLPdfvinA](https://www.youtube.com/watch?v=X862E7Hlrx4)https://www.youtube.com/watch?v=X862E7Hlrx4)
+[![Assista ao vídeo](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/1ad4989b-b96e-4d4d-8a06-61c441e2c6c5)]([https://www.youtube.com/watch?v=cboLPdfvinA](https://www.youtube.com/watch?v=X862E7Hlrx4)https://www.youtube.com/watch?v=X862E7Hlrx4](https://youtu.be/VTPGUQL1RYE?feature=shared))
 
-Link:  https://youtu.be/X862E7Hlrx4
+Link:  [https://youtu.be/X862E7Hlrx4](https://youtu.be/VTPGUQL1RYE?feature=shared)https://youtu.be/VTPGUQL1RYE?feature=shared
+
