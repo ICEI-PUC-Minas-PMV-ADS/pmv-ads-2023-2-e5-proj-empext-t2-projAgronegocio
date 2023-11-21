@@ -23,10 +23,22 @@ A justificativa para este projeto reside na necessidade crítica da empresa de m
 
 ## Relação com a Extensão Universitária
 
-A extensão universitária da PUC Minas possibilita o compartilhamento do conhecimento adquirido por meio do ensino e da pesquisa. Ela é a articulação do conhecimento científico advindo do ensino e da pesquisa com as necessidades do mercado.
+O agronegócio é um setor estratégico para a economia brasileira, sendo responsável por cerca de 24,4% do Produto Interno Bruto (PIB) e por mais de 40% das exportações do país. Dentro desse setor, a soja é o principal produto exportado pelo Brasil, representando mais de 50% do valor das exportações agropecuárias em 2022. No entanto, o mercado de soja é complexo e dinâmico, envolvendo diversos agentes, como produtores, armazenadores, comerciantes, processadores e consumidores, que realizam negociações de compra e venda em diferentes modalidades, como à vista, a termo, futura e de opções.
 
-Nesse contexto, a extensão universitária se manifesta na aplicação prática dos conhecimentos adquiridos durante a formação acadêmica para enfrentar desafios reais enfrentados por uma empresa na área de armazenagem e comércio de grãos. Através da criação de uma aplicação móvel, buscamos proporcionar soluções concretas que tenham o potencial de melhorar significativamente o desempenho da empresa. Isso é um exemplo de como a extensão universitária pode beneficiar tanto a sociedade quanto os estudantes, fornecendo aprendizado prático.
+Nesse contexto, o projeto proposto visa desenvolver um sistema sociotécnico inovador que atenda às necessidades de uma empresa do ramo de agronegócio localizada no interior de Minas Gerais, que atua na armazenagem e comércio de grãos, principalmente soja, com foco em vendas futuras destinadas à exportação. O sistema consiste em uma aplicação móvel que permita o registro e o acompanhamento em tempo real das negociações de compra e venda de grãos, bem como o cálculo de métricas relacionadas aos preços. O sistema visa melhorar a eficiência, o controle e a transparência das operações da empresa, além de facilitar a tomada de decisões estratégicas baseadas em dados.
+
+O projeto se insere no eixo temático de desenvolvimento de um sistema sociotécnico inovador, pois busca criar uma solução tecnológica que integre aspectos sociais, organizacionais e técnicos, visando resolver um problema real de uma organização parceira.
+
+Através da criação de uma aplicação móvel, buscamos proporcionar soluções concretas que tenham o potencial de melhorar o desempenho da empresa. Isso é um exemplo de como a extensão universitária pode beneficiar tanto a sociedade quanto os estudantes, fornecendo aprendizado prático.
 
 ## Descrição do Parceiro
 
 O parceiro é uma empresa do ramo de agronegócio sediada no interior de Minas Gerais. Ela atua na armazenagem e comércio de grãos, com foco na exportação. A empresa possui filiais em várias localidades e enfrentam desafios relacionados ao acompanhamento e registro de negociações, devido à falta de uma solução digital eficaz. A implantação do sistema sociotécnico visa resolver esses desafios, melhorar a eficiência das operações.
+
+## Referências
+
+CNN BRASIL. Associação eleva previsão de exportação de soja em 2023 para quase 100 milhões de toneladas. Disponível em: https://www.cnnbrasil.com.br/economia/associacao-eleva-previsao-de-exportacao-de-soja-em-2023-para-quase-100-milhoes-de-toneladas/#:~:text=Com os ajustes%2C a receita,produto de exportação do Brasil. Acesso em: 21 nov. 2023.
+
+MINISTÉRIO DA AGRICULTURA, PECUÁRIA E ABASTECIMENTO. Exportações do agronegócio fecham 2022 com US$ 159 bilhões em vendas. Disponível em: https://www.gov.br/agricultura/pt-br/assuntos/noticias/exportacoes-do-agronegocio-fecham-2022-com-us-159-bilhoes-em-vendas. Acesso em: 21 nov. 2023.
+
+CEPEA - CENTRO DE ESTUDOS AVANÇADOS EM ECONOMIA APLICADA. PIB do agronegócio brasileiro. Disponível em: https://www.cepea.esalq.usp.br/br/pib-do-agronegocio-brasileiro.aspx#:~:text=Pesquisadores do Cepea%2FCNA indicam,PIB do País em 2023. Acesso em: 21 nov. 2023.
