@@ -29,7 +29,7 @@ const MinhasNegociacoes = () => {
     getNegociacoesUsuarioId(id).then((dados) => {
       setNegociacoes(dados);
     });
-  }, [isFocused]);
+  }, [id, isFocused]);
 
   const handleItemPress = (item) => {
     navigation.navigate('NovaNegociacao', { item });
