@@ -38,16 +38,14 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-007| Visualizar consolidado do dia anterior (D-1) | MÉDIA |
 | RF-008| Visualizar o saldo | MÉDIA | 
 | RF-009| Informar saldo negativo | MÉDIA |
-| RF-010| Enviar notificações via Whatsapp | BAIXA |
 | RF-011| Apresentar valor total de cada negociação | ALTA |
-| RF-012| Gerar relatórios detalhados com base nos dados fornecidos | ALTA |
 
 
 ### Requisitos não Funcionais
 
 | ID     | Descrição do Requisito                                       | Prioridade |
 |-------|--------------------------------------------------------------|------------|
-| RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel. | MÉDIA |
+| RNF-001| O sistema deve ser responsivo para rodar em um dispositivo móvel. | MÉDIA |
 | RNF-002| Utilizar o MySQL como SGBD para armazenar informações de negociações e usuários. | ALTA |
 | RNF-003| Criar uma interface de usuário intuitiva e de fácil uso, considerando a simplicidade e usabilidade para os usuários. | ALTA |
 | RNF-004| Garantir que a aplicação seja acessível a todos os tipos de usuários, incluindo suporte a leitores de tela e alto contraste. | BAIXA |
@@ -55,8 +53,8 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RNF-006| Utilizar armazenamento em nuvem | MÉDIA |
 | RNF-007| Autenticar usuários para evitar acessos não autorizados | ALTA |
 | RNF-008| O software deve ser atualizado regularmente para garantir que esteja em conformidade com as mudanças nas leis e regulamentos | ALTA |
+| RNF-009| O software precisa ter acesso online, 24 horas por dia de onde você estiver | ALTA |
 
-O software precisa ter acesso online, 24 horas por dia de onde você estiver3.
 
 
 ## Restrições
