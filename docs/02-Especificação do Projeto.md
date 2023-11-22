@@ -14,9 +14,9 @@ O **front-end** é construído usando **React Native** com **React Native Paper*
 
 O **back-end** é construído usando **Node.js** e o Sistema de Gerenciamento de Banco de Dados (SGBD) **MySQL**. 
 
-A comunicação é feita através do **Socket.IO**, que é uma biblioteca JavaScript para aplicativos da web em tempo real. Ele permite a comunicação bidirecional em tempo real entre clientes da web e servidores.
+A comunicação é feita através da **API REST**
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/b8639b8b-f5b8-4963-9c0b-90ecbf34c152)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/0973d0fe-b685-4d06-b575-74ae313913bd)
 
 ## Project Model Canvas
 ![Project Modelo Canvas](img/ProjectModelCanvas.PNG)
