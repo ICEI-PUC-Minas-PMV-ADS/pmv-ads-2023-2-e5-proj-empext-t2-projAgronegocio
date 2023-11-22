@@ -38,7 +38,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-007| Visualizar consolidado do dia anterior (D-1) | MÉDIA |
 | RF-008| Visualizar o saldo | MÉDIA | 
 | RF-009| Informar saldo negativo | MÉDIA |
-| RF-011| Apresentar valor total de cada negociação | ALTA |
+| RF-010| Apresentar valor total de cada negociação | ALTA |
 
 
 ### Requisitos não Funcionais
