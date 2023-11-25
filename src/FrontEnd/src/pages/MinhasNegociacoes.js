@@ -32,7 +32,7 @@ const MinhasNegociacoes = () => {
   }, [id, isFocused]);
 
   const handleItemPress = (item) => {
-    navigation.navigate('NovaNegociacao', { item });
+    navigation.navigate('EditarNegociacao', { item });
   };
 
   const renderNegociacoes = () => {

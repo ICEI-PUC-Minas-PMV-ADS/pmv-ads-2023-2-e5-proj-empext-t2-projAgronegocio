@@ -1,46 +1,56 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import Home from '../pages/Home';
-import Negociacao from '../pages/Negociacao';
+import PerfilRoute from './PerfilRoute';
+import NegociacaoRoute from './NegociacaoRoute';
 import NovaNegociacao from '../pages/NovaNegociacao';
-import MinhasNegociacoes from '../pages/MinhasNegociacoes';
-import DetalhesNegociacao from '../pages/DetalhesNegociacao';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const Main = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        name="Home"
-        component={Home}
+    <Tab.Navigator
+      initialRouteName="Negociacao"
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: { backgroundColor: '#6FCF97' },
+        tabBarActiveTintColor: '#000000',
+        tabBarHideOnKeyboard: true,
+      }}>
+      <Tab.Screen
+        name="NegociacaoRoute"
+        component={NegociacaoRoute}
         options={{
-          header: () => null,
+          tabBarLabel: 'Painel Principal',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="home-analytics"
+              color={color}
+              size={size}
+            />
+          ),
         }}
       />
-      <Stack.Screen
+      <Tab.Screen
+        name="PerfilRoute"
+        component={PerfilRoute}
+        options={{
+          tabBarLabel: 'Perfil',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="NovaNegociacao"
         component={NovaNegociacao}
         options={{
-          header: () => null,
+          tabBarLabel: 'Nova Negociação',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="grain" color={color} size={size} />
+          ),
         }}
       />
-      <Stack.Screen
-        name="MinhasNegociacoes"
-        component={MinhasNegociacoes}
-        options={{
-          header: () => null,
-        }}
-      />
-      <Stack.Screen
-        name="DetalhesNegociacao"
-        component={DetalhesNegociacao}
-        options={{
-          header: () => null,
-        }}
-      />
-    </Stack.Navigator>
+    </Tab.Navigator>
   );
 };
 

@@ -32,7 +32,7 @@ import Assets from '../assets/ImagemSoja2.jpg';
 import { getPessoas } from '../services/pessoas.services';
 import { getUnidades } from '../services/unidades.services';
 
-DMENOS = 3;
+DMENOS = 1;
 
 const Negociacao = () => {
   const navigation = useNavigation();
@@ -227,7 +227,7 @@ const Negociacao = () => {
         {displayedNegociacoes.map((item, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => navigation.navigate('NovaNegociacao', { item })}>
+            onPress={() => navigation.navigate('DetalhesNegociacao', { item })}>
             <View style={styles.itemContainer}>
               <View style={styles.leftContent}>
                 <Image source={Assets} style={styles.image} />
@@ -282,36 +282,29 @@ const Negociacao = () => {
   
 //consolidado compra D-1
   const somatorioCompraDmenosUm = () => {
-  let sumVenda = 0;
   let sumCompra = 0;
 
-  const str = (moment().format('DD/MM/YYYY')).split('/');
-  const d = str[0]-DMENOS;
-  const m = str[1];
-  const y = str[2];
-  const strConv = d + '/' + m + '/' + y;
-  
-  let date1 = new Date(strConv).getTime();
+  let yesterday = new Date();
+
+  let dd = String(yesterday.getDate()).padStart(2, '0')-DMENOS;
+  let mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = yesterday.getFullYear();
+
+  yesterday = yyyy + '-' + mm + '-' + dd;
+  console.log('Comprayesterday: ' + yesterday);
 
   for (let i=0; i<negociacoes.length;i++)
-  {
-      let date2 = new Date(moment(negociacoes[i].data_lancamento).format('DD/MM/YYYY')).getTime();
-
-    if(date2 < date1)
+  {     
+    //console.log(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday.toString(),"checking")
+    if(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday)
     {
-      if(negociacoes[i].tipo_operacao===0)
+      if(negociacoes[i].tipo_operacao===1)
       {
-      sumVenda+=negociacoes[i].quantidade_saca;
-
+        sumCompra+=negociacoes[i].quantidade_saca;
       }
-      else{
-          sumCompra+=negociacoes[i].quantidade_saca;
 
-      }
     }
   }
-  saldo = sumVenda - sumCompra;
-        //console.log('SomVenda: ' + sumVenda +' Somcompra' + sumCompra);
       return (
       <View>
             <Text style={styles.vendaSaca}>{sumCompra} sacas</Text>         
@@ -322,33 +315,28 @@ const Negociacao = () => {
   //consolidado venda D-1
   const somatorioVendaDmenosUm = () => {
   let sumVenda = 0;
-  let sumCompra = 0;
 
-  const str = (moment().format('DD/MM/YYYY')).split('/');
-  const d = str[0]-DMENOS;
-  const m = str[1];
-  const y = str[2];
-  const strConv = d + '/' + m + '/' + y;
+  let yesterday = new Date();
 
-  let date1 = new Date(strConv).getTime();
+  let dd = String(yesterday.getDate()).padStart(2, '0')-DMENOS;
+  let mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = yesterday.getFullYear();
+
+  yesterday = yyyy + '-' + mm + '-' + dd;
+  console.log('Vendayesterday: ' + yesterday);
 
   for (let i=0; i<negociacoes.length;i++)
-  {
-     let date2 = new Date(moment(negociacoes[i].data_lancamento).format('DD/MM/YYYY')).getTime();
-
-    if(date2 < date1)
+  {     
+    //console.log(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday.toString(),"checking")
+    if(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday)
     {
       if(negociacoes[i].tipo_operacao===0)
       {
-      sumVenda+=negociacoes[i].quantidade_saca;
+        sumVenda+=negociacoes[i].quantidade_saca;
       }
-      else{
-          sumCompra+=negociacoes[i].quantidade_saca;
 
-      }
     }
   }
-  saldo = sumVenda - sumCompra;
       return (
       <View>
             <Text style={styles.vendaSaca}>{sumVenda} sacas</Text>               
@@ -518,7 +506,7 @@ const unidadeNegociacVenda = () => {
 
     }
   }
-  saldo = sumVenda - sumCompra;
+  saldo = sumCompra - sumVenda ;
       return (
       <View>
             <Text>{saldo} sacas</Text>                  
@@ -531,31 +519,19 @@ const saldoAtualDmenosUm = () => {
   let sumCompra = 0;
   let saldo = 0;
 
-  const str = (moment().format('DD/MM/YYYY')).split('/');
-    console.log('STR ' + str);
-  const strmod = Date.parse("17/11/2023");
-  console.log('STRMOD ' + strmod);
-  const d = str[0]-DMENOS;
-  const m = str[1];
-  const y = str[2];
-  const strConv = d + '/' + m + '/' + y;
-    //console.log('STRCONV ' + strConv);
+  let yesterday = new Date();
 
-  let date1 = new Date(strConv).getTime();
-  //console.log('str value d1 ' + date1);
-  let date3 = new Date(moment(strConv)).getTime();
-    //console.log('str value d3 ' + date3);
+  let dd = String(yesterday.getDate()).padStart(2, '0')-DMENOS;
+  let mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = yesterday.getFullYear();
+
+  yesterday = yyyy + '-' + mm + '-' + dd;
+  console.log('Saldoyesterday: ' + yesterday);
 
   for (let i=0; i<negociacoes.length;i++)
-  {
-
-    let date2 = new Date(moment(negociacoes[i].data_lancamento).format('DD/MM/YYYY')).getTime();
-    //console.log('str value d2 ' + date2);
-    //console.log('aaa ' + date1 +'  ' + date2);
-
-    //console.log(date2 < date1);
-
-    if(date2 < date1)
+  {     
+    //console.log(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday.toString(),"checking")
+    if(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday)
     {
       if(negociacoes[i].tipo_operacao===0)
       {
@@ -567,9 +543,10 @@ const saldoAtualDmenosUm = () => {
           //console.log("PASSOU AQUI");
 
       }
+
     }
   }
-  saldo = sumVenda - sumCompra;
+  saldo = sumCompra - sumVenda;
       return (
       <View>
             <Text>{saldo} sacas</Text>                  

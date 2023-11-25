@@ -15,12 +15,9 @@ import Body from '../components/Body';
 import Header from '../components/Header';
 import Input from '../components/Input';
 
-import { useUser } from '../contexts/UserContext';
-
-import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import {
-  insertNegociacao,
   updateNegociacao,
   deleteNegociacao,
 } from '../services/negociacao.services';
@@ -28,15 +25,13 @@ import {
 import { getPessoas } from '../services/pessoas.services';
 import { getUnidades } from '../services/unidades.services';
 
-const NovaNegociacao = ({ route }) => {
+const EditarNegociacao = ({ route }) => {
   const navigation = useNavigation();
   //validar se existe valores
   const { item } = route.params ? route.params : {};
 
-  const { id } = useUser();
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const isFocused = useIsFocused();
 
   const [tipoOperacao, setTipoOperacao] = useState('Venda');
 
@@ -70,36 +65,36 @@ const NovaNegociacao = ({ route }) => {
       setUnidadeSelecionada(item.unidade);
       setIdUsuario(item.id_usuario);
     }
-  }, [isFocused, item]);
+  }, [item]);
 
   const handleSalvar = () => {
-    insertNegociacao({
-      cliente_produtor: pessoaSelecionada,
-      tipo_operacao: Number(tipoOperacao),
-      valor_por_saca: Number(valorPorSaca),
-      quantidade_saca: Number(qtdSacas),
-      data_vencimento: dataVencimento,
-      valor_total: valorPorSaca * qtdSacas,
-      unidade: unidadeSelecionada,
-      id_usuario: id,
-    }).then((res) => {
-      res != null
-        ? Alert.alert('Atenção!', 'Negociação criada com sucesso!', [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'NegociacaoRoute' }],
-                }),
-            },
-          ])
-        : Alert.alert('Atenção!', 'Erro ao cadastrar negociação!', [
-            {
-              text: 'Ok',
-            },
-          ]);
-    });
+    if (item) {
+      updateNegociacao({
+        cliente_produtor: pessoaSelecionada,
+        tipo_operacao: Number(tipoOperacao),
+        valor_por_saca: Number(valorPorSaca),
+        quantidade_saca: Number(qtdSacas),
+        data_vencimento: dataVencimento,
+        valor_total: valorPorSaca * qtdSacas,
+        unidade: unidadeSelecionada,
+        id_usuario: Number(idUsuario),
+        id: item.id,
+      }).then((res) => {
+        console.log(res);
+        res != null
+          ? Alert.alert('Atenção!', 'Negociação alterada com sucesso!', [
+              {
+                text: 'Ok',
+                onPress: () => navigation.goBack(),
+              },
+            ])
+          : Alert.alert('Atenção!', 'Erro ao alterar negociação!', [
+              {
+                text: 'Ok',
+              },
+            ]);
+      });
+    }
   };
 
   const confirmar = () => {
@@ -191,7 +186,7 @@ const NovaNegociacao = ({ route }) => {
 
   return (
     <Container>
-      <Header title={'Negociação'}></Header>
+      <Header title={'Negociação'} goBack={() => navigation.goBack()}></Header>
       <Body>
         <View style={styles.containerRadioButton}>
           <View style={styles.containerRadioItem}>
@@ -313,4 +308,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NovaNegociacao;
+export default EditarNegociacao;
