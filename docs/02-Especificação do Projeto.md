@@ -19,7 +19,8 @@ A comunicação é feita através da **API REST**
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/0973d0fe-b685-4d06-b575-74ae313913bd)
 
 ## Project Model Canvas
-![Project Modelo Canvas](img/ProjectModelCanvas.PNG)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/c5164e76-9917-4a55-84d6-580f97fb54d7)
+
 
 ## Requisitos
 
@@ -100,7 +101,7 @@ O Esquema Relacional corresponde à representação dos dados em tabelas juntame
 
 Na figura abaixo é mostrado o Esquema Relacional(ER) desenvolvido no próprio banco de dados para o projeto.
 
-<img src="img/esquema_relacional_Agro2.png" alt="Figura do modelo Esquema relacional do projeto AgroTradeMonitor">
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/b1664570-2146-4d12-9ca6-843f59d7acb1)
 
 ## Projeto da Base de Dados
 
