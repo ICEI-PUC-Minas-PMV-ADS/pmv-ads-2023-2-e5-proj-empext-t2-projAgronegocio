@@ -30,15 +30,22 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | ID     | Descrição do Requisito                                       | Prioridade |
 |-------|--------------------------------------------------------------|------------|
 | RF-001| Oferecer uma tela de login para autenticação dos usuários. | ALTA |  
-| RF-002| Possibilitar a seleção da unidade da empresa (Matriz, Filial 1, Filial 2, Filial 3) em cada negociação. | MÉDIA |
+| RF-002| Possibilitar a seleção da unidade da empresa ao criar uma negociação.| MÉDIA |
 | RF-003| Registrar negociações | ALTA | 
-| RF-004| Visualizar negociações| ALTA | 
+| RF-004| Visualizar todas as negociações| ALTA | 
 | RF-005| Excluir negociações | ALTA | 
-| RF-006| Visualizar média de preços de venda e de compra | MÉDIA |
+| RF-006| Visualizar média de preço da saca de venda e compra | MÉDIA |
 | RF-007| Visualizar consolidado do dia anterior (D-1) | MÉDIA |
 | RF-008| Visualizar o saldo | MÉDIA | 
-| RF-009| Informar saldo negativo | MÉDIA |
-| RF-010| Apresentar valor total de cada negociação | ALTA |
+| RF-009| Mostrar quando o saldo for negativo | MÉDIA |
+| RF-010| Filtrar por unidade, data de lançamento, data de vencimento, tipo de operação, cliente/produtor | ALTA |
+| RF-011| Editar negociação | ALTA |
+| RF-012| Possibilitar a seleção do nome do cliente/produtor ao criar uma negociação. | ALTA |
+| RF-013| Visualizar o total em sacas de compra e venda por unidade | ALTA |
+| RF-014| Permitir o registro de usuários. | ALTA |
+| RF-015| Permitir ao usúario visualizar separadamente as negociações registradas por ele. | ALTA |
+| RF-016| Mostrar o valor total da negociação. | ALTA |
+| RF-017| Mostrar a usuário responsável pela criação de cada negociação. | ALTA |
 
 
 ### Requisitos não Funcionais
