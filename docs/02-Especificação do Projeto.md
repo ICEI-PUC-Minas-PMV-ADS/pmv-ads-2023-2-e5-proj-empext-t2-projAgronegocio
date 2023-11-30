@@ -56,13 +56,8 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RNF-001| O sistema deve ser responsivo para rodar em um dispositivo móvel. | MÉDIA |
 | RNF-002| Utilizar o MySQL como SGBD para armazenar informações de negociações e usuários. | ALTA |
 | RNF-003| Criar uma interface de usuário intuitiva e de fácil uso, considerando a simplicidade e usabilidade para os usuários. | ALTA |
-| RNF-004| Garantir que a aplicação seja acessível a todos os tipos de usuários, incluindo suporte a leitores de tela e alto contraste. | BAIXA |
-| RNF-005| Considerar que o usuário poderá acessar a aplicação de uma área remota | BAIXA |
-| RNF-006| Utilizar armazenamento em nuvem | MÉDIA |
-| RNF-007| Autenticar usuários para evitar acessos não autorizados | ALTA |
-| RNF-008| O software deve ser atualizado regularmente para garantir que esteja em conformidade com as mudanças nas leis e regulamentos | ALTA |
-| RNF-009| O software precisa ter acesso online, 24 horas por dia de onde você estiver | ALTA |
-
+| RNF-004| Utilizar armazenamento em nuvem | MÉDIA |
+| RNF-005| Autenticar usuários para evitar acessos não autorizados | ALTA |
 
 
 ## Restrições
@@ -87,6 +82,10 @@ No diagrama, as classes são representadas com caixas que contêm três comparti
 
 <img src="img/diagrama-de-classes_Agro3.png" alt="Figura do diagrama de classes do projeto AgroTradeMonitor">
 
+## Projeto da Base de Dados
+
+O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
+
 ## Modelo ER
 
 O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.]
@@ -103,6 +102,3 @@ Na figura abaixo é mostrado o Esquema Relacional(ER) desenvolvido no próprio b
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/b1664570-2146-4d12-9ca6-843f59d7acb1)
 
-## Projeto da Base de Dados
-
-O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
