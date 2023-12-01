@@ -4,7 +4,7 @@ O projeto visa desenvolver uma aplicação móvel para atender às necessidades 
 
 ## Problema
 
-O problema central é a falta de uma ferramenta eficiente para o acompanhamento em tempo real das negociações de compra e venda de grãos. Essa ausência de registro dificulta a análise de métricas, o acompanhamento por filial e a tomada de decisões estratégicas relacionadas aos preços de compra e venda. A empresa enfrenta dificuldades em manter o controle das transações e em assegurar que a compra corresponda às vendas, levando, por vezes, a saldos negativos.
+O problema central é a falta de uma ferramenta eficiente para o acompanhamento dos registros da negociações de compra e venda de grãos. As transações, atualmente conduzidas de maneira informal via ligações e mensagens de WhatsApp, são registradas manualmente em cadernos, gerando dificuldades na análise de métricas, no monitoramento por filial e na tomada de decisões estratégicas associadas aos preços da saca de compra e venda.
 
 ## Objetivos
 
@@ -12,24 +12,26 @@ Os objetivos gerais do projeto são desenvolver um software que solucione o prob
 
 Os objetivos específicos incluem:
 1. Criar uma aplicação móvel com interface intuitiva para registro de negociações;
-2. Implementar funcionalidades que permitam o acompanhamento em tempo real das transações;
-3. Calcular médias de preços de compra e venda negociados diariamente;
-4. Fornecer informações consolidadas do dia anterior;
-5. Notificar os usuários sobre novas negociações em tempo real.
+2. Implementar funcionalidades que permitam o acompanhamento das transações;
+3. Trazer métricas relacionadas aos preços de sacas e quantidades;
+4. Fornecer informações consolidadas do saldo e do dia anterior;
+
 
 ## Justificativa
 
-A justificativa para este projeto reside na necessidade crítica da empresa de melhorar seu processo de acompanhamento de negociações e análise de métricas. A transição para um sistema eficiente trará maior transparência, controle e eficácia às operações de compra e venda de grãos. Isso ajudará a empresa a tomar decisões mais informadas sobre preços e estoques, aumentando sua competitividade no mercado de agronegócio.
+A justificativa para este projeto reside na necessidade da empresa de melhorar seu processo de acompanhamento de negociações e análise de métricas. A transição para um sistema eficiente trará maior transparência, controle e eficácia nas negociações. Isso ajudará a empresa a tomar decisões mais assertivas de preços das  sacas e á não se perder em meio as anotações.
 
 ## Relação com a Extensão Universitária
 
 O agronegócio é um setor estratégico para a economia brasileira, sendo responsável por cerca de 24,4% do Produto Interno Bruto (PIB) e por mais de 40% das exportações do país. Dentro desse setor, a soja é o principal produto exportado pelo Brasil, representando mais de 50% do valor das exportações agropecuárias em 2022. No entanto, o mercado de soja é complexo e dinâmico, envolvendo diversos agentes, como produtores, armazenadores, comerciantes, processadores e consumidores, que realizam negociações de compra e venda em diferentes modalidades, como à vista, a termo, futura e de opções.
 
-Nesse contexto, o projeto proposto visa desenvolver um sistema sociotécnico inovador que atenda às necessidades de uma empresa do ramo de agronegócio localizada no interior de Minas Gerais, que atua na armazenagem e comércio de grãos, principalmente soja, com foco em vendas futuras destinadas à exportação. O sistema consiste em uma aplicação móvel que permita o registro e o acompanhamento em tempo real das negociações de compra e venda de grãos, bem como o cálculo de métricas relacionadas aos preços. O sistema visa melhorar a eficiência, o controle e a transparência das operações da empresa, além de facilitar a tomada de decisões estratégicas baseadas em dados.
+Reconhecendo a importância do registro preciso e ágil de negociações nesse setor, na busca por aprimorar esse processo e compreendendo essa demanda, o projeto de extensão se propõe a oferecer uma solução inovadora e eficaz para otimizar o registro de negociações, trazendo métricas relacionadas aos preços e quantidades, contribuindo significativamente para a fluidez e transparência desses procedimentos.
 
-O projeto se insere no eixo temático de desenvolvimento de um sistema sociotécnico inovador, pois busca criar uma solução tecnológica que integre aspectos sociais, organizacionais e técnicos, visando resolver um problema real de uma organização parceira.
+O projeto se insere no eixo temático de desenvolvimento de um sistema sociotécnico inovador, pois busca criar uma solução tecnológica que integre aspectos sociais, organizacionais e técnicos, visando resolver um problema real de uma organização parceira e com a  implementação desse sistema registro, buscamos simplificar e agilizar todo o processo, reduzindo possíveis erros e eliminando a burocracia desnecessária.
 
-Através da criação de uma aplicação móvel, buscamos proporcionar soluções concretas que tenham o potencial de melhorar o desempenho da empresa. Isso é um exemplo de como a extensão universitária pode beneficiar tanto a sociedade quanto os estudantes, fornecendo aprendizado prático.
+No que se refere a experiência com a extensão universitária, o envolvimento com projetos extensionistas auxilia no crescimento profissional e pessoal, aprimorando o conhecimento de forma prática. A colaboração estreita com empresas do setor de agronegócio nos proporcionou também uma compreensão mais profunda das demandas desse mercado. Nossa solução não apenas atende às necessidades de registro de negociações, mas também oferece uma interface amigável e adaptável.
+
+Através da criação de uma aplicação móvel, buscamos proporcionar soluções concretas que tenham o potencial de melhorar o desempenho da empresa. Isso é um exemplo de como a extensão universitária pode beneficiar tanto a sociedade quanto os estudantes, fornecendo aprendizado prático. No que se refere a experiência com a extensão universitária, o envolvimento com projetos extensionistas auxilia no crescimento profissional e pessoal, aprimorando o conhecimento de forma prática. A colaboração estreita com empresas do setor de agronegócio proporciona também uma compreensão mais profunda das demandas desse mercado. A solução apresentada não apenas atende às necessidades de registro de negociações, mas também oferece uma interface amigável e adaptável.
 
 ## Descrição do Parceiro
 
