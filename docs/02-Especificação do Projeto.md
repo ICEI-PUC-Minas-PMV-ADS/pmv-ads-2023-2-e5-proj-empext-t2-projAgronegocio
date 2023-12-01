@@ -21,10 +21,19 @@ A comunicação entre o front-end e o back-end é realizada por meio de uma **AP
 ## Metodologia
 
 A metodologia utilizada para o desenvolvimento foi a metodologia SCRUM, dividida em 5 etapas, onde o planejamento das atividades foi realizado utilizando a ferramenta Trello, onde foi possível dividir as tarefas do grupo.
-Link do trello: https://trello.com/b/TgOhJ9iM/agrotrade-monitor
+
+Para a organzação e distribuição das tarefas optamos por utilizar o Trello. Pode ser acessado através do link:( https://trello.com/b/TgOhJ9iM/agrotrade-monitor ) 
+Está estruturado da forma a seguir:
+
+Sprints: apresentando todas as sprints e seu status.
+Product Backlog: recebe as tarefas a serem trabalhadas. Todas as atividades identificadas no decorrer do projeto também devem ser incorporadas a esta lista;
+Backlog da Sprint: nesta lista consta todas as tarefas que serão executadas dentro da sprint em andamento.
+Em Andamento: Representa as tarefas que estão em andamento;
+Feito: São as tarefas já realizadas, e podem passar por atualizações durante o desenvolvimento do projeto.
 
 
 ## Project Model Canvas
+
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/c5164e76-9917-4a55-84d6-580f97fb54d7)
 
 
