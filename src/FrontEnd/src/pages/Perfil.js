@@ -1,17 +1,17 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import {View, StyleSheet} from 'react-native';
+import {Button} from 'react-native-paper';
 import Header from '../components/Header';
 import Container from '../components/Container';
 import Body from '../components/Body';
-import { useNavigation } from '@react-navigation/native';
-import { useUser } from '../contexts/UserContext';
-import AsyncStorage from '@react-native-community/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {useUser} from '../contexts/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Perfil = () => {
   const navigation = useNavigation();
   console.log(AsyncStorage.getAllKeys());
-  const { setSigned } = useUser();
+  const {setSigned} = useUser();
 
   const handleTextClick = () => {
     // Ao navegar para MinhasNegociacoes
@@ -19,8 +19,8 @@ const Perfil = () => {
   };
   const logout = () => {
     AsyncStorage.getAllKeys()
-      .then((keys) => AsyncStorage.multiRemove(keys))
-      .then(() => setSigned(false));
+        .then((keys) => AsyncStorage.multiRemove(keys))
+        .then(() => setSigned(false));
     console.log(AsyncStorage.getAllKeys());
   };
 

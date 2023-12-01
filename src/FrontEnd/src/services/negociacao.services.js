@@ -1,16 +1,16 @@
 import API from './webapi.services';
-import { URL } from './urls';
+import {URL} from './urls';
 
 export const getNegociacoes = async () => {
   try {
     return await API.get(`${URL}/negociacao`).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        console.log(error);
-        return null;
-      }
+        (response) => {
+          return response.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        },
     );
   } catch (error) {
     console.log(error);
@@ -21,13 +21,13 @@ export const getNegociacoes = async () => {
 export const getNegociacoesRecentes = async () => {
   try {
     return await API.get(`${URL}/negociacaorecente`).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        console.log(error);
-        return null;
-      }
+        (response) => {
+          return response.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        },
     );
   } catch (error) {
     console.log(error);
@@ -38,13 +38,13 @@ export const getNegociacoesRecentes = async () => {
 export const getNegociacoesUsuarioId = async (param) => {
   try {
     return await API.get(`${URL}/negociacao/${param}`).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        console.log(error);
-        return null;
-      }
+        (response) => {
+          return response.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        },
     );
   } catch (error) {
     console.log(error);
@@ -56,13 +56,13 @@ export const updateNegociacao = async (param) => {
   console.log(param);
   try {
     return await API.put(`${URL}/negociacao/${param.id}`, param).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        console.log(error);
-        return null;
-      }
+        (response) => {
+          return response.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        },
     );
   } catch (error) {
     console.log(error);
@@ -73,13 +73,13 @@ export const updateNegociacao = async (param) => {
 export const insertNegociacao = async (param) => {
   try {
     return await API.post(`${URL}/negociacao`, param).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        console.log(error);
-        return null;
-      }
+        (response) => {
+          return response.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        },
     );
   } catch (error) {
     console.log(error);
@@ -90,13 +90,13 @@ export const insertNegociacao = async (param) => {
 export const deleteNegociacao = async (id) => {
   try {
     return await API.delete(`${URL}/negociacao/${id}`).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        console.log(error);
-        return null;
-      }
+        (response) => {
+          return response.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        },
     );
   } catch (error) {
     console.log(error);

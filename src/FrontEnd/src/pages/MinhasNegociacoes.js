@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable max-len */
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   Image,
@@ -7,21 +8,21 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { Text } from 'react-native-paper';
+import {Text} from 'react-native-paper';
 
 import Header from '../components/Header';
 import Container from '../components/Container';
 import Body from '../components/Body';
 import Assets from '../assets/ImagemSoja2.jpg';
 
-import { useNavigation, useIsFocused } from '@react-navigation/native';
-import { getNegociacoesUsuarioId } from '../services/negociacao.services';
-import { useUser } from '../contexts/UserContext';
+import {useNavigation, useIsFocused} from '@react-navigation/native';
+import {getNegociacoesUsuarioId} from '../services/negociacao.services';
+import {useUser} from '../contexts/UserContext';
 
 const MinhasNegociacoes = () => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
-  const { id } = useUser();
+  const {id} = useUser();
 
   const [negociacoes, setNegociacoes] = useState([]);
 
@@ -32,7 +33,7 @@ const MinhasNegociacoes = () => {
   }, [id, isFocused]);
 
   const handleItemPress = (item) => {
-    navigation.navigate('EditarNegociacao', { item });
+    navigation.navigate('EditarNegociacao', {item});
   };
 
   const renderNegociacoes = () => {
@@ -45,7 +46,7 @@ const MinhasNegociacoes = () => {
             <View style={styles.leftContent}>
               <Image source={Assets} style={styles.image} />
             </View>
-             <View style={styles.rightContent}>
+            <View style={styles.rightContent}>
               <Text style={styles.labelText}>{item.tipo_operacao === 0 ? 'Cliente:' : 'Produtor:'}</Text>
               <Text>{item.nomePessoa}</Text>
               <Text style={styles.labelText}>Data de pagamento:</Text>
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 4,
   },
-   saldoDia: {
+  saldoDia: {
     fontSize: 20,
     color: '#269F67',
     marginBottom: 10,

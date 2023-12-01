@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
+/* eslint-disable max-len */
+import React, {useState} from 'react';
 import validator from 'validator';
-import { StyleSheet, View, Alert, Image } from 'react-native';
-import { TextInput, Button, ActivityIndicator } from 'react-native-paper';
+import {StyleSheet, View, Alert, Image} from 'react-native';
+import {TextInput, Button, ActivityIndicator} from 'react-native-paper';
 import Container from '../components/Container';
 import Body from '../components/Body';
 import Input from '../components/Input';
+import PropTypes from 'prop-types';
+import {useNavigation} from '@react-navigation/native';
+import {register} from '../services/auth.services';
 
-import { useNavigation } from '@react-navigation/native';
-import { register } from '../services/auth.services';
-
-const Register = ({ route }) => {
+const Register = ({route}) => {
   const navigation = useNavigation();
 
   const [name, setName] = useState('');
-  const [email, setEmail] = useState(route.params.paramKey);
+  const [email, setEmail] = useState(route.params?.paramKey || '');
   const [senha, setSenha] = useState('');
   const [isRegister, setRegister] = useState(false);
 
   const checkFields = () => {
-    if (name == '') {
+    if (name === '') {
       Alert.alert('Atenção!', 'Informe seu nome!');
-    } else if (email == '' || !validator.isEmail(email)) {
+    } else if (email === '' || !validator.isEmail(email)) {
       Alert.alert('Atenção!', 'Informe um email válido!');
-    } else if (senha == '' || senha.length < 5) {
+    } else if (senha === '' || senha.length < 5) {
       Alert.alert('Atenção!', 'A senha deve conter no mínimo 5 caracteres!');
     } else {
       handleRegister();
@@ -40,7 +41,7 @@ const Register = ({ route }) => {
       setRegister(false);
       if (res && res.insertId) {
         Alert.alert('Atenção', 'Usuário Cadastrado com sucesso!', [
-          { text: 'OK', onPress: () => navigation.goBack() },
+          {text: 'OK', onPress: () => navigation.goBack()},
         ]);
       } else {
         if (res && res.usuarioJaCadastrado) {
@@ -110,6 +111,11 @@ const Register = ({ route }) => {
   );
 };
 
+// Adicione a validação de props
+Register.propTypes = {
+  route: PropTypes.object.isRequired,
+};
+
 const styles = StyleSheet.create({
   buttonSend: {
     margin: 8,
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
   },
   buttonCancel: {
     margin: 8,
-    backgroundColor: '#F2B66D',
+    backgroundColor: '#45818e',
   },
   activity: {
     marginVertical: 8,

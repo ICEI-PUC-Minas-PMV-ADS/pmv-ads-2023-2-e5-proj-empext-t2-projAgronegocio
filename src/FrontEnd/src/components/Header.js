@@ -1,44 +1,48 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 
-const Header = ({ goBack }) => {
+const Header = ({goBack}) => {
   const handleGoBack = () => {
     if (goBack) {
       goBack();
     }
   };
 
-  return (    
+  return (
     <View style={styles.header}>
       <Image
         source={require('../assets/LogoAgroTradeMonitor4.jpg')}
         style={styles.image}
       />
       {goBack && (
-        <TouchableOpacity style={styles.iconContainer} onPress={goBack}>
+        <TouchableOpacity style={styles.iconContainer} onPress={handleGoBack}>
           <Icon name="chevron-left" size={20} style={styles.icon} />
         </TouchableOpacity>
       )}
-    </View> 
+    </View>
   );
+};
+
+Header.propTypes = {
+  goBack: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
 
-  image: { 
+  image: {
     width: 417,
     height: 109,
     alignSelf: 'center',
   },
-         
-  
+
+
   icon: {
     color: 'black',
-   marginLeft:40,
+    marginLeft: 40,
 
 
-   
   },
 });
 

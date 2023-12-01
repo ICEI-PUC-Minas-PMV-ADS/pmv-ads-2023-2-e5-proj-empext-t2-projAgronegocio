@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import { TextInput} from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 
 const Input = (props) => {
   return (
-    <TextInput 
+    <TextInput
       style = {styles.input}
       keyboardType="default"
       {...props}
@@ -13,10 +13,10 @@ const Input = (props) => {
 };
 
 const styles = StyleSheet.create({
-  input:{
+  input: {
     backgroundColor: '#FFF',
-    marginBottom:8
+    marginBottom: 8,
   },
-})
+});
 
 export default Input;

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "agrotrademonitorentragaetapa4_newnavegacao",
+    "name": "agrotrademonitoretapa5",
     "slug": "snack-9a29dfac-44d1-42c8-ad0c-517fdad58bc6",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.agrotrademonitor.pucminas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f393c584-6fec-4220-8356-aba61fb06a39"
+      }
     }
   }
 }

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import UserProvider from './src/contexts/UserContext';
 import Route from './src/navigations/Route';
 const App = () => {
   return (
     <UserProvider>
       <NavigationContainer>
-        <Route/>  
+        <Route/>
       </NavigationContainer>
     </UserProvider>
-  );  
-};    
+  );
+};
 
-export default App; 
+export default App;

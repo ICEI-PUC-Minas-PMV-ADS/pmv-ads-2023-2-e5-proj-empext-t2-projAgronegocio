@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import React from 'react';
+import {useState, useEffect} from 'react';
+import {View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {
   RadioButton,
   Text,
@@ -8,32 +9,33 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
+import PropTypes from 'prop-types';
 
 import Container from '../components/Container';
 import Body from '../components/Body';
 import Header from '../components/Header';
 import Input from '../components/Input';
 
-import { useUser } from '../contexts/UserContext';
+import {useUser} from '../contexts/UserContext';
 
-import { useNavigation, useIsFocused } from '@react-navigation/native';
+import {useNavigation, useIsFocused} from '@react-navigation/native';
 import moment from 'moment';
 import {
   insertNegociacao,
-  updateNegociacao,
+  updateNegociacao, // Não utilizado
   deleteNegociacao,
 } from '../services/negociacao.services';
 
-import { getPessoas } from '../services/pessoas.services';
-import { getUnidades } from '../services/unidades.services';
+import {getPessoas} from '../services/pessoas.services';
+import {getUnidades} from '../services/unidades.services';
 
-const NovaNegociacao = ({ route }) => {
+const NovaNegociacao = ({route}) => {
   const navigation = useNavigation();
-  //validar se existe valores
-  const { item } = route.params ? route.params : {};
+  // validar se existe valores
+  const {item} = route.params ? route.params : {};
 
-  const { id } = useUser();
+  const {id} = useUser();
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const isFocused = useIsFocused();
@@ -41,7 +43,7 @@ const NovaNegociacao = ({ route }) => {
   const [tipoOperacao, setTipoOperacao] = useState('Venda');
 
   const [dataVencimento, setDataVencimento] = useState(
-    moment(new Date()).format('DD/MM/YYYY')
+      moment(new Date()).format('DD/MM/YYYY'),
   );
   const [qtdSacas, setQtdSacas] = useState('');
   const [valorPorSaca, setValorPorSaca] = useState('');
@@ -83,37 +85,37 @@ const NovaNegociacao = ({ route }) => {
       unidade: unidadeSelecionada,
       id_usuario: id,
     }).then((res) => {
-      res != null
-        ? Alert.alert('Atenção!', 'Negociação criada com sucesso!', [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'NegociacaoRoute' }],
-                }),
-            },
-          ])
-        : Alert.alert('Atenção!', 'Erro ao cadastrar negociação!', [
-            {
-              text: 'Ok',
-            },
-          ]);
+      res != null ?
+        Alert.alert('Atenção!', 'Negociação criada com sucesso!', [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.reset({
+                index: 0,
+                routes: [{name: 'NegociacaoRoute'}],
+              }),
+          },
+        ]) :
+        Alert.alert('Atenção!', 'Erro ao cadastrar negociação!', [
+          {
+            text: 'Ok',
+          },
+        ]);
     });
   };
 
   const confirmar = () => {
     if (item) {
       Alert.alert(
-        'Atenção!',
-        'Tem certeza que deseja ALTERAR os dados desta negociação?',
-        [
-          {
-            text: 'Cancelar',
-            style: 'cancel',
-          },
-          { text: 'Sim', onPress: () => handleSalvar() },
-        ]
+          'Atenção!',
+          'Tem certeza que deseja ALTERAR os dados desta negociação?',
+          [
+            {
+              text: 'Cancelar',
+              style: 'cancel',
+            },
+            {text: 'Sim', onPress: () => handleSalvar()},
+          ],
       );
     } else {
       handleSalvar();
@@ -138,20 +140,20 @@ const NovaNegociacao = ({ route }) => {
 
   const renderPessoas = (tipoOp) => {
     produtor = pessoas
-      .filter(function (item) {
-        return item.tipo == 'Produtor';
-      })
-      .map(function ({ id, nome }) {
-        return { id, nome };
-      });
+        .filter(function(item) {
+          return item.tipo == 'Produtor';
+        })
+        .map(function({id, nome}) {
+          return {id, nome};
+        });
 
     cliente = pessoas
-      .filter(function (item) {
-        return item.tipo == 'Cliente';
-      })
-      .map(function ({ id, nome }) {
-        return { id, nome };
-      });
+        .filter(function(item) {
+          return item.tipo == 'Cliente';
+        })
+        .map(function({id, nome}) {
+          return {id, nome};
+        });
 
     if (tipoOp == 0) {
       dadosPessoas = cliente;
@@ -163,11 +165,12 @@ const NovaNegociacao = ({ route }) => {
       <Picker
         selectedValue={pessoaSelecionada}
         style={styles.picker}
-        onValueChange={(itemValue) => setPessoaSelecionada(itemValue)}>
+        onValueChange={(itemValue) => setPessoaSelecionada(itemValue)}
+      >
         <Picker.Item color="#00000090" label="Selecione" value="" />
-        {dadosPessoas.map((array) => {
-          return <Picker.Item label={array.nome} value={array.id} />;
-        })}
+        {dadosPessoas.map((pessoa) => (
+          <Picker.Item key={pessoa.id} label={pessoa.nome} value={pessoa.id} />
+        ))}
       </Picker>
     ) : (
       <ActivityIndicator size="large" color="#6FCF97" />
@@ -179,10 +182,12 @@ const NovaNegociacao = ({ route }) => {
       <Picker
         selectedValue={unidadeSelecionada}
         style={styles.picker}
-        onValueChange={(itemValue) => setUnidadeSelecionada(itemValue)}>
-        {unidades.map((array) => {
-          return <Picker.Item label={array.razaoSocial} value={array.id} />;
-        })}
+        onValueChange={(itemValue) => setUnidadeSelecionada(itemValue)}
+      >
+        {unidades.map((unidade) => (
+          // eslint-disable-next-line max-len
+          <Picker.Item key={unidade.id} label={unidade.razaoSocial} value={unidade.id} />
+        ))}
       </Picker>
     ) : (
       <ActivityIndicator size="large" color="#6FCF97" />
@@ -277,7 +282,7 @@ const NovaNegociacao = ({ route }) => {
         {item && (
           <Button
             mode="contained"
-            color="#F2B66D"
+            color="#45818e"
             style={styles.button}
             onPress={handleExcluir}>
             Excluir
@@ -312,5 +317,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
+
+NovaNegociacao.propTypes = {
+  route: PropTypes.object.isRequired,
+};
 
 export default NovaNegociacao;

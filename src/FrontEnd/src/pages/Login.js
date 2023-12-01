@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Alert, Image, Text } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import { TextInput, Button, Headline } from 'react-native-paper';
+import React, {useState} from 'react';
+import {StyleSheet, View, Alert, Image, Text} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {TextInput, Button} from 'react-native-paper';
 import Container from '../components/Container';
 import Body from '../components/Body';
 import Input from '../components/Input';
 
-import { useNavigation } from '@react-navigation/native';
-import { useUser } from '../contexts/UserContext';
+import {useNavigation} from '@react-navigation/native';
+import {useUser} from '../contexts/UserContext';
 
-import { login } from '../services/auth.services';
+import {login} from '../services/auth.services';
 
 const Login = () => {
   const navigation = useNavigation();
-  const { setSigned, setName, setId } = useUser();
-  const [email, setEmail] = useState('geo@gmail.com');
-  const [senha, setSenha] = useState('123456');
+  const {setSigned, setName, setId} = useUser();
+  const [email, setEmail] = useState();
+  const [senha, setSenha] = useState();
 
   const handleLogin = () => {
     login({
@@ -78,9 +78,6 @@ const Login = () => {
         <Button style={styles.buttonSend} onPress={handleLogin} color="white">
           Entrar
         </Button>
-        <View style={styles.infText}>
-          <Text> Ou continue com </Text>
-        </View>
         <View style={styles.registerText}>
           <Text> Não possui conta? </Text>
           <Button
@@ -91,7 +88,7 @@ const Login = () => {
                 paramKey: email,
               })
             }>
-            Crie agora
+            Registre-se
           </Button>
         </View>
       </Body>
@@ -106,11 +103,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-  },
-  infText: {
-    margin: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   registerText: {
     margin: 8,
