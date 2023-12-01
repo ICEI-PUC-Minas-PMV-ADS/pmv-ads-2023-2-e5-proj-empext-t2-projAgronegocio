@@ -7,6 +7,8 @@ https://snack.expo.dev/@laislimas/821324?platform=android
 
 Entrar no CMD ou PowerShell e instalar os pacotes em cada diretorio separadamente:
 
+### OBS: Não é mais necessário para o BackEnd, visto que ele se encontra hospedado, porém caso tenha interesse em saber as dependências, são as descritas abaixo:
+
 ### cd src/BackEnd/Usuarios
 npm install
 
@@ -43,21 +45,25 @@ npm install mysql2
 npm install -g localtunnel
 
 ### cd src/FrontEnd
-npm install --force
 
-npm audit fix
+npm install
+
+npm install eslint --save-dev
+
+npx eslint --init
+
+npx eslint --fix .              -- Caso queira que seja realizado correções
 
 npm install --global expo-cli
 
-npx expo install --fix
-
-npx expo start
 
 ### Instalar App do Expo e Ler QR Code (só se tiver o localtunnel em pé e as URLs em services atualizadas);
 
 ## Executando:
 
 ### cd src/BackEnd
+
+### OBS: Não é mais necessário pois se encontra hospedado
 
 Abrir CMD e digitar: npm run dev
 Executará na porta 3333
@@ -68,3 +74,12 @@ Executará na porta 3333
 npx expo start
 
 Ler QR Code no celular ou abrir Android Studio (se já tiver instalado, não recomendo)
+
+-------------------------------------
+### Gerar AAB
+
+### cd src/FrontEnd
+
+npm install -g eas-cli
+
+eas build --platform android
