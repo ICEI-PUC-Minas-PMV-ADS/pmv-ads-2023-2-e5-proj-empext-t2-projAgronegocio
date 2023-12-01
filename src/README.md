@@ -1,7 +1,7 @@
 # AgroTrade Monitor
 
 ## Acesso pelo Snack do Expo
-https://snack.expo.dev/@laislimas/821324?platform=android
+https://snack.expo.dev/@laislimas/agrotrademonitorentragaetapa5?platform=android
 
 ## Parametrização de ambiente
 
