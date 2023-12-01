@@ -80,6 +80,8 @@ Ler QR Code no celular ou abrir Android Studio (se já tiver instalado, não rec
 
 ### cd src/FrontEnd
 
+### Acessar documentação: https://docs.expo.dev/build/setup/
+
 npm install -g eas-cli
 
 eas build --platform android
