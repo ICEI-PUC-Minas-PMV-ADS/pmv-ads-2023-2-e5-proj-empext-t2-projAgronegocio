@@ -10,11 +10,11 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 
 A arquitetura do projeto é dividida em duas partes principais: o front-end e o back-end. 
 
-O **front-end** é construído usando **React Native** com **React Native Paper**. React Native é uma estrutura que permite o desenvolvimento de aplicativos móveis nativos para iOS e Android usando JavaScript e React. React Native Paper é uma biblioteca de componentes de design de material para React Native que segue as melhores práticas de acessibilidade da Web.
+A camada de **front-end** da aplicação é desenvolvida utilizando **React Native**  uma estrutura que permite a criação de aplicativos móveis nativos para Android utilizando JavaScript e React. Adicionalmente, **React Native Paper** uma biblioteca de componentes de design de material para React Native, é empregada para garantir as melhores práticas.
 
-O **back-end** é construído usando **Node.js** e o Sistema de Gerenciamento de Banco de Dados (SGBD) **MySQL**. 
+A parte de **back-end** é construído usando **Node.js**, oferecendo um ambiente de execução JavaScript do lado do servidor. O Sistema de Gerenciamento de Banco de Dados (SGBD) utilizado é o **MySQL**,  fornecendo a robustez necessária para o armazenamento eficiente das informações das negociações.
 
-A comunicação é feita através da **API REST**
+A comunicação entre o front-end e o back-end é realizada por meio de uma **API REST**, assegurando a interoperabilidade eficiente entre as partes do sistema.
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/0973d0fe-b685-4d06-b575-74ae313913bd)
 
