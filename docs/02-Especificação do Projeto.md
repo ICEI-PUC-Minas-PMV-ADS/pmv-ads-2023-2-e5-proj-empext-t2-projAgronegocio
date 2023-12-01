@@ -18,6 +18,12 @@ A comunicação entre o front-end e o back-end é realizada por meio de uma **AP
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/0973d0fe-b685-4d06-b575-74ae313913bd)
 
+## Metodologia
+
+A metodologia utilizada para o desenvolvimento foi a metodologia SCRUM, dividida em 5 etapas, onde o planejamento das atividades foi realizado utilizando a ferramenta Trello, onde foi possível dividir as tarefas do grupo.
+Link do trello: https://trello.com/b/TgOhJ9iM/agrotrade-monitor
+
+
 ## Project Model Canvas
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/c5164e76-9917-4a55-84d6-580f97fb54d7)
 
@@ -72,7 +78,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/assets/32153247/0c81c528-2b56-440e-96c9-32cf2dcc8b56)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/blob/main/docs/img/Diagrama-caso-uso.jpg)
 
 ## Diagrama de Classes
 
