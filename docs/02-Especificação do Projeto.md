@@ -87,7 +87,8 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e5-proj-empext-t2-projAgronegocio/blob/main/docs/img/DiagramaCasoUso.png)
+
+<img src="img/DiagramaCasoUso.png" alt="Figura do diagrama de casos de uso do projeto AgroTradeMonitor">
 
 ## Diagrama de Classes
 
