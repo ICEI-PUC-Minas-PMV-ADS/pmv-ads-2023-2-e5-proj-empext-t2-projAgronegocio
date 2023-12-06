@@ -108,7 +108,7 @@ O Modelo ER representa através de um diagrama como as entidades (coisas, objeto
 
 Na figura abaixo é mostrado o Modelo Relacional(MR) desenvolvido na plataforma "AgroTradeMonitor" para o projeto.
 
-<img src="img/modelo_relacional_Agro2.png" alt="Figura do modelo ER do projeto AgroTradeMonitor">
+<img src="img/ModeloER.png" alt="Figura do modelo ER do projeto AgroTradeMonitor">
 
 ## Esquema Relacional
 
