@@ -88,7 +88,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 ## Diagrama de Casos de Uso
 
 
-<img src="img/DiagramaCasoUso.png" alt="Figura do diagrama de casos de uso do projeto AgroTradeMonitor">
+<img src="img/CasosUsoAgrotrade.png" alt="Figura do diagrama de casos de uso do projeto AgroTradeMonitor">
 
 ## Diagrama de Classes
 
