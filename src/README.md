@@ -3,7 +3,7 @@
 Instruções para utilização do código fonte.
 
 ## Acesso pelo Snack do Expo
-https://snack.expo.dev/@keniacunha/agrotrademonitorentregafinaletapa5?platform=android
+https://snack.expo.dev/@werlon/agrotrademonitorentragaetapa5__04122023?platform=web
 
 ## Parametrização de ambiente
 
