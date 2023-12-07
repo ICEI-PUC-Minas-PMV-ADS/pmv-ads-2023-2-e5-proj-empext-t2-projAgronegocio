@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   buttonCancel: {
     margin: 8,
-    backgroundColor: '#45818e',
+    backgroundColor: '#F2B66D',
   },
   activity: {
     marginVertical: 8,

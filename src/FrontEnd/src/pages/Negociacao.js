@@ -291,12 +291,14 @@ const Negociacao = () => {
     const mm = String(yesterday.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = yesterday.getFullYear();
 
-    yesterday = yyyy + '-' + mm + '-' + dd;
-    console.log('Comprayesterday: ' + yesterday);
+    yesterday = new Date(yyyy + '-' + mm + '-' + dd);
+    // console.log('Comprayesterday: ' + yesterday);
 
     for (let i = 0; i < negociacoes.length; i++) {
+      const dataLancamento = new Date(negociacoes[i].data_lancamento.slice(0, 10));
+      
       // console.log(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday.toString(),"checking")
-      if (negociacoes[i].data_lancamento.slice(0, 10).toString() < yesterday) {
+      if (dataLancamento < yesterday) {
         if (negociacoes[i].tipo_operacao === 1) {
           sumCompra += negociacoes[i].quantidade_saca;
         }
@@ -309,7 +311,7 @@ const Negociacao = () => {
     );
   };
 
-  // consolidado venda D-1
+   // consolidado venda D-1
   const somatorioVendaDmenosUm = () => {
     let sumVenda = 0;
 
@@ -319,12 +321,14 @@ const Negociacao = () => {
     const mm = String(yesterday.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = yesterday.getFullYear();
 
-    yesterday = yyyy + '-' + mm + '-' + dd;
-    console.log('Vendayesterday: ' + yesterday);
+    yesterday = new Date(yyyy + '-' + mm + '-' + dd);
+    // console.log('Vendayesterday: ' + yesterday);
 
     for (let i = 0; i < negociacoes.length; i++) {
+      const dataLancamento = new Date(negociacoes[i].data_lancamento.slice(0, 10));
+
       // console.log(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday.toString(),"checking")
-      if (negociacoes[i].data_lancamento.slice(0, 10).toString() < yesterday) {
+      if (dataLancamento < yesterday) {
         if (negociacoes[i].tipo_operacao === 0) {
           sumVenda += negociacoes[i].quantidade_saca;
         }
@@ -491,39 +495,45 @@ const Negociacao = () => {
     );
   };
 
-  const saldoAtualDmenosUm = () => {
-    let sumVenda = 0;
-    let sumCompra = 0;
-    let saldo = 0;
 
-    let yesterday = new Date();
-
-    const dd = String(yesterday.getDate()).padStart(2, '0') - DMENOS;
-    const mm = String(yesterday.getMonth() + 1).padStart(2, '0'); // January is 0!
-    const yyyy = yesterday.getFullYear();
-
-    yesterday = yyyy + '-' + mm + '-' + dd;
-    console.log('Saldoyesterday: ' + yesterday);
-
-    for (let i = 0; i < negociacoes.length; i++) {
-      // console.log(negociacoes[i].data_lancamento.slice(0,10).toString() < yesterday.toString(),"checking")
-      if (negociacoes[i].data_lancamento.slice(0, 10).toString() < yesterday) {
-        if (negociacoes[i].tipo_operacao === 0) {
-          sumVenda += negociacoes[i].quantidade_saca;
-          // console.log({sumVenda});
-        } else {
-          sumCompra += negociacoes[i].quantidade_saca;
-          // console.log("PASSOU AQUI");
-        }
+const saldoAtualDmenosUm = () => {
+  let sumVenda = 0;
+  let sumCompra = 0;
+  let saldo = 0;
+ 
+  let yesterday = new Date();
+ 
+  const dd = String(yesterday.getDate()).padStart(2, '0') - DMENOS;
+  const mm = String(yesterday.getMonth() + 1).padStart(2, '0'); // January is 0!
+  const yyyy = yesterday.getFullYear();
+ 
+  yesterday = new Date(yyyy + '-' + mm + '-' + dd);
+  // console.log('Saldoyesterday: ' + yesterday);
+ 
+  for (let i = 0; i < negociacoes.length; i++) {
+    const dataLancamento = new Date(negociacoes[i].data_lancamento.slice(0, 10));
+ 
+    // console.log(dataLancamento < yesterday, "checking");
+    if (dataLancamento < yesterday) {
+      // console.log('DMENOS: ' + negociacoes[i].data_lancamento.slice(0, 10).toString() + ' yesterday: ' + yesterday.toString());
+      // console.log('ITEM: ' + i);
+ 
+      if (negociacoes[i].tipo_operacao === 0) {
+        sumVenda += negociacoes[i].quantidade_saca;
+      } else {
+        sumCompra += negociacoes[i].quantidade_saca;
       }
     }
-    saldo = sumCompra - sumVenda;
-    return (
-      <View>
-        <Text style={styles.saldoDiaAnterior}> {saldo} sacas</Text>
-      </View>
-    );
-  };
+  }
+ 
+  saldo = sumCompra - sumVenda;
+ 
+  return (
+<View>
+<Text style={styles.saldoDiaAnterior}> {saldo} sacas</Text>
+</View>
+  );
+};
 
 
   return (
@@ -857,10 +867,10 @@ const styles = StyleSheet.create({
     textAlign: 'center', // Centralizando horizontalmente
 
   },
-  saldoDia: {
+    saldoDia: {
     fontSize: 18,
   },
-  saldoDiaAnterior: {
+    saldoDiaAnterior: {
     fontSize: 18,
   },
 
